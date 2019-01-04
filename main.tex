@@ -1,0 +1,85 @@
+\documentclass[twoside,openright,a4paper,papersize,uplatex]{jsbook}
+% uplatex オプションを指定し、ユニコード対応に。ただだし、uplatex でコンパイルすること。
+
+% 修論本体と表紙で共通で必要となる設定
+\input{preamble}
+
+% 画像の取り扱いに必要
+\usepackage[dvipdfmx]{graphicx}
+
+% 表でセルを複数列で結合する
+\usepackage{multicol}
+
+% 数式の機能を拡張
+\usepackage{amsmath}
+
+% citep や citet を有効にする
+\usepackage{natbib}
+
+% (Okumura, 2009) などを (Okumura 2009) とする
+% 日本語文章で全角丸括弧の表示にし、かつ \inhibitglue で役物同士の字間を適切にする。
+% https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2349
+\setcitestyle{aysep={},notesep={},open={\inhibitglue（},close={）\inhibitglue}}
+
+% subfigure 環境で、(a)、(b) などの番号を左上に表示する。宇宙系の分野ではこれが一般的なはず。
+\usepackage[nooneline]{subfigure}
+\subfiguretopcaptrue
+
+% 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
+%\usepackage{lineno}
+%\linenumbers
+
+% PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
+\usepackage[dvipdfmx, hidelinks]{hyperref}
+
+% newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
+\makeatletter
+\newcommand{\ion}[2]{#1$\;${\small\rmfamily\@Roman{#2}}\relax}%
+\makeatother
+\newcommand{\HI}{\mbox{\ion{H}{1}}} % 中性原子ガス（HI 領域）の例
+\newcommand{\bs}{\symbol{92}} % backslash
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+% 氏名などの情報が入っているファイル。各自で編集。
+\include{AuthorInfo}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+% これを入れることでページ番号が表示されない。
+\thispagestyle{empty}
+
+% abstract 環境は jsbook では「概要」と表示してくれないため、手動で表示させる。
+% 参照 http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2121
+\begin{center}
+  {\large \sf 概要}
+\end{center}
+
+\input{Abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+% include を使うことで、別ファイルに分割することができます。
+\include{Introduction}
+\include{Review}
+\include{WhatYouDid}
+\include{LaTeX}
+\include{Plagiarism}
+\include{Discussion}
+\include{Conclusion}
+\include{Appendix}
+\include{Acknowledgments}
+
+\renewcommand{\bibname}{引用文献}
+\bibliographystyle{jecon}
+\bibliography{thesis}
+\label{page:bib}
+
+\end{document}
