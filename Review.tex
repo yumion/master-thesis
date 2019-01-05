@@ -28,7 +28,14 @@
 \section{半教師あり学習}
 
 \section{ディープラーニングを用いた病理画像診断}
-学習した結果を評価するときに医療画像の場合は、PrecisionとRecallを識別性能の評価指数として使う。\[ Precision = \frac{TP}{TP+FP}\hspace{10mm} Recall = \frac{TP}{TP+FN} \]ここで使ったTP(True Positive)は真の結果が正である時に予測も正であるという意味であるTN(True Negative)は真の結果が正で予測が負である場合である。同様にFP(False Positive)真の結果が負で予測も負、FN(False Negative)真の結果が負で予測は正である．
+学習した結果を評価するときに医療画像の場合は、PrecisionとRecallを識別性能の評価指数として使う。
+
+\begin{align}
+  \mathrm{Precision} & = \dfrac{TP}{TP+FP}\\
+  \mathrm{Recall} & = \frac{TP}{TP+FN}
+\end{align}
+
+ここで使ったTP(True Positive)は真の結果が正である時に予測も正であるという意味であるTN(True Negative)は真の結果が正で予測が負である場合である。同様にFP(False Positive)真の結果が負で予測も負、FN(False Negative)真の結果が負で予測は正である．
 
 2016年に行われたCAMELYON16という乳がんの転移を調べるシステムのコンペティションでは、7人の医師の成績を上回っていることが報告されてている。
 
