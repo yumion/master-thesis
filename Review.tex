@@ -20,9 +20,17 @@
 
 
 \subsection{再帰的ニューラルネットワーク}
-再帰的ニューラルネットワーク(Recurrent Neural Network: RNN)
-Long-short term memory(LSTM)
+再帰的ニューラルネットワーク(Recurrent Neural Network: RNN)は時系列解析や自然言語処理に利用されるニューラルネットワークである．内部にループを持つことで過去の情報を保持しておくことができる．
+時系列の入力 $x = (x_1, ... , x_T)$ があった時に，出力 $y = (y_1, ... , y_T)$と隠れ層のベクトル $h = (h_1, ... ,h_T)$をそれぞれ以下の式で計算する．
 
+\begin{align}\label{eq:LSTM}
+  h_t = \H(W_{ih} x_t + W_{hh} h_{t−1} + b_h) 
+  y_t = W_{ho} h_t + b_o
+\end{align}
+
+Wは重みの行列であり($W_{ih}$は入力と隠れ層間の重み行列)，bはバイアス項である．そしてHが活性化関数である．
+
+RNNは過去の情報をどこまでさかのぼって関連性を見つけるかを判断することができないため，時系列データが長くなるほど，その長期の依存性を学習するには人が慎重にパラメータを設計する必要があるなど，学習が難しくなるという問題があった．この問題を解決するためにLong-short term memory(LSTM)が提案された．LSTMもRNNの一種ではあるため，繰り返し構造を持ち，3つのゲートを持つ層からなっている. 
 
 \begin{figure}[h]
 \centering
@@ -32,8 +40,8 @@ Long-short term memory(LSTM)
 \end{figure}
 
 \begin{align}\label{eq:LSTM}
-  i_t & = \sigma(W_{xi} x_t + W_{hi} h_{t-1} + W_{ci} c_{t-1} + b_i) \\
   f_t & = \sigma(W_{xf} x_t + W_{hf} h_{t-1} + W_{cf} c_{t-1} + b_f ) \\
+  i_t & = \sigma(W_{xi} x_t + W_{hi} h_{t-1} + W_{ci} c_{t-1} + b_i) \\
   c_t & = f_t c_{t-1} + i_t \tanh(W_{xc} x_t + W_{hc} h_{t-1} + b_c) \\
   o_t & = \sigma(W_{xo} x_t + W_{ho} h_{t-1} + W_{co} c_t + b_o) \\
   h_t & = o_t \tanh(c_t) 
@@ -44,6 +52,9 @@ Long-short term memory(LSTM)
   \sigma (x) = \dfrac{1}{1 + e^{-x}}
 \end{equation}
 
+$f_t$で示される層は忘却ゲート層と呼ばれ，過去の情報で捨てるべき情報を判断する.これはシグモイド層によって行われ，0と1の間の値を出力し，0は完全に忘れる．1は完全に維持するという意味である．
+$i_t$や$c_t$で示される層は，入力ゲート層と呼ばれ，$i_t$で新たに入力された情報から，どの情報を更新するかを判断し$c_t$で古い情報を落とし新しい情報を加え，値を更新する．
+最後が$o_t$や$h_t$で示される層で，出力ゲート層と呼ばれる．まず何を出力するべきかを$o_t$のゲートで判断して，$c_t$に$\tanh$を適用して掛けることで出力が計算される．
 
 \section{画像認識におけるディープラーニング}
 %教師あり学習であることもここで触れておきたい
