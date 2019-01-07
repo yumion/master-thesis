@@ -6,3 +6,5 @@
 *.lot
 *.toc
 *.gz
+reference/
+fig/
