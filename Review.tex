@@ -23,8 +23,9 @@
 再帰的ニューラルネットワーク(Recurrent Neural Network: RNN)は時系列解析や自然言語処理に利用されるニューラルネットワークである．内部にループを持つことで過去の情報を保持しておくことができる．
 時系列の入力 $x = (x_1, ... , x_T)$ があった時に，出力 $y = (y_1, ... , y_T)$と隠れ層のベクトル $h = (h_1, ... ,h_T)$をそれぞれ以下の式で計算する．
 
-\begin{align}\label{eq:RNN}
-  h_t & = \H(W_{ih} x_t + W_{hh} h_{t−1} + b_h) 
+\begin{align}
+\label{eq:RNN}
+  h_t & = H(W_{ih} x_t + W_{hh} h_{t-1} + b_h) \\ 
   y_t & = W_{ho} h_t + b_o
 \end{align}
 
