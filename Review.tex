@@ -75,7 +75,27 @@ $i_t$や$c_t$で示される層は，入力ゲート層と呼ばれ，$i_t$で�
 
 \section{推論と学習}
 ニューラルネットワークでは推論フェーズと学習フェーズに分かれている．
-誤差逆伝播法
+
+損失関数(loss function)
+2乗和誤差(mean squared error: MSE )
+交差エントロピー誤差(cross entropy error)
+
+誤差逆伝播法(Backpropergation)
+
+
+\subsection{最適化手法}
+\subsubsection*{確率的勾配降下法}
+
+
+\subsubsection*{Adam}
+
+
+\subsection{学習のテクニック}
+\subsubsection*{Dropout}
+
+
+\subsubsection*{Batch Normalization}
+
 
 
 \section{画像認識におけるディープラーニング}
@@ -98,16 +118,16 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 画像処理におけるディープラーニングでは大きく3つのタスクがあり，それぞれ，クラス分類，物体検出，セグメンテーションである．以下に詳細を述べる．
 
 \subsection*{クラス分類}
-カテゴリ分けをすること
+与えられた画像をカテゴリごとに分ける手法である．
 
 \subsection*{物体検出}
-物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOGやSIFTなど局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkになりデータのみから抽象的な特徴量を複数得ることができる．一般物体認識の場合は数千のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，今はカテゴリがせいぜい数百程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかるアルゴリズムであることが多いため，リアルタイムに物体検出を行う時は，速度と精度でトレードオフが生じてしまう．
+物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOGやSIFTなど局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkになりデータのみから抽象的な特徴量を複数得ることができる．\fig {YOLO}に物体検出で有名はアルゴリズムであるSSDとYOLOのアーキテクチャを示す．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/yolo_ssd.png}
-\caption{Network Architecture of SSD and YOLO}
-\label{fig:YOLO}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/yolo_ssd.png}
+	\caption{Network Architecture of SSD and YOLO}
+	\label{fig:YOLO}
 \end{figure}
 
 \subsection*{セグメンテーション}
@@ -116,7 +136,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\linewidth]{fig/unet.png}
-\caption{}
+\caption{Artchitecture of Unet}
 \label{fig:Unet}
 \end{figure}
 
@@ -128,18 +148,18 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 2次元画像が深さ方向に連続している3次元画像の特徴を抽出するために，2次元のCNNを拡張して，3次元のカーネルを使って畳み込みを行う，3DCNNを利用した手法がある．
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/3d_cnn.png}
-\caption{}
-\label{fig:}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/3d_cnn.png}
+	\caption{Artchitecture of 3DCNN}
+	\label{fig:3DCNN}
 \end{figure}
 
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/stacked_conv.png}
-\caption{}
-\label{fig:}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/stacked_conv.png}
+	\caption{Architecture of stacked convolution}
+	\label{fig:stacked_conv}
 \end{figure}
 
 \subsection{LSTMと2DCNNの組み合わせ}
@@ -159,10 +179,10 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 VAEよりもGANの方が細部まで鮮明に画像を生成することができる．しかしGANは計算時間がかかるという問題や，DiscriminatorかGeneratorのどちらかか強くなってしまうなど，学習が安定しない問題があるため，これについての多くの研究報告がされている．
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
-\caption{}
-\label{fig:GAN}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
+	\caption{Diagram of GAN}
+	\label{fig:GAN}
 \end{figure}
 
 \section{半教師あり学習}
