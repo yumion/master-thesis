@@ -183,6 +183,24 @@
 	}
 \end{figure}
 
+\subsection{クロッピング画像}
+\begin{figure}
+	\centering
+	\subfigure[normal C-012]{
+		\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/cropping/HE/normal/C-012}
+	}
+	\subfigure[normal C-013]{
+	\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/cropping/HE/normal/C-013}
+}
+	\subfigure[cancer C-12]{
+	\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/cropping/HE/cancer/C-012}
+}
+	\subfigure[cancer C-013]{
+	\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/cropping/HE/cancer/C-013}
+}
+
+\end{figure}
+
 \section{古典的な画像処理手法による識別精度評価}
 正常と腫瘍を両方含む画像に対してHough変換による円検出で正常の線管構造を検出した．円検出では検出できない線菅構造をより多く検出するために楕円でも検出ができるように変更した．複数のパラメータを調整することで，アノテーションの正常領域が検出できるような円検出の数を増やしながらも，ノイズが多くならないような値を決定した．また，これが複数の検体で試してみた時に，最適なパラメータを見積もった．
 
