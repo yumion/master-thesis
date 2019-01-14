@@ -26,8 +26,6 @@
 \end{figure}
 
 
-\subsection{擬似HE染色}
-
 \subsection{教師データの作成}
 消化器内科の医師がつけた腫瘍部分を教師データとして利用した．以下の図が腫瘍の位置をマスクした画像になっている．
 
@@ -47,9 +45,33 @@
 }
 \end{figure}
 
+\section{前処理}
+
+\subsection{擬似HE染色}
+\begin{figure}
+	\centering
+	\subfigure[]{
+		\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/pseudo-HE/0130171}
+	}
+	\subfigure[]{
+	\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/pseudo-HE/0120100}
+}
+	\subfigure[]{
+	\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/pseudo-HE/0100}
+}
+	\subfigure[]{
+	\includegraphics[clip, width=0.4\linewidth]{fig/preprocessing/pseudo-HE/0110240}
+}
+\end{figure}
+
+\subsection{Data Augmentation}
 
 \section{古典的な画像処理手法による識別精度評価}
 正常と腫瘍を両方含む画像に対してHough変換による円検出で正常の線管構造を検出した．円検出では検出できない線菅構造をより多く検出するために楕円でも検出ができるように変更した．複数のパラメータを調整することで，アノテーションの正常領域が検出できるような円検出の数を増やしながらも，ノイズが多くならないような値を決定した．また，これが複数の検体で試してみた時に，最適なパラメータを見積もった．
+
+\section{事前学習}
+今回のように新しい画像の撮影方法でデータを多く集めることができない時は，類似データを事前に学習しておく事前学習を用いる．
+大腸の管構造の特徴を捉えるために，外部のデータセットのGland Challengeデータセットを使って事前学習を行う．
 
 \section{教師あり学習による識別精度評価}
 \subsection*{2次元画像}
