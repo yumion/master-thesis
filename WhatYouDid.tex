@@ -7,6 +7,38 @@
 多光子顕微鏡で3D画像として撮影する．一つの視野で観察することができる領域は縦横が~で深さ方向が~である．ここでLUCIDによる透明化によって今までは断面のみの撮影だったものを深さ方向まで撮影することができるようになった．
 検体全ての撮影をするために画像取得にはタイリングをする．
 
+\subsection*{撮影条件}
+蛍光顕微鏡
+Microscope name: Ti2 Microscope
+Objective name: Plan Apo 10x
+Objective magnification: 10
+Objective numerical aperture: 0.45
+Refractive Index: 1.000
+
+
+レーザー波長の情報
+
+DAPI
+Emission wavelength: 440.0 - 420.0
+Excitation wavelength: 405.0
+Pinhole size: 20.00
+Channel modality: Laser Scan Confocal, PMT
+
+FITC
+Emission wavelength: 500.0 - 550.0
+Excitation wavelength: 405.0
+Pinhole size: 20.00
+Channel modality: Laser Scan Confocal, PMT
+
+Texas Red
+Emission wavelength: 593.0 - 670.0
+Excitation wavelength: 561.0
+Pinhole size: 20.00
+Channel modality: Laser Scan Confocal, PMT
+
+深さ方向の分解能
+Z step : 2.7µm
+
 % 三次元に撮影した画像
 
 \begin{figure}[H]
@@ -375,21 +407,52 @@
 大腸の管構造の特徴を捉えるために，外部のデータセットのGland Challengeデータセットを使って事前学習を行う．
 
 \section{教師あり学習による識別精度評価}
-%モデルの概略図
-%評価方法
-%交差検証法について
+% モデルの概略図
+
+\subsection{評価方法}
+機械学習の評価方法には，ホールドアウト法と交差検証法の２通りある．ホールドアウト法はデータを訓練データとテストデータに分割して評価する方法である．交差検証法はデータをK分割してK-1のグループを訓練データに，残りの1つをテストデータにする．これをKパターン全て試行した精度の平均で評価する方法である．交差検証法の方が計算時間が長くなるが信頼性が高い．少量のデータの場合は特に訓練データとテストデータの分割の違いで結果に差が生じることがあるため本研究の評価方法では交差検証法を用いた．
+
+本研究では4検体を使っているため検体ごとに分割することで4分割の交差検証法を行った．
 
 \subsection*{2次元画像}
+用いたネットワーク構造は，VGG19, InceptionV3, Xception, Inception\_Resnetの４つである
+それぞれに対して，Data Augmentation，事前学習，擬似HE染色のありなしで精度がどのように改善されるかを実験した．
+
 \subsection*{3次元画像}
+深さ方向の15枚をまとめて3次元画像として解析する．
+用いたモデルは3DCNN, Stacked CNN, 2DCNN\_LSTMである．
+ここでは，Data Augmentationと事前学習と擬似HE染色は，全て適用して実験を行った．
 
 \section{教師なし学習による識別精度評価}
-\subsection*{2次元画像}
-\subsection*{3次元画像}
+Auto Encoder, GAN, VAE, VAE-GANで教師なし学習を行った．
 
 \section{半教師あり学習による識別精度評価}
-\subsection*{2次元画像}
-\subsection*{3次元画像}
+VAEの考えを利用して，半教師あり学習のネットワークを作成した．
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_A}
+	\caption{}
+	\label{fig:paterna}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_B}
+	\caption{}
+	\label{fig:paterna}
+\end{figure}
 
 \section{学習環境}
-Ubuntu 14.04
+\begin{table}[H]
+	\centering
+	\caption{}
+	\label{tab:}
+	\begin{tabular}{ccc}\toprule
+		OS & Ubuntu & 14.04 \\ 
+		言語 & Python & 3.6 \\ 
+		フレームワーク & Keras & 2.2.4 \\ 
+		& Tensorflow & 1.11.0 \\ 
+		GPU & GeForceRX 1080Ti & 3枚 \\  \bottomrule
+	\end{tabular}
+\end{table}
 Github
