@@ -21,56 +21,97 @@
 % 写真での分布
 % loss, accグラフ
 \subsection{VAE}
-擬似HE染色した画像と，元のカラー画像のそれぞれにVAEを行って潜在変数を2次元プロットした結果．
-\begin{figure}
+擬似HE染色した画像と元のカラー画像のそれぞれに対してVAEを行い，潜在変数を2次元空間にプロットした結果を\fig {VAEplot}に示す．
+\begin{figure}[H]
 	\centering
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_c13_he}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_299_c13_rgb}
-}
+	
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_c13_he}
+		\subcaption{HE like color at sample A}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_299_c13_rgb}
+		\subcaption{original color at sample A}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_he_mix}
+		\subcaption{HE like color at sample A and B}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_rgb_mix}
+		\subcaption{original color at sample A and B}
+		\label{fig:}
+	\end{minipage}
+	
+	\caption{Latent space of 2D. Color ratio 1 is cancer, 0 is normal.}
+	\label{fig:VAEplot}
 
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_he_mix}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_rgb_mix}
-}
-\caption{}
-\label{fig:}
 \end{figure}
 
 \subsection{GAN}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-\subfigure[epoch=0]{
-    \includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/0000_0000}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/0079_0000}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/0641_0000}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/0969_0000}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/1213_0000}
-}
-\subfigure[epoch=0]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/1619_0000}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/2004_0000}
-}
-\subfigure[]{
-	\includegraphics[clip, width=0.4\linewidth]{fig/generative_adversarial_nets/3208_0000}
-}
-\caption{}
-\label{fig:}
+	
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+	    \includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0000_0000}
+		\subcaption{epochs = 0}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0079_0000}
+		\subcaption{epochs = 79}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0641_0000}
+	\subcaption{epochs = 641}
+	\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0969_0000}
+	\subcaption{epochs = 969}
+	\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/1213_0000}
+	\subcaption{epochs = 1213}
+	\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/1619_0000}
+		\subcaption{epoch = 1619}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/2004_0000}
+		\subcaption{epochs = 2004}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/3208_0000}
+		\subcaption{epochs = 3208}
+		\label{fig:}
+	\end{minipage}
+	
+	\caption{Transition generated images by GAN}
+	\label{fig:GANimage}
+
 \end{figure}
 
 
