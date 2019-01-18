@@ -8,7 +8,8 @@
 多光子顕微鏡で3D画像として撮影する．一つの視野で観察することができる領域は縦横が~で深さ方向が~である．ここでLUCIDによる透明化によって今までは断面のみの撮影だったものを深さ方向まで撮影することができるようになった．
 検体全ての撮影をするために画像取得にはタイリングをする．
 
-\subsection*{撮影条件}
+\begin{comment}
+
 蛍光顕微鏡
 Microscope name: Ti2 Microscope
 Objective name: Plan Apo 10x
@@ -20,25 +21,60 @@ Refractive Index: 1.000
 レーザー波長の情報
 
 DAPI
-Emission wavelength: 440.0 - 420.0
+Emission wavelength: 440.0--420.0
 Excitation wavelength: 405.0
 Pinhole size: 20.00
 Channel modality: Laser Scan Confocal, PMT
 
 FITC
-Emission wavelength: 500.0 - 550.0
+Emission wavelength: 500.0--550.0
 Excitation wavelength: 405.0
 Pinhole size: 20.00
 Channel modality: Laser Scan Confocal, PMT
 
 Texas Red
-Emission wavelength: 593.0 - 670.0
+Emission wavelength: 593.0--670.0
 Excitation wavelength: 561.0
 Pinhole size: 20.00
 Channel modality: Laser Scan Confocal, PMT
 
 深さ方向の分解能
 Z step : 2.7µm
+
+\end{comment}
+
+
+\tab {蛍光顕微鏡}に示すような蛍光顕微鏡で撮影を行った．また撮影条件を\tab {レーザー波長}にまとめた．
+
+\begin{table}[H]
+	\centering
+	\caption{Information of fluorescence microscope}
+	\label{tab:蛍光顕微鏡}
+	\begin{tabular}{cc}\toprule
+		Microscope name & Ti2 Microscope \\ 
+		Objective name & Plan Apo 10x \\ 
+		Objective magnification & 10 \\ 
+		Objective numerical aperture & 0.45 \\ 
+		Refractive Index & 1.000 \\ \bottomrule
+	\end{tabular} 
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Information of laser wavelength}
+	\label{tab:レーザー波長}
+	\begin{tabular}{cccc}\toprule
+		& DAPI & FITC & Texas Red \\ \midrule
+		Emission wavelength (nm) & 440.0--420.0 & 500.0--550.0 & 593.0--670.0 \\ 
+		Excitation wavelength (nm) & 405.0 & 405.0 & 561.0 \\ 
+		Pinhole size ($\upmu$m) & 20.00 & 20.00 & 20.00 \\ 
+		Channel modality & \multicolumn{3}{c}{Laser Scan Confocal, PMT } \\
+		Z step &  & 2.7 $\upmu$m &  \\ \bottomrule
+	\end{tabular}
+\end{table}
+
+
+
 
 % 三次元に撮影した画像
 
@@ -429,31 +465,34 @@ Auto Encoder, GAN, VAE, VAE-GANで教師なし学習を行った．
 
 \section{半教師あり学習による識別精度評価}
 VAEの考えを利用して，半教師あり学習のネットワークを作成した．
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_A}
 	\caption{}
 	\label{fig:paterna}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_B}
 	\caption{}
 	\label{fig:paterna}
 \end{figure}
 
+
 \section{学習環境}
 \begin{table}[H]
 	\centering
-	\caption{}
-	\label{tab:}
+	\caption{Enviroment of implementation}
+	\label{tab:環境}
 	\begin{tabular}{ccc}\toprule
-		OS & Ubuntu & 14.04 \\ 
-		言語 & Python & 3.6 \\ 
-		フレームワーク & Keras & 2.2.4 \\ 
-		& Tensorflow & 1.11.0 \\ 
-		GPU & GeForceRX 1080Ti & 3枚 \\  \bottomrule
+		OS & Ubuntu & ver. 14.04 \\ 
+		Language & Python & ver. 3.6 \\ 
+		\multirow{2}{*}{Framework} & Keras & ver. 2.2.4 \\ 
+		& Tensorflow & ver. 1.11.0 \\ 
+		GPU & GeForceRX 1080Ti & $\times$3 \\  \bottomrule
 	\end{tabular}
 \end{table}
-Github
+
+Githubにコードを上げてある．
+URL : 
