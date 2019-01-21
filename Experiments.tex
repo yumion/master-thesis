@@ -1,48 +1,10 @@
 \chapter{自分の研究本体を述べるところ}
-ここは自分のやった研究を述べる章です。実際の中身に合わせて章を複数立てにする場合もあると思います。「議論」の章を別に分ける場合は、この章では得られた結果までを記述し、その結果に対する議論は「議論」の章に回すのが良いでしょう。この章は必ずしも1つの章のみである必要はありません。研究内容に応じて、複数の章に分割することも一般的に行われます。
+%ここは自分のやった研究を述べる章です。実際の中身に合わせて章を複数立てにする場合もあると思います。「議論」の章を別に分ける場合は、この章では得られた結果までを記述し、その結果に対する議論は「議論」の章に回すのが良いでしょう。この章は必ずしも1つの章のみである必要はありません。研究内容に応じて、複数の章に分割することも一般的に行われます。
 
 \section{胃がんの画像データ取得方法}
 
 \subsection{透明化と染色}
-ホルマリン固定されている検体をLUCIDによる透明化してから染色する．
-多光子顕微鏡で3D画像として撮影する．一つの視野で観察することができる領域は縦横が~で深さ方向が~である．ここでLUCIDによる透明化によって今までは断面のみの撮影だったものを深さ方向まで撮影することができるようになった．
-検体全ての撮影をするために画像取得にはタイリングをする．
-
-\begin{comment}
-
-蛍光顕微鏡
-Microscope name: Ti2 Microscope
-Objective name: Plan Apo 10x
-Objective magnification: 10
-Objective numerical aperture: 0.45
-Refractive Index: 1.000
-
-
-レーザー波長の情報
-
-DAPI
-Emission wavelength: 440.0--420.0
-Excitation wavelength: 405.0
-Pinhole size: 20.00
-Channel modality: Laser Scan Confocal, PMT
-
-FITC
-Emission wavelength: 500.0--550.0
-Excitation wavelength: 405.0
-Pinhole size: 20.00
-Channel modality: Laser Scan Confocal, PMT
-
-Texas Red
-Emission wavelength: 593.0--670.0
-Excitation wavelength: 561.0
-Pinhole size: 20.00
-Channel modality: Laser Scan Confocal, PMT
-
-深さ方向の分解能
-Z step : 2.7µm
-
-\end{comment}
-
+はじめに，ホルマリン固定されている検体をLUCIDによる透明化してから染色した．次に検体を多光子顕微鏡で3D画像として撮影した．LUCIDによる透明化によって，今までは断面のみの撮影だったものを深さ方向まで撮影することを可能にした．本研究で使用した多光子顕微鏡では，一つの視野で観察することができる領域は縦横が~で深さ方向が~である．したがって検体全ての撮影をするために，画像取得にはタイリングを行った．
 
 \tab {蛍光顕微鏡}に示すような蛍光顕微鏡で撮影を行った．また撮影条件を\tab {レーザー波長}にまとめた．
 
@@ -73,11 +35,11 @@ Z step : 2.7µm
 	\end{tabular}
 \end{table}
 
-
-
+\fig {検体一覧}に検体の全体像およびその切片を示す．検体ごとに発光波長が異なるのは，
+クァwせdrftgyふじこ
+が理由である．
 
 % 三次元に撮影した画像
-
 \begin{figure}[H]
 	\centering
 	
@@ -109,7 +71,7 @@ Z step : 2.7µm
 
 
 \subsection{教師データの作成}
-消化器内科の医師がつけた腫瘍部分を教師データとして利用した．\fig {コラ画像}が腫瘍の位置をマスクした画像になっている．
+消化器内科の医師がつけた腫瘍部分を教師データとして利用した．\fig {切り取り画像}が腫瘍の位置をマスクした画像になっている．
 
 \begin{figure}[H]
 	\centering
@@ -144,14 +106,17 @@ Z step : 2.7µm
 	%\end{minipage}
 	
 	\caption{Sample images masking cancer}
-	\label{fig:コラ画像}
+	\label{fig:切り取り画像}
 	
 \end{figure}
 
 
 \section{前処理}
+本研究では，学習器にかける前にいくつかの前処理を行った．本節ではこの前処理について述べる．
 
 \subsection{擬似HE染色}
+蛍光顕微鏡で撮影した画像は，病片発光色が検体ごとで異なるためそれらを一様に扱えない．そこで，病理でよく用いられるHE染色のカラーテイストへと変換した．\fig {HElike}に示すように，全ての検体が同様な色調になっていることが分かる．
+
 \begin{figure}[H]
 	\centering
 	
@@ -175,7 +140,6 @@ Z step : 2.7µm
 		\includegraphics[clip, angle=270, width=\linewidth]{fig/preprocessing/pseudo-HE/0110240}
 		\subcaption{sample D}
 	\end{minipage}
-	
 	%\begin{minipage}{0.8\columnwidth}
 	%	\centering
 	%	\includegraphics[clip, angle=270, width=\linewidth]{fig/preprocessing/pseudo-HE/0100}
@@ -188,7 +152,8 @@ Z step : 2.7µm
 \end{figure}
 
 
-教師ラベルから，正常と腫瘍に分割した．
+また\fig {切り取り画像}に示した教師ラベルから，画像データを正常と腫瘍に分割した．その一例を\fig {検体A教師ラベル}に示す．
+
 \begin{figure}[H]
 	\centering
 	
@@ -203,15 +168,21 @@ Z step : 2.7µm
 		\subcaption{Cancer of sample A}
 	\end{minipage}
 	
-	\caption{Teacher labels of normal and cancer}
+	\caption{Example of teacher labels of normal and cancer}
 	\label{fig:検体A教師ラベル}
 	
 \end{figure}
 
+
 \subsection{Data Augmentation}
-本研究では少量のデータセットであるため，少しの画像からより多くの特徴を抽出するために擬似的にデータの水増し(Data Augmentation)を行った．本研究で注意した点は，入力画像としてあり得る範囲のバリエーションに絞った点である．
+本研究ではデータセットが少量である．そこで少しの画像からより多くの特徴を抽出するために，擬似的なデータの水増し(Data Augmentation)を行った．本研究で注意した点は，入力画像としてあり得る範囲のバリエーションに絞った点である．
+
+このData Augmentationによって，訓練データは
+??10倍??
+にも増やすことができた．
 
 \subsection*{回転}
+入力画像を90\deg 刻みで最大270\deg 回転させた．その一例を\fig {回転}に示す．
 
 \begin{figure}[H]
 	\centering
@@ -242,8 +213,8 @@ Z step : 2.7µm
 	
 \end{figure}
 
-
 \subsection*{反転}
+入力画像を垂直方向および水平方向に反転させた．その一例を\fig {反転}に示す．
 
 \begin{figure}[H]
 	\centering
@@ -268,6 +239,7 @@ Z step : 2.7µm
 \end{figure}
 
 \subsection*{ガウシアンブラー}
+入力画像にぼかしを加えた．ぼかしにはガウシアンブラーを適用し，ぼかし半径は0.5刻みで最大2まで行った．その一例を\fig {ガウシアンブラー}に示す．
 
 \begin{figure}[H]
 	\centering
@@ -299,6 +271,7 @@ Z step : 2.7µm
 \end{figure}
 
 \subsection*{鮮鋭度}
+入力画像の鮮鋭度(シャープネス)を変えた．ここで$f$は使用したライブラリPillowのfactorで，最大$f=2.00$まで適用した．その一例を\fig {シャープネス}に示す．
 
 \begin{figure}[H]
 	\centering
@@ -330,6 +303,8 @@ Z step : 2.7µm
 \end{figure}
 
 \subsection*{輝度}
+入力画像の輝度(明るさ)を変えた．ここで$I$は輝度値であり，$I=1.00$が元の明るさで，$I=1.20$は1.2倍の明るく，$I=0.80$は0.8倍暗くなっている．その一例を\fig {輝度}に示す．
+
 \begin{figure}[H]
 	\centering
 	
@@ -355,6 +330,8 @@ Z step : 2.7µm
 \end{figure}
 
 \subsection*{コントラスト}
+入力画像のコントラストを変えた．ここで$f$は使用したライブラリPillowのfactorで，最大$f=1.50$まで適用した．その一例を\fig {コントラスト}に示す．
+
 \begin{figure}[H]
 	\centering
 	
@@ -375,11 +352,13 @@ Z step : 2.7µm
 	\end{minipage}	
 	
 	\caption{Contrast. $f$ is enhancement factor. An enhancement factor of 0.0 gives a solid grey image. A factor of 1.0 gives the original image.}
-	\label{fig:}
+	\label{fig:コントラスト}
 	
 \end{figure}
 
 \subsection*{彩度}
+入力画像の彩度を変えた．ここで$f$は使用したライブラリPillowのfactorで，最大$f=1.50$まで適用した．その一例を\fig {彩度}に示す．
+
 \begin{figure}[H]
 	\centering
 	
@@ -405,6 +384,9 @@ Z step : 2.7µm
 \end{figure}
 
 \subsection{クロッピング画像}
+入力画像を
+??ランダムに??
+クロッピングした．\fig {クロップ}に各検体のクロッピング画像を示す．
 
 \begin{figure}[H]
 	\centering
@@ -437,98 +419,136 @@ Z step : 2.7µm
 \end{figure}
 
 \section{古典的な画像処理手法による識別精度評価}
-正常と腫瘍を両方含む画像に対してHough変換による円検出で正常の線管構造を検出した．円検出では検出できない線菅構造をより多く検出するために楕円でも検出ができるように変更した．複数のパラメータを調整することで，アノテーションの正常領域が検出できるような円検出の数を増やしながらも，ノイズが多くならないような値を決定した．また，これが複数の検体で試してみた時に，最適なパラメータを見積もった．
+正常と腫瘍を両方含む画像に対して，Hough変換による円検出で正常の腺管構造を検出した．円検出では検出できない腺管構造をより多く検出するために，楕円でも検出ができるように変更した．複数のパラメータを調整することで，アノテーションの正常領域が検出できるような円検出の数を増やしながらも，ノイズが多くならないような値を決定した．また，これを複数の検体で試してみた時の最適なパラメータを見積もった．
+
+%円検出の画像
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/circle_detection}
+	\caption{Detection of circle.}
+	\label{fig:circle_detection}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/eclips_low}
+	\caption{楕円？}
+	\label{fig:eclipslow}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/eclips_detection}
+	\caption{こっちとの違いがわからない}
+	\label{fig:eclips_detection}
+\end{figure}
+
+
 
 \section{事前学習}
-今回のように新しい画像の撮影方法でデータを多く集めることができない時は，類似データを事前に学習しておく事前学習を用いる．
-大腸の管構造の特徴を捉えるために，外部のデータセットのGland Challengeデータセットを使って事前学習を行う．
+本研究では，新しい画像の撮影方法でデータを多く集めることができない．そこで，類似データを事前に学習しておく事前学習が有効であると考えた．今回，大腸の管構造の特徴を捉えるために，外部のデータセットであるGland Challengeデータセットを使って事前学習を行った．Gland Chellengeの詳細を\tab {GlandChallenge}に示す．
 
-\begin{tabular}{|cc}
-	\hline 
-	Cancer Type & Colorectal Cancer \\ 
-	\hline 
-	Resolution & $20X (0.62005 \mu{m}/pixel)$ \\ 
-	\hline 
-	Number
-	
-	of Images & 165 \\ 
-	\hline 
-	Format & bmp \\ 
-	\hline 
-\end{tabular} 
+\begin{table}[H]
+	\centering
+	\caption{Data description}
+	\label{tab:GlandChallenge}
+	\begin{tabular}{cc}\toprule
+		Cancer Type & Colorectal Cancer \\ 
+		Resolution & $20\times (0.62005 \upmu m/pixel)$ \\ 
+		Number of Images & 165 \\ 
+		Format & bmp \\ \bottomrule
+	\end{tabular} 
+\end{table}
+
 
 \begin{figure}[H]
 	\centering
 	
-	\begin{minipage}{0.45\columnwidth}
+	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_5.bmp}
-		\subcaption{Normal images of sample A}
+		\subcaption{Normal}
 	\end{minipage}
-	\begin{minipage}{0.45\columnwidth}
+	\hspace{5truemm}
+	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_35.bmp}
-		\subcaption{Cancer images of sample A}
+		\subcaption{Normal}
 	\end{minipage}
 	
-	\begin{minipage}{0.45\columnwidth}
+	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_12.bmp}
-		\subcaption{Normal images of sample B}
+		\subcaption{Cancer}
 	\end{minipage}
-	\begin{minipage}{0.45\columnwidth}
+	\hspace{5truemm}
+	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/train_77.bmp}
-		\subcaption{Cancer images of sample B}
+		\subcaption{Cancer}
 	\end{minipage}
 	
-	\caption{Cropped images for validation}
+	\caption{Example of images for pre-training}
 	\label{fig:事前学習画像}
 	
 \end{figure}
-事前学習で用意する画像と本研究で使用する検体が類似している必要があるため，前処理を行った．解像度を揃えて，サンプル間で正規化をした．事前学習の画像が，本検体の画像よりも解像度が4倍あった．そこで画像サイズが(755pix, 522pix)である枚数が151枚を利用し，その画像を(432, 299)にリサイズした．本研究の検体をウィンドウサイズが130pixとなるようにスライドウィンドウで画像を取得した．その際，背景の割合が0.1\%以上あるものは取り除いた．130pixで切り抜いた画像を299pixにリサイズして入力画像とした．また学習に用いる際には，事前学習の画像では(432, 299)から(256, 256)に切り抜き，本研究の検体では(299, 299)を(256, 256)に切り抜いて学習の教師データとした．
 
-\subsection{バッチ学習}
-本研究は，3次元画像を解析するため，学習に利用する画像サイズやニューラルネットワークのパラメータ数が大きくなるため11GBのGPUにはメモリに乗らないことがある．そこで，画像をバッチに分けてバッチごとに画像を読み込みGPUで計算を行った．
+事前学習で用意する画像と本研究で使用する検体が類似ように，両方のデータセットに対して前処理を行った．
+
+まず，両データの解像度を揃え，サンプル間で画像を正規化をした．事前学習の画像が，本検体の画像よりも解像度が4倍あった．事前学習のデータセットは画像サイズが異なるデータも多少あったため，画像サイズが(755 pix, 522 pix)である画像151枚を利用し，その画像を(432 pix, 299 pix)にリサイズした．また，本研究の検体をウィンドウサイズが130 pixとなるようにスライドウィンドウで画像を取得した．その際，背景の割合が0.1\%以上あるものは取り除いた．130 pixで切り抜いた画像を299 pixにリサイズして入力画像とした．
+学習に用いる際には，事前学習の画像では(432 pix, 299 pix)から(256 pix, 256 pix)に切り抜き，本研究の検体では(299 pix, 299 pix)をランダムに(256 pix, 256 pix)に切り抜いて学習の教師データとした．
+
 
 \section{教師あり学習による識別精度評価}
 % モデルの概略図
 
 \subsection{評価方法}
-機械学習の評価方法には，ホールドアウト法と交差検証法の２通りある．ホールドアウト法はデータを訓練データとテストデータに分割して評価する方法である．交差検証法はデータをK分割してK-1のグループを訓練データに，残りの1つをテストデータにする．これをKパターン全て試行した精度の平均で評価する方法である．交差検証法の方が計算時間が長くなるが信頼性が高い．少量のデータの場合は特に訓練データとテストデータの分割の違いで結果に差が生じることがあるため本研究の評価方法では交差検証法を用いた．
+機械学習の評価方法には，ホールドアウト法と交差検証法の2通りある．ホールドアウト法は，あらかじめデータを訓練データとテストデータに分割して評価する方法である．交差検証法はデータを$K$分割して$K-1$のグループを訓練データに，残りの1つをテストデータにする．これを$K$パターン全て試行した精度の平均で評価する方法である．交差検証法の方が計算時間が長くなるが信頼性が高い．少量のデータの場合は訓練データとテストデータの分割の違いで結果に差が生じることがあるため，本研究の評価方法では交差検証法を用いた．
 
 本研究では4検体を使っているため検体ごとに分割することで4分割の交差検証法を行った．
 
 \subsection*{2次元画像}
-用いたネットワーク構造は，InceptionV3, Xception, Inception\_Resnetの４つである
-それぞれに対して，Data Augmentation，事前学習，擬似HE染色のありなしで精度がどのように改善されるかを実験した．
+用いたネットワーク構造は，InceptionV3，Xception，Inception-Resnetの4つである．
+それぞれに対して，Data Augmentation，事前学習，擬似HE染色のあり・なしで精度がどのように改善されるかを実験した．
 
 \subsection*{3次元画像}
-深さ方向の15枚をまとめて3次元画像として解析する．
-用いたモデルは3DCNN, Stacked CNN, 2DCNN\_LSTMである．
+深さ方向の15枚をまとめて3次元画像として解析した．用いたモデルは3DCNN, Stacked CNN, 2DCNN-LSTMである．
 ここでは，Data Augmentationと事前学習と擬似HE染色は，全て適用して実験を行った．
 
+
 \section{教師なし学習による識別精度評価}
-Auto Encoder, GAN, VAE, VAE-GANで教師なし学習を行った．
+AutoEncoder, GAN, VAE, VAE-GANで教師なし学習を行った．
+
 
 \section{半教師あり学習による識別精度評価}
 VAEの考えを利用して，半教師あり学習のネットワークを作成した．
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_A}
-	\caption{}
-	\label{fig:paterna}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_B}
-	\caption{}
-	\label{fig:paterna}
+	\begin{minipage}{\columnwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_A}
+		\subcaption{Not including teacher label}
+		\label{fig:VAE-a}
+	\end{minipage}
+	
+	\begin{minipage}{\columnwidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{fig/chapter3/networks/patern_B}
+		\subcaption{Including teacher label}
+		\label{fig:VAE-b}
+	\end{minipage}
+	
+	\caption{Diagram of semi-supervised learning}
+	\label{fig:半教師}
+	
 \end{figure}
+
 
 
 \section{学習環境}
+本研究の学習環境を\tab{環境}にまとめた．
+
 \begin{table}[H]
 	\centering
 	\caption{Enviroment of implementation}
@@ -538,9 +558,13 @@ VAEの考えを利用して，半教師あり学習のネットワークを作�
 		Language & Python & ver. 3.6 \\ 
 		\multirow{2}{*}{Framework} & Keras & ver. 2.2.4 \\ 
 		& Tensorflow & ver. 1.11.0 \\ 
-		GPU & GeForceRX 1080Ti & $\times$3 \\  \bottomrule
+		GPU & GeForceRX 1080Ti $\times$3 & RAM 11 GB \\  \bottomrule
 	\end{tabular}
 \end{table}
 
-Githubにコードを上げてある．
+また，本研究で作成したプログラムはGithubに上げてある(下記URLを参照)．
 URL : 
+
+
+\subsection*{バッチ学習}
+本研究は3次元画像を解析するため，学習に利用する画像サイズやニューラルネットワークのパラメータ数が大きくなる．そのため本研究で使用したGPUではメモリに乗り切らないことがある．そこで画像をミニバッチに分けて，バッチごとに画像を読み込みGPUで計算を行った．
