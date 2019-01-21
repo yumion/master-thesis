@@ -7,12 +7,11 @@
 % 画像の取り扱いに必要
 \usepackage{graphicx}
 
-% 表でセルを複数列で結合する
-\usepackage{multicol}
 
 % 数式の機能を拡張
 \usepackage{amsmath}
 \usepackage{bm}
+\usepackage{upgreek}
 
 % citep や citet を有効にする
 \usepackage{cite}
@@ -22,6 +21,11 @@
 \usepackage{subcaption}
 \usepackage{here}
 
+% 表関連
+\usepackage{booktabs}
+% 表でセルを複数列で結合する
+\usepackage{multicol}
+\usepackage{multirow}
 % 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
 %\usepackage{lineno}
 %\linenumbers
@@ -35,6 +39,9 @@
 \usepackage{mymacro}
 % 目次でsubsectionまで表示
 \setcounter{tocdepth}{2}
+% 複数行コメント
+\usepackage{comment}
+
 
 % 氏名などの情報が入っているファイル。各自で編集。
 \include{AuthorInfo}
@@ -68,13 +75,13 @@
 \mainmatter
 
 % include を使うことで、別ファイルに分割することができます。
-\include{Introduction} % 背景
-\include{Review} % 原理
+%\include{Introduction} % 背景
+%\include{Review} % 原理
 \include{Experiments} % 実験手法
-\include{Results} % 結果と考察
-\include{Conclusion} % まとめ
-\include{Appendix} % 付録
-\include{Acknowledgments} % 謝辞
+%\include{Results} % 結果と考察
+%\include{Conclusion} % まとめ
+%\include{Appendix} % 付録
+%\include{Acknowledgments} % 謝辞
 
 \renewcommand{\bibname}{引用文献}
 \bibliographystyle{elsart-num}
