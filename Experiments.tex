@@ -443,6 +443,52 @@ Z step : 2.7µm
 今回のように新しい画像の撮影方法でデータを多く集めることができない時は，類似データを事前に学習しておく事前学習を用いる．
 大腸の管構造の特徴を捉えるために，外部のデータセットのGland Challengeデータセットを使って事前学習を行う．
 
+\begin{tabular}{|cc}
+	\hline 
+	Cancer Type & Colorectal Cancer \\ 
+	\hline 
+	Resolution & $20X (0.62005 \mu{m}/pixel)$ \\ 
+	\hline 
+	Number
+	
+	of Images & 165 \\ 
+	\hline 
+	Format & bmp \\ 
+	\hline 
+\end{tabular} 
+
+\begin{figure}[H]
+	\centering
+	
+	\begin{minipage}{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_5.bmp}
+		\subcaption{Normal images of sample A}
+	\end{minipage}
+	\begin{minipage}{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_35.bmp}
+		\subcaption{Cancer images of sample A}
+	\end{minipage}
+	
+	\begin{minipage}{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_12.bmp}
+		\subcaption{Normal images of sample B}
+	\end{minipage}
+	\begin{minipage}{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/train_77.bmp}
+		\subcaption{Cancer images of sample B}
+	\end{minipage}
+	
+	\caption{Cropped images for validation}
+	\label{fig:事前学習画像}
+	
+\end{figure}
+
+画像サイズが(755, 522)である枚数が151枚であり，それ以外は使用しなかった．
+
 \section{教師あり学習による識別精度評価}
 % モデルの概略図
 
@@ -452,7 +498,7 @@ Z step : 2.7µm
 本研究では4検体を使っているため検体ごとに分割することで4分割の交差検証法を行った．
 
 \subsection*{2次元画像}
-用いたネットワーク構造は，VGG19, InceptionV3, Xception, Inception\_Resnetの４つである
+用いたネットワーク構造は，InceptionV3, Xception, Inception\_Resnetの４つである
 それぞれに対して，Data Augmentation，事前学習，擬似HE染色のありなしで精度がどのように改善されるかを実験した．
 
 \subsection*{3次元画像}
