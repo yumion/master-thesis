@@ -1,5 +1,6 @@
 \chapter{序論}
 \label{chap_intro}
+\section{けんきゆうはいけい}
 胃がんは、日本でもっとも罹患数が多いがんであり、年間13万人が罹患し5万人が亡くなっている．内視鏡の生検は食道，大腸，小腸，胃などを鉗子で2mm角の立方体程度の大きさで抜き出し，染色したものを2，3断面にカットしてから病理診断医が顕微鏡で観察，診断している．
 断面のみの観察では内部に腫瘍がある場合に見落としてしまうリスクがあるため，本研究では組織透明化技術を用いて検体を丸ごと観察できるようにした。病理医が全てを診断するには負担が大きいことと病変の見落としリスクがあること，経験を詰んだ医師でも判断の難しい病変を見つけることが求められている。
 
@@ -7,27 +8,27 @@
 
 また癌検診では担当医が判定して専門医がダブルチェックをしているが，AIがスクリーニングを行って専門医の確認が必要な症例を絞り込む．専門医の判定は主観的であることや，専門医ごとにも判断基準がことなることが課題になる．
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter1/lucid}
-	\caption[transparent specimen]{}
+	\caption{transparent specimen}
 	\label{fig:lucid}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter1/microscope}
-	\caption[microscope]{}
+	\caption{microscope}
 	\label{fig:microscope}
 \end{figure}
 
-
+\section{ほんけんきゆうのもくてき}
 本研究の目的は内視鏡生検を透明にして深層学習を利用して癌を見落とさない診断方法を開発することである．組織透明化技術LUCIDを用いて検体を丸ごと透明化し，レーザー顕微鏡で観察することで，顕微鏡の解像度で検体の内部まで3次元情報として解析することができる．
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter1/whole_image_analysis}
-	\caption[whole image analysis]{}
+	\caption{whole image analysis}
 	\label{fig:wholeimageanalysis}
 \end{figure}
 
