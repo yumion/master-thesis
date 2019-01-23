@@ -5,7 +5,6 @@
 *.lof
 *.lot
 *.toc
-*.pdf
+main.pdf
 *.gz
 reference/
-*.pdf
