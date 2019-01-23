@@ -1,28 +1,31 @@
-\documentclass[twoside,openright,a4paper,papersize,uplatex]{jsbook}
+\documentclass[twoside,openright,a4paper,papersize,uplatex,dvipdfmx]{jsbook}
 % uplatex オプションを指定し、ユニコード対応に。ただだし、uplatex でコンパイルすること。
 
 % 修論本体と表紙で共通で必要となる設定
 \input{preamble}
 
 % 画像の取り扱いに必要
-\usepackage[dvipdfmx]{graphicx}
+\usepackage{graphicx}
 
-% 表でセルを複数列で結合する
-\usepackage{multicol}
 
 % 数式の機能を拡張
 \usepackage{amsmath}
 \usepackage{bm}
+\usepackage{upgreek}
 
-% citep や citet を有効にする
+% 複数引用
 \usepackage{cite}
 
 
-% subfigure 環境で、(a)、(b) などの番号を左上に表示する。宇宙系の分野ではこれが一般的なはず。
+% 複数図を並べる時のcaption
 \usepackage{subcaption}
 \usepackage{here}
 
-
+% 表関連
+\usepackage{booktabs}
+% 表でセルを複数列で結合する
+\usepackage{multicol}
+\usepackage{multirow}
 % 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
 %\usepackage{lineno}
 %\linenumbers
@@ -31,10 +34,14 @@
 \usepackage[dvipdfmx, hidelinks]{hyperref}
 
 
+
 % renewcommandなどはここに
 \usepackage{mymacro}
 % 目次でsubsectionまで表示
 \setcounter{tocdepth}{2}
+% 複数行コメント
+\usepackage{comment}
+
 
 % 氏名などの情報が入っているファイル。各自で編集。
 \include{AuthorInfo}
@@ -71,7 +78,7 @@
 \include{Introduction} % 背景
 \include{Review} % 原理
 \include{Experiments} % 実験手法
-%\include{Results} % 結果と考察
+\include{Results} % 結果と考察
 \include{Conclusion} % まとめ
 \include{Appendix} % 付録
 \include{Acknowledgments} % 謝辞
