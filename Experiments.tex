@@ -179,9 +179,7 @@
 \subsection{Data Augmentation}
 本研究ではデータセットが少量である．そこで少しの画像からより多くの特徴を抽出するために，擬似的なデータの水増し(Data Augmentation)を行った．本研究で注意した点は，入力画像としてあり得る範囲のバリエーションに絞った点である．
 
-このData Augmentationによって，訓練データは
-??10倍??
-にも増やすことができた．
+Data Augmentationは1エポックごとに行われるので，訓練データは50エポック学習したら1つのData Augmentationに対して50倍にも増やすことができる．
 
 \subsection*{回転}
 入力画像を90\deg 刻みで最大270\deg 回転させた．その一例を\fig {回転}に示す．
@@ -385,10 +383,11 @@
 	
 \end{figure}
 
+\subsection*{ランダムクロッピング}
+入力画像をランダムに$256 \times 256$にクロッピングを行った．
+
 \subsection{クロッピング画像}
-入力画像を
-??ランダムに??
-クロッピングした．\fig {クロップ}に各検体のクロッピング画像を示す．
+入力画像の中心を$130\times 130$ pixでクロッピングし，これをテストデータとした．\fig {クロップ}に各検体のクロッピング画像を示す．
 
 \begin{figure}[H]
 	\centering
@@ -433,18 +432,10 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/eclips_low}
-	\caption{楕円？}
-	\label{fig:eclipslow}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
 	\includegraphics[width=0.7\linewidth]{fig/eclips_detection}
-	\caption{こっちとの違いがわからない}
-	\label{fig:eclips_detection}
+	\caption{Detection of ellipse}
+	\label{fig:ellipse_detection}
 \end{figure}
-
 
 
 \section{事前学習}
@@ -456,7 +447,7 @@
 	\label{tab:GlandChallenge}
 	\begin{tabular}{cc}\toprule
 		Cancer Type & Colorectal Cancer \\ 
-		Resolution & $20\times (0.62005 \upmu m/pixel)$ \\ 
+		Resolution & $20\times (0.62005 \upmu \mathrm{m / pixel})$ \\ 
 		Number of Images & 165 \\ 
 		Format & bmp \\ \bottomrule
 	\end{tabular} 
@@ -471,22 +462,10 @@
 		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_5.bmp}
 		\subcaption{Normal}
 	\end{minipage}
-	\hspace{5truemm}
-	\begin{minipage}[b]{0.4\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_35.bmp}
-		\subcaption{Normal}
-	\end{minipage}
-	
+	\hspace{5truemm}	
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/testA_12.bmp}
-		\subcaption{Cancer}
-	\end{minipage}
-	\hspace{5truemm}
-	\begin{minipage}[b]{0.4\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter2/pretrain_image/train_77.bmp}
 		\subcaption{Cancer}
 	\end{minipage}
 	
@@ -497,8 +476,8 @@
 
 事前学習で用意する画像と本研究で使用する検体が類似ように，両方のデータセットに対して前処理を行った．
 
-まず，両データの解像度を揃え，サンプル間で画像を正規化をした．事前学習の画像が，本検体の画像よりも解像度が4倍あった．事前学習のデータセットは画像サイズが異なるデータも多少あったため，画像サイズが(755 pix, 522 pix)である画像151枚を利用し，その画像を(432 pix, 299 pix)にリサイズした．また，本研究の検体をウィンドウサイズが130 pixとなるようにスライドウィンドウで画像を取得した．その際，背景の割合が0.1\%以上あるものは取り除いた．130 pixで切り抜いた画像を299 pixにリサイズして入力画像とした．
-学習に用いる際には，事前学習の画像では(432 pix, 299 pix)から(256 pix, 256 pix)に切り抜き，本研究の検体では(299 pix, 299 pix)をランダムに(256 pix, 256 pix)に切り抜いて学習の教師データとした．
+まず，両データの解像度を揃え，サンプル間で画像を正規化をした．事前学習の画像が，本検体の画像よりも解像度が4倍あった．事前学習のデータセットは画像サイズが異なるデータも多少あったため，画像サイズが$755 \times 522$ pixである画像151枚を利用し，その画像を$432 \times 299$ pixにリサイズした．また，本研究の検体をウィンドウサイズが130 pixとなるようにスライドウィンドウで画像を取得した．その際，背景の割合が0.1\%以上あるものは取り除いた．130 pixで切り抜いた画像を299 pixにリサイズして入力画像とした．
+学習に用いる際には，事前学習の画像では$432 \times 299$ pixから$256 \times 256$ pixに切り抜き，本研究の検体では$299 \times 299$ pixをランダムに$256 \times 256$ pixに切り抜いて学習の教師データとした．
 
 
 \section{教師あり学習による識別精度評価}
@@ -560,7 +539,7 @@ VAEの考えを利用して，半教師あり学習のネットワークを作�
 		Language & Python & ver. 3.6 \\ 
 		\multirow{2}{*}{Framework} & Keras & ver. 2.2.4 \\ 
 		& Tensorflow & ver. 1.11.0 \\ 
-		GPU & GeForceRX 1080Ti $\times$3 & RAM 11 GB \\  \bottomrule
+		GPU & GeForce GTX 1080Ti $\times$3 & RAM 11 GB \\  \bottomrule
 	\end{tabular}
 \end{table}
 
