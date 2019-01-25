@@ -4,7 +4,7 @@
 \section{胃がんの画像データ取得方法}
 
 \subsection{透明化と染色}
-はじめに，ホルマリン固定されている検体をLUCIDによる透明化してから染色した．次に検体を蛍光顕微鏡で3D画像として撮影した．LUCIDによる透明化によって，今までは断面のみの撮影だったものを深さ方向まで撮影することを可能にした．本研究で使用した蛍光顕微鏡では，一つの視野で観察することができる領域は縦横が解像度$ 2.49 \upmu \mathrm{m/pix}$で512pixであるので1.27 mmが一度で見れる視野である．深さ方向はz方向に対して2.7 $\upmu$ mの解像度で最大800 $\upmu$ mまで観察可能である．縦横の一視野では1.27 mmが撮影されるが，それを検体の長さの分だけ観察するためにタイリングという移動しながら撮影を行う方法で画像を取得した．この際，隣同士の間に余分な空白ができないように画像の15\%を重ねながらタイリングを行った．
+はじめに，ホルマリン固定されている検体をLUCIDによる透明化してから染色した．次に検体を蛍光顕微鏡で3D画像として撮影した．LUCIDによる透明化によって，今までは断面のみの撮影だったものを深さ方向まで撮影することを可能にした．本研究で使用した蛍光顕微鏡では，一つの視野で観察することができる領域は縦横が解像度2.49 $\upmu$m/pixで512 pixであるので1.27 mmが一度で見れる視野である．深さ方向はz方向に対して2.7 $\upmu$mの解像度で最大800 $\upmu$mまで観察可能である．縦横の一視野では1.27 mmが撮影されるが，それを検体の長さの分だけ観察するためにタイリングという移動しながら撮影を行う方法で画像を取得した．この際，隣同士の間に余分な空白ができないように画像の15\%を重ねながらタイリングを行った．
 
 \tab {蛍光顕微鏡}に示すような蛍光顕微鏡で撮影を行った．また撮影条件を\tab {レーザー波長}にまとめた．
 
@@ -35,39 +35,8 @@
 	\end{tabular}
 \end{table}
 
-\fig {検体アノテーション}に専門医によって腫瘍をアノテーションした検体を示す．なお，検体Bのアノテーション画像はなかったため，顕微鏡の観察像を載せた．
 
-% アノテーション
-\begin{figure}[H]
-	\centering
-	
-	\begin{minipage}{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-013}
-		\subcaption{sample A}
-	\end{minipage}
-	\begin{minipage}{0.45\linewidth}
-		\centering
-		%	\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-012}
-		\subcaption{sample B}
-	\end{minipage}
-	\begin{minipage}{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-009}
-		\subcaption{sample C}
-	\end{minipage}
-	\begin{minipage}{0.45\linewidth}
-		\centering
-		\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-011}
-		\subcaption{sample D}
-	\end{minipage}
-	
-	\caption{Anotation images of samples}
-	\label{fig:検体アノテーション}
-	
-\end{figure}
-
-\fig {検体一覧}に共焦点顕微鏡の撮影した検体の3次元構造を示す．検体ごとに発光波長が異なるのは，染色液の侵食度合い異なることが理由である．
+\fig {3D検体一覧}に共焦点顕微鏡の撮影した検体の3次元構造を示す．検体ごとに発光波長が異なるのは，染色液の侵食度合い異なることが理由である．
 
 % 三次元に撮影した画像
 \begin{figure}[H]
@@ -98,6 +67,41 @@
 	\label{fig:3D検体一覧}
 	
 \end{figure}
+
+
+\fig {検体アノテーション}に専門医によって腫瘍をアノテーションした検体を示す．なお，検体Bのアノテーション画像はなかったため，顕微鏡の観察像を載せた．
+
+% アノテーション
+\begin{figure}[H]
+	\centering
+	
+	\begin{minipage}{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-013}
+		\subcaption{sample A}
+	\end{minipage}
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/raw_data/summary/C-012}
+		\subcaption{sample B}
+	\end{minipage}
+	\begin{minipage}{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-009}
+		\subcaption{sample C}
+	\end{minipage}
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\includegraphics[clip, angle=270, width=\linewidth]{fig/raw_data/summary/C-011}
+		\subcaption{sample D}
+	\end{minipage}
+	
+	\caption{Annotation images of samples}
+	\label{fig:検体アノテーション}
+	
+\end{figure}
+
+
 
 
 
