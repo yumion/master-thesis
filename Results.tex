@@ -96,6 +96,40 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 \subsection{3次元画像解析}
 3DCNNは，学習する際の訓練パラメータが多すぎて，学習が収束しない点や，メモリが大きくてGPUに乗らないという問題があり，時系列解析で行われているLSTMやGRUまた，BidirectionalなGRUをモデルの比較として利用した．
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter4/3d/roc/depth_all.pdf}
+	\caption{depth}
+	\label{fig:depthall}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_10.pdf}
+		\subcaption{depth: 10}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_50.pdf}
+		\subcaption{depth: 50}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_100.pdf}
+		\subcaption{depth: 100}
+		\label{fig:}
+	\end{minipage}
+	
+	\caption{ROC curve with different depth}
+	\label{fig:2dcnn+LSTM_roc}
+	
+\end{figure}
+
 \section{教師なし学習による識別精度評価}
 \subsection{Auto Encoder}
 \begin{figure}
