@@ -97,42 +97,12 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 3DCNNは，学習する際の訓練パラメータが多すぎて，学習が収束しない点や，メモリが大きくてGPUに乗らないという問題があり，時系列解析で行われているLSTMやGRUまた，BidirectionalなGRUをモデルの比較として利用した．
 
 \section{教師なし学習による識別精度評価}
-% 潜在空間の分布
-% 写真での分布
-% loss, accグラフ
-\subsection{VAE}
-擬似HE染色した画像と元のカラー画像のそれぞれに対してVAEを行い，潜在変数を2次元空間にプロットした結果を\fig {VAEplot}に示す．
-\begin{figure}[H]
+\subsection{Auto Encoder}
+\begin{figure}
 	\centering
-	
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_c13_he}
-		\subcaption{HE like color at sample A}
-		\label{fig:}
-	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_299_c13_rgb}
-		\subcaption{original color at sample A}
-		\label{fig:}
-	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_he_mix}
-		\subcaption{HE like color at sample A and B}
-		\label{fig:}
-	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_rgb_mix}
-		\subcaption{original color at sample A and B}
-		\label{fig:}
-	\end{minipage}
-	
-	\caption{Latent space of 2D. Color ratio 1 is cancer, 0 is normal.}
-	\label{fig:VAEplot}
-	
+	\includegraphics[width=0.9\linewidth]{fig/chapter4/unet_ae}
+	\caption{Auto Encoder}
+	\label{fig:unetae}
 \end{figure}
 
 \subsection{GAN}
@@ -194,8 +164,62 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 	
 \end{figure}
 
+\subsection{VAE}
+擬似HE染色した画像と元のカラー画像のそれぞれに対してVAEを行い，潜在変数を2次元空間にプロットした結果を\fig {VAEplot}に示す．
+\begin{figure}[H]
+	\centering
+	
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_c13_he}
+		\subcaption{HE like color at sample A}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_299_c13_rgb}
+		\subcaption{original color at sample A}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_he_mix}
+		\subcaption{HE like color at sample A and B}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/variational_auto_encoder/vae_colon_epoch_100_rgb_mix}
+		\subcaption{original color at sample A and B}
+		\label{fig:}
+	\end{minipage}
+	
+	\caption{Latent space of 2D. Color ratio 1 is cancer, 0 is normal.}
+	\label{fig:VAEplot}
+	
+\end{figure}
+
+部分的には，正常と腫瘍で分布が異なるようになったが，明確な境界線を引くことが難しい．したがって，教師あり学習で境界を明確にし，教師なし学習でデータの構造を抽出することができれば，もっとも精度の高い認識モデルが作れる．
 
 \section{半教師あり学習による識別精度評価}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter4/accuracy_summary}
+	\caption{VAE Accuracy}
+	\label{fig:accuracysummary}
+\end{figure}
 
-%lossとaccグラフ
-% 教師ありと半教師ありを同じグラフにaccをプロット
+
+
+\section{学習結果の可視化}
+深層学習を用いて，腫瘍らしい領域を認識するアルゴリズムを，病理医が見るために画像上に腫瘍の部分が見て分かるように可視化を行った．
+
+スライドウィンドウで
+
+Grad-CAMを利用することでより詳細に深層学習の判断が可視化されるようになった．
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter4/large-grad-cam-step100-rm-black}
+	\caption{Visualization with Grad-CAM}
+	\label{fig:large-grad-cam-step100-rm-black}
+\end{figure}
