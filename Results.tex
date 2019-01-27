@@ -130,6 +130,55 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 	
 \end{figure}
 
+ここでLSTMやGRU, Bi-GRUといったモデルによる精度の差は，ほとんどなかった．GRUがもっとも訓練パラメータが少ないので学習時間や推論時間を早くすることができる．そのため今後はGRUを使って学習をすると効率が良いことが分かった．
+
+深さ方向に10, 50, 100と増やしていくと腫瘍と正常の認識精度を向上させることができた．これは，正常の場合だと腺菅構造が深さ方向に一定に変化するのに対して，腫瘍の場合は構造が乱れているので変化も不規則であるという性質など，3次元的な構造を捉えながら学習することができたため，認識精度が上がったと言える．
+
+\begin{figure}
+	\centering
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_10_gru}
+		\subcaption{confusion matrix depth 10}
+		\label{fig:count_10}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_10_gru}
+		\subcaption{normalized matrix depth 10}
+		\label{fig: depth10}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_50_gru}
+		\subcaption{confusion matrix depth 50}
+		\label{fig: count_he_preprocess}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_50_gru}
+		\subcaption{normalized matrix depth 50}
+		\label{fig: he_preprocess}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_100_gru}
+		\subcaption{confusion matrix depth 100}
+		\label{fig: count_pretrain_preprocess}
+	\end{minipage}
+	\begin{minipage}[b]{0.45\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_100_gru}
+		\subcaption{normalized matrix depth 100}
+		\label{fig: pretrain_preprocess}
+	\end{minipage}
+	
+	
+	\caption{Confusion Matrix for 2DCNN with different preprocessing}
+	\label{fig:gru_matrix}
+	
+\end{figure}
+
 \section{教師なし学習による識別精度評価}
 \subsection{Auto Encoder}
 \begin{figure}
