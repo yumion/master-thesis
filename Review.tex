@@ -1,11 +1,11 @@
 \chapter{深層学習による病理画像の診断支援}
 \label{chap_review}
 
-病理画像をデジタルで保存することが始まったのは数十年前になる．これによって遠隔地でも診断することができるようになったり，情報を共有することができるようになり，複数の医師で診断しミスを防止するセカンド・オピニオンが容易になった．計算機科学の分野の側面ではデータを収集することができるようになり，研究が盛んに行われることになった．その後は，様々な病理データでより改良されたアルゴリズムの提案が行われている．\cite{litjens2017survey}
+病理画像をデジタルで保存することが始まったのは数十年前になる．これによって遠隔地でも診断することができるようになったり，情報を共有することができるようになり，複数の医師で診断しミスを防止するセカンド・オピニオンが容易になった．計算機科学の分野の側面ではデータを収集できるようになり，研究が盛んに行われることになった．近年では，様々な病理データでより改良されたアルゴリズムの提案が行われている\cite{litjens2017survey}．
 
-細胞組織の形態を観察するための病理染色ではヘマトキシリン・エオジン染色(HE染色)が一般的に用いられる．細胞核を青紫色に染色し，細胞質をピンク色に染色する．正常から異常に変化していくと，細胞核が過度に増殖したり，細胞質の形が崩れたりすることで，その特徴を機械学習によって精度よく検出するための研究が行われている．\cite{wang2016deep}
+細胞組織の形態を観察するための病理染色ではヘマトキシリン・エオジン染色(HE染色)が一般的に用いられる．細胞核を青紫色に染色し，細胞質をピンク色に染色する．正常から異常に変化していくと，細胞核が過度に増殖したり，細胞質の形が崩れたりすることで，その特徴を機械学習によって精度よく検出するための研究が行われている\cite{wang2016deep}．
 
-これまでは，核の形やテキスチャーからパターンマッチングなどの画像処理によって腫瘍を検出する研究されてきたが，近年になって画像処理に大きなブレークスルーが起きたことをきっかけに，新しい手法で解析するようになってきた．そのブレークスルーがディープラーニングである．
+これまでは核の形やテキスチャーからパターンマッチングなどの画像処理によって腫瘍を検出する研究されてきたが\cite{要出典}，近年になって画像処理に大きなブレークスルーが起きたことをきっかけに，新しい手法で解析するようになってきた．そのブレークスルーがディープラーニングである．
 
 \section{ニューラルネットワーク}\label{sec:NeuralNetwork}
 人間の脳にはニューロンと呼ばれる神経細胞が1000億個以上あり，それぞれが複数のニューロンが電気信号によって情報を伝達している．また脳にはシナプスという場所があり，ここで電気信号を細胞体へ受け渡す．細胞体はある閾値以上の電気信号がきた場合に他のニューロンへ電気信号を伝播させる(これを発火と呼ぶ)．このようなニューロンとシナプスで行われる演算を模倣したアルゴリズムを作ることができれば，人間のような思考や認識をコンピュータを使って再現できると考えた．そのアルゴリズムがニューラルネットワーク(Neural Network: NN)である．
@@ -58,6 +58,7 @@
 従来の画像認識では，画像から特徴を抽出しそれを識別器にかける手法が主流であった．古典的手法では画像から特徴を抽出するいわゆる特徴量設計が必要で，ここをいかにうまく設計するかがポイントであった．特徴抽出の方法として，HOG\cite{HOG}やSIFT\cite{SIFT}，SURF\cite{SURF}などがあり，これらによって抽出した特徴ベクトルをSupport Vector Machine(SVM)\cite{SVM}によって識別することが多かった．
 
 しかし，1998年にLeNetと呼ばれる畳み込みニューラルネットワーク(Convolutional Neural Network: CNN)が提案された\cite{LeNet}．CNNは畳み込み層とプーリング層からなっている．この畳み込みとプーリングの演算を通して，特徴量設計から識別までをend-to-endで行うことができる．
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/LeNet}
@@ -169,10 +170,11 @@
 
 ここで，$\bm{W}$は重み行列($W_{ih}$は入力と隠れ層間の重み行列)であり，$\bm{b}$はバイアス項，$H$は活性化関数である．
 
+
 \subsection*{LSTM}
 RNNは，過去の情報をどこまで遡って関連性を見つけるか判断することができない．そのため，時系列データが長くなるほどその長期の依存性を学習するには人が慎重にパラメータを設計する必要があり，長期的なデータは学習が難しい問題があった．この問題を解決するためにLong-short term memory(LSTM)が提案された．\fig {LSTM}に示すように，LSTMもRNNの一種であるため繰り返し構造を持ち，3つのゲートを持つ層からなっている．
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/lstm.png}
 	\caption{Architecture of LSTM}
@@ -197,15 +199,17 @@ $i_t$や$c_t$で示される層は，入力ゲート層と呼ばれ，$i_t$で�
 最後が$o_t$や$h_t$で示される層で，出力ゲート層と呼ばれる．まず何を出力するべきかを$o_t$のゲートで判断して，$c_t$に$\tanh$を適用して掛けることで出力が計算される．
 
 \subsection*{GRU}
-\begin{figure}
+GRUはLSTMと似た構造をもつニューラルネットワークであるが，より単純であるため計算量を少なくすることができる,\cite{cho2014learning}．
+\fig{gru}における$z$と$r$がゲートの役割でゲート$z$で新しく値を更新するかどうかを決定し，$r$で前の情報を無視するか利用するかを判断する．
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter2/gru}
 	\caption{GRU structure}
 	\label{fig:gru}
 \end{figure}
 
- GRUはLSTMと似た構造をもつニューラルネットワークであるが，より単純であるため計算量を少なくすることができる．\cite{cho2014learning}
-\fig{gru}におけるzとrがゲートの役割でゲートzで新しく値を更新するかどうかを決定し，rで前の情報を無視するか利用するかを判断する．
+
 
 \section{推論と学習}
 ニューラルネットワークでは推論フェーズと学習フェーズに分かれている．\ref{sec:NeuralNetwork}節は全て推論フェーズの話であり，順伝播ニューラルネットと呼ばれる．
@@ -255,6 +259,7 @@ $m_t$と$v_t$はそれぞれ、勾配の一次モーメント（平均値）と�
 
 \subsection{学習のテクニック}
 ディープラーニングでは過学習(overfitting)と呼ばれる問題が多く起こる．過学習とは，訓練データに対してのみ適応し過ぎてしまい，訓練データに含まれないテストデータには精度が出ない状態を指す．過学習は，大量にパラメータを持つ表現力の高いモデルであることや，訓練データが少ないことなどが原因で起こる．ここでは過学習を抑制するテクニックを述べる．
+
 \subsection*{Dropout}
 Dropout\cite{Dropout}は，ネットワークのノードをランダムに消去しながら学習する手法である．訓練時に隠れ層のノードを毎回ランダムに選択し，そのノードの出力を0にする．そしてテスト時には全てのノードを活性化させ，信号を伝達させる．
 
@@ -296,124 +301,130 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 クラス分類は画像に写っている物体が「dog」「airplane」「bird toy」など事前に定義されたラベルのどれが適切かを識別するタスクである．この識別は，事前に定義されたラベルの特徴べクトルと入力画像の特徴べクトルの距離計算を行い，距離値が小さければ同一，そうでなければ否と判定する．指紋照合，顔照合，人物照合では，本人と他人を判定するタスクとなる．深層学習では，同一人物のペア画像間の距離値が小さく，他人の画像との距離値が大きくなるような損失関数を設計し，ネットワークを構築することで人物照合問題を解いている．
 
 \subsection*{物体検出}
-物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOGやSIFTなど局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkになりデータのみから抽象的な特徴量を複数得ることができる．\fig {YOLO}に物体検出で有名はアルゴリズムであるSSDとYOLOのアーキテクチャを示す．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
+物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOG\cite{HOG}やSIFT\cite{SIFT}など局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkが主流となり，データのみから抽象的な特徴量を複数得ることができる．\fig {SSD}に物体検出で有名はアルゴリズムであるSSDとYOLOのアーキテクチャを示す．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/yolo_ssd.png}
-	\caption{Network Architecture of SSD and YOLO}
-	\label{fig:YOLO}
+	\caption{Network Architecture of SSD and YOLO\cite{SSD}}
+	\label{fig:SSD}
 \end{figure}
 
 \subsection*{セグメンテーション}
-セマンティックセグメンテーションとは，画像を画素レベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．セマンティックセグメンテーションの手法についてディープラーニング以前では，Texton Forestsや，Random Forestsに基づいた分類を行っていたが，物体検出と同様にCNNが登場してからは，高精度なセグメンテーションが実現するようになった．CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである(\fig {Unet})．このUnetは文字通りUの形をしたネットワークであることが特徴で，２つのアーキテクチャーからできている．1つ目がエンコーダーのアーキテクチャーでCNNとプーリングで特徴を抽出しながら次元を削減していき，2つ目のデコーダーのアーキテクチャーで画像をセグメンテーションの結果になるように復元する．ここで問題になることが，プーリングをすることで位置情報を消してしまっているので，この位置情報を利用して画像を復元するためには，エンコーダーとデコーダーで画像サイズが同じところ同士をショートカットで接続することがUnet構造の優れている点である．
+セマンティックセグメンテーションとは，画像を画素レベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．セマンティックセグメンテーションの手法についてディープラーニング以前では，Texton Forests\cite{要出典}や，Random Forests\cite{要出典}に基づいた分類を行っていたが，物体検出と同様にCNNが登場してからは，高精度なセグメンテーションが実現するようになった．CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，2つのアーキテクチャーからできている(\fig {Unet})．1つ目がエンコーダーのアーキテクチャーでCNNとプーリングで特徴を抽出しながら次元を削減していき，2つ目のデコーダーのアーキテクチャーで画像をセグメンテーションの結果になるように復元する．ここで問題になることが，プーリングをすることで位置情報を消してしまっているので，この位置情報を利用して画像を復元するためには，エンコーダーとデコーダーで画像サイズが同じところ同士をショートカットで接続することがUnet構造の優れている点である．
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/unet.png}
-	\caption{Artchitecture of Unet}
+	\caption{Artchitecture of Unet\cite{Unet}}
 	\label{fig:Unet}
 \end{figure}
 
-\section{深層学習による3次元画像解析}
-3次元画像には，動画または，ボリューム画像があるが，2次元画像とその深さ方向(動画であれば，時間方向)には異方性があることから，機械学習の方法に工夫が必要になる．今まで考案されている手法として，2DCNNを拡張した3DCNN，またCNNと時系列解析でよく用いられるLSTMを組み合わせた手法と，LSTM内部にCNNを組み込んだ手法が研究されている．
+
+\section{深層学習による3次元画像解析}\label{sec:3Danalysis}
+3次元画像には，動画またはボリューム画像があるが，2次元画像とその深さ方向(動画であれば，時間方向)には異方性があることから，機械学習の方法に工夫が必要になる．今まで考案されている手法として，2DCNNを3次元に拡張した3DCNN，また時系列解析でよく用いられるLSTMとCNNを組み合わせた手法と，LSTM内部にCNNを組み込んだ手法が研究されている．
 
 
 \subsection{3DCNN}
-2次元画像が深さ方向に連続している3次元画像の特徴を抽出するために，2次元のCNNを拡張して，3次元のカーネルを使って畳み込みを行う，3DCNNを利用した手法がある．3DCNNによって，空間的な次元と時間方向の次元を同時に畳み込み計算で特徴を抽出することができる．\cite{ji20133d}
+2次元画像が深さ方向に連続している3次元画像の特徴を抽出するために，2次元のCNNを拡張して，3次元のカーネルを使って畳み込みを行う，3DCNNを利用した手法がある．3DCNNによって，空間的な次元と時間方向の次元を同時に畳み込み計算で特徴を抽出することができる\cite{ji20133d}．
 i番面の層でj番面の特徴マップにおける(x, y, z)の値は，以下の式で与えられる．
-
 \begin{align}\label{eq:3dcnn}
-v_{ij}^{xyz} = tanh(b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1}　\sum_{q=0}^{Q_i -1}　\sum_{r=0}^{R_i -1} \omega_{ijm}^{pqr} v_{(i-1)m}^{(x+p)(y+q)(z+r)})
+v_{ij}^{xyz} = \tanh \left[ b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1} \sum_{q=0}^{Q_i -1} \sum_{r=0}^{R_i -1} \omega_{ijm}^{pqr} v_{(i-1)m}^{(x+p)(y+q)(z+r)}\right]
 \end{align}
-ただし，$R_i$はカーネルの深さ方向の次元であり，$\omega_{ijm}^{pqr}$前層のm番面の特徴マップの(p, q, r)におけるカーネルの値である．
+ただし，$R_i$はカーネルの深さ方向の次元であり，$\omega_{ijm}^{pqr}$は前層の$m$番面の特徴マップの$(p, q, r)$におけるカーネルの値である．
 
 3DCNNでは．学習パラメータが大きすぎるため学習を安定させるには，入力画像サイズを小さくするか深さ方向を少量に限定して画像を入力しなくてはいけないという問題点がある．
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/3d_cnn.png}
-	\caption{Artchitecture of 3DCNN}
+	\caption{Artchitecture of 3DCNN\cite{Hosseini-AslGE16}}
 	\label{fig:3DCNN}
 \end{figure}
 
 
-
 \subsection{LSTMと2DCNNの組み合わせ}
-時系列解析に使われるLSTMを用いて3次元の画像を解析することができる．これはよく動画の解析で行われることがある．つまりフレームごとの画像の特徴を2次元のCNNで計算してから時系列情報をLSTMで解析することで，画像の時系列解析を行うことができる．これを3次元の医療画像でCTやMRIで適用する研究も行われている．3DCNNのデメリットであったパラメータの増大を2DCNNとLSTMの組み合わせで解決することができる．\cite{Donahue_2015_CVPR}
+時系列解析に使われるLSTMを用いて3次元の画像を解析することができる．これはよく動画の解析で行われることがある．つまりフレームごとの画像の特徴を2次元のCNNで計算してから時系列情報をLSTMで解析することで，画像の時系列解析を行うことができる．これを3次元の医療画像でCTやMRIで適用する研究も行われている．3DCNNのデメリットであったパラメータの増大を2DCNNとLSTMの組み合わせで解決することができる\cite{Donahue_2015_CVPR}．
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter2/cnn_lstm}
-	\caption{Action recognition with CNN-LSTM}
+	\caption{Action recognition with CNN-LSTM\cite{Donahue_2015_CVPR}}
 	\label{fig:cnnlstm}
 \end{figure}
 
 また，LSTMの研究も盛んに行われているため，その改良モデルが数多く存在する．特に，LSTMの学習効率を上げたGRU(Gated Linear Unit)\cite{cho2014learning}や，順方向だけでなく逆方向の時系列も計算に入れるBiLSTM\cite{wang2016image}が時系列解析の精度向上になっている報告がある．
 
+
 \section{教師なし学習}
-機械学習の手法には，上記で説明したように，ラベルの貼られているデータセットを用いて学習することを教師あり学習と呼び，その反対で，データセットはあっても，そのデータセットの特性を示したラベルが与えられていない場合のデータセットを用いて学習することを教師なし学習と呼ぶ
+機械学習の手法には，\ref{sec:NeuralNetwork}〜\ref{sec:3Danalysis}節で説明したように，ラベルの貼られているデータセットを用いて学習する教師あり学習と，その反対に，データセットはあっても，そのデータセットの特性を示したラベルが与えられていない場合のデータセットを用いて学習する教師なし学習がある．本節では教師なし学習について述べる．
 
 
 \subsection{Autoencoder}
-教師なし学習で画像の特徴を抽出する方法としてオートエンコーダがある．\cite{hinton2006reducing}画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ」の二つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
-\begin{figure}
+教師なし学習で画像の特徴を抽出する方法としてオートエンコーダ(Autoencoder)がある\cite{hinton2006reducing}．画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ(encoder)」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ(decoder)」の2つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\linewidth]{fig/chapter2/auto_encoder}
-	\caption{Auto Encoder Network}
+	\caption{AutoEncoder Network\cite{hinton2006reducing}}
 	\label{fig:autoencoder}
 \end{figure}
 
 
-
 \subsection{Variational Autoencoder}
-本研究では，このオートエンコーダの派生である．Variational Autoencoder(VAE)\cite{kingma2013auto}を利用した．これはオートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，データセットの潜在変数の分布が，正規分布になるような制約を加えて学習を行う手法である．こうすることでAutoencoderの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度を分布が表現することができるところが特徴である\cite{abbasnejad2017infinite}．
+Variational Autoencoder(VAE)はオートエンコーダの派生である\cite{kingma2013auto}．VAEは，オートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，\eq{vae}のようにデータセットの潜在変数の分布が正規分布になるような制約を加えて学習を行う点でオートエンコーダと異なる．ここで，$N$は正規分布，$\mu$は平均，$\sigma$は分散を示す．
 
 \begin{align}\label{eq:vae}
-p_\theta (z) & = N (z; 0, I)  \\
-p_\theta (x|z) & = N (x; \upmu(z), \sigma(z)I) \\
-q_\phi (z|x) & = N (x; \upmu(x), \sigma(x)I)
+p_\theta (z) & = N (z; 0, 1)  \\
+p_\theta (x|z) & = N (x; \mu(z), \sigma(z)) \\
+q_\phi (z|x) & = N (x; \mu(x), \sigma(x))
 \end{align}
 
+オートエンコーダの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度の分布が表現することができるところが特徴である\cite{abbasnejad2017infinite}．
 
 \subsection{敵対的生成ネットワーク}
-敵対的生成ネットワーク(Generative Advarsarial Network: GAN)は2014年に提案された手法である．\fig {GAN}のようにGANではGeneratorとDiscriminatorの2つのネットワークがある．Generatorは訓練データと同じような画像を生成するネットワークでDiscriminatorは，入力されたデータが訓練データから来たものかGeneratorで生成されたものかを識別するように学習する．
-VAEよりもGANの方が細部まで鮮明に画像を生成することができる．しかしGANは計算時間がかかるという問題や，DiscriminatorかGeneratorのどちらかか強くなってしまうなど，学習が安定しない問題があるため，これについての多くの研究報告がされている．
+敵対的生成ネットワーク(Generative Advarsarial Network: GAN)は2014年に提案された手法である\cite{GAN}．\fig {GAN}のようにGANではGeneratorとDiscriminatorの2つのネットワークが存在する．Generatorは訓練データと同じような画像を生成するネットワークで，Discriminatorは入力されたデータが訓練データから来たものかGeneratorで生成されたものかを識別するように学習する．
+
+VAEよりもGANの方が細部まで鮮明に画像を生成することができる．しかし，GANは計算時間がかかるという問題や，DiscriminatorかGeneratorのどちらかか強くなってしまい学習が安定しない問題があるため，これらについての多くの研究報告がされている．
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
-	\caption{Diagram of GAN}
+	%\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
+	\caption{Diagram of GAN(https://www.slideshare.net/xavigiro/deep-learning-for-computer-vision-generative-models-and-adversarial-training-upc-2016)slideshare出典はまずいです}
 	\label{fig:GAN}
 \end{figure}
 
 \section{半教師あり学習}
-弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．こうすることでデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
-VAEをベースに半教師あり学習のモデルを作ることができ，これをM2モデルと呼ばれている．\cite{M2model}，半教師あり学習の，モデルの最適化手法は，推論のモデルと，生成のモデルに分けて行われる\cite{narayanaswamy2017learning}．
+弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．これによりデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
+
+M2モデルと呼ばれるVAEをベースに半教師あり学習のモデルがある\cite{M2model}．
+半教師あり学習のモデルの最適化は，推論のモデルと生成のモデルに分けて行われる\cite{narayanaswamy2017learning}．
 
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{0.4\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter2/discriminative_vae}
+		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/discriminative_vae}
 		\subcaption{Discriminative Model}
+		\label{fig:m2_discriminative}
 	\end{minipage}
 	\begin{minipage}{0.4\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter2/generative_vae}
+		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/generative_vae}
 		\subcaption{Generative Model}
+		\label{fig:m2_generative}
 	\end{minipage}
 	\caption{VAE M2 Model}
 	\label{fig:vae_m2}
 \end{figure}
 
-推論モデルは\fig{vae_m2}の(a)で以下のように定義する．
+推論モデルは\fig{m2_discriminative}であり，以下のように定義される．
 \begin{align}\label{eq:m2_discriminative}
-q_\phi (y | x) & = Categorical(y | \lambda_\phi (x)) \\
-q_\phi (z | x, y) & = N(x | \upmu_\phi(x, y), log(\sigma_\phi^2 (x, y)))
+q_\phi (y | x) & = \mathrm{Categorical}(y | \lambda_\phi (x)) \\
+q_\phi (z | x, y) & = N(x | \mu_\phi(x, y), \log(\sigma_\phi^2 (x, y)))
 \end{align}
 
-生成モデルは以下のように定義する．
+生成モデルは\fig{m2_generative}であり，以下のように定義される．
 \begin{align}\label{eq:m2_generative}
 p(z) & = N (z| 0, 1)  \\
 p(y) & = \frac{1}{N_c} \\
