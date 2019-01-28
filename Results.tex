@@ -33,46 +33,64 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{fig/chapter4/2dcnn_preprocessing}
-	\caption{ROC for 2DCNN with different preprocessing}
-	\label{fig:2dcnnpreprocessing}
+	\begin{minipage}{0.5\columnwidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/chapter4/2dcnn_preprocessing}
+		\caption{ROC curve for 2DCNN with different preprocessing}
+		\label{fig:2dcnnpreprocessing}
+	\end{minipage}
+	\makeatletter
+	\def\@captype{table}
+	\makeatother
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\caption{AUC of ROC curve for 2DCNN with different preprocessing}
+		\label{tab:2DCNNpreprocessing_AUC}
+		\begin{tabular}{cc}\toprule
+			& AUC \\ \midrule
+			HE: False, pretrain: False &  \\ 
+			HE: True, pretrain: False &  \\ 
+			HE: True, pretrain: True &  \\ \bottomrule
+		\end{tabular} 
+	\end{minipage}
 \end{figure}
+
+\fig{2dcnnpreprocessing}は評価指数のROCである．  
+前処理を何も行わない場合が緑線であり，擬似HE変換を行った場合が青線，擬似HE変換を行いかつ事前学習を行った場合が橙線である．
+AUCを\tab {2DCNNpreprocessing_AUC}にまとめた．前処理を何も行わない場合が一番AUCが低い値となった．
+
+\fig{2d_preprocess_matrix}に混同行列を示す．図の左側は画像枚数であり，右側はその割合を示している．
+\fig{no_preprocess}のように，前処理なしでは腫瘍は87\%の精度で検出できているが，正常は40\%の精度でしか検出できていなかったことが分かる．
+
+腫瘍の見落としとなる偽陰性の割合が13\%と低く，偽陽性が高くなっていることが分かる．このようになった理由は，深層学習の学習方法に理由がある．今回学習に用いたデータで正常は，783枚であるのに対して，腫瘍の学習データの枚数は1566枚である．正常の画像よりも腫瘍の画像を2倍多く学習に利用することで，腫瘍の検出がより重要視されるモデルになったのである．これは，病変の見落としリスクを防止するためには，非常に良い結果となった．
+
+腫瘍の見落とし率が低いことは良いが，正常を腫瘍と判断する割合が高すぎるのでこれを正しく正常画像を正常と判断できるようにしなくてはならない．
+
+ここで前処理として擬似HE変換を行って学習した結果(\fig{he_preprocess})と，擬似HE変換した後に，事前学習も行った時の学習結果(\fig{pretrain_preprocess})から，前処理をすることで腫瘍の見落としリスクを低くしたまま，正常画像を正しく認識することができるようになった．
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}[b]{0.45\columnwidth}
-	\centering
-	\includegraphics[clip, width=\linewidth]{fig/chapter4/count_pretrain_False_he_False}
-	\subcaption{pretrain: Flase, he transform: False}
-	\label{fig:count_no_preprocess}
-    \end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+	
+	\begin{minipage}[b]{\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/pretrain_False_he_False}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/count_pretrain_False_he_False}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/pretrain_False_he_False}
 		\subcaption{pretrain: Flase, he transform: False}
 		\label{fig:no_preprocess}
 	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-	\centering
-	\includegraphics[clip, width=\linewidth]{fig/chapter4/count_pretrain_False_he_True}
-	\subcaption{pretrain: Flase, he transform: True}
-	\label{fig:count_he_preprocess}
-    \end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+
+	\begin{minipage}[b]{\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/pretrain_False_he_True}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/count_pretrain_False_he_True}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/pretrain_False_he_True}
 		\subcaption{pretrain: Flase, he transform: True}
 		\label{fig:he_preprocess}
 	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-	\centering
-	\includegraphics[clip, width=\linewidth]{fig/chapter4/count_pretrain_True_he_True}
-	\subcaption{pretrain: True, he transform: True}
-	\label{fig:count_pretrain_preprocess}
-    \end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+
+	\begin{minipage}[b]{\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/pretrain_True_he_True}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/count_pretrain_True_he_True}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/pretrain_True_he_True}
 		\subcaption{pretrain: True, he transform: True}
 		\label{fig:pretrain_preprocess}
 	\end{minipage}
@@ -82,52 +100,83 @@
 	
 \end{figure}
 
-前処理を何も行わない場合が\fig{2dcnnpreprocessing}の緑のプロットでありROCの評価指数である．AUCはhogeで一番認識精度が低かった．また\fig{no_preprocess}のように腫瘍は87\%の精度で検出できているが，正常は40\%の精度でしか検出できていなかった．
-
-ここで腫瘍の見落としとなる偽陰性の割合が13\%と低く，偽陽性が高くなっていることが分かる．このようになった理由は，深層学習の学習方法に理由がある．今回学習に用いたデータで正常は，783枚であるのに対して，腫瘍の学習データの枚数は1566枚である．正常の画像よりも腫瘍の画像を2倍多く学習に利用することで，腫瘍の検出がより重要視されるモデルになったのである．これは，病変の見落としリスクを防止するためには，非常に良い結果となった．
-
-腫瘍の見落とし率が低いことは良いが，正常を腫瘍と判断する割合が高すぎるのでこれを正しく正常画像を正常と判断できるようにしなくてはならない．
-
-ここで前処理として擬似HE変換を行って学習した結果(\fig{he_preprocess})と，擬似HE変換した後に，事前学習も行った時の学習結果(\fig{pretrain_preprocess})から，前処理をすることで腫瘍の見落としリスクを低くしたまま，正常画像を正しく認識することができるようになった．
 
 \subsection*{モデルの比較}
 InceptionV3とXception, InceptionResnetV2を比較して，どのネットワークが認識精度が高いのかを実験した．
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter4/2dcnn_model}
-	\caption{Comparing deep learning models}
-	\label{fig:2dcnnmodel}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/chapter4/2dcnn_model}
+		\caption{Comparing deep learning models}
+		\label{fig:2dcnnmodel}
+	\end{minipage}
+	\makeatletter
+	\def\@captype{table}
+	\makeatother
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\caption{AUC of ROC curve for different models}
+		\label{tab:2DCNNcompare_AUC}
+		\begin{tabular}{cc}\toprule
+			& AUC \\ \midrule
+			InceptionV3 &  \\ 
+			Xception &  \\ 
+			InceptionResNetV2 &  \\ \bottomrule
+		\end{tabular} 
+	\end{minipage}
 \end{figure}
 
-先行研究でも利用されているように，今回の研究に用いた検体データでもInceptionV3がもっともAUCが大きくなるディープラーニングのモデルであることが分かった．XceptionやInceptionResnNetV2など様々なディープラーニングのモデルが研究され利用されているが，一般物体認識では，InceptionResNet，Xception, InceptionV3の順番に精度が高いことが報告されているが，実際のデータが変化するごとに，どのモデルがもっとも精度が高くなるかを事前に判断することが難しいことが分かった．
+\tab{2DCNNcompare_AUC}に示す通り，先行研究でも利用されているように，今回の研究に用いた検体データでもInceptionV3がもっともAUCが大きくなるディープラーニングのモデルであることが分かった．XceptionやInceptionResNetV2など様々なディープラーニングのモデルが研究され利用されており，一般物体認識では，InceptionResNet，Xception, InceptionV3の順番に精度が高いことが報告されている．しかし今回のように適用するデータが変化すると，どのモデルがもっとも精度が高くなるかを事前に判断することが難しいことが分かった．
 
 \subsection{3次元画像解析}
-3DCNNは，学習する際の訓練パラメータが多すぎて，学習が収束しない点や，メモリが大きくてGPUに乗らないという問題があり，時系列解析で行われているLSTMやGRUまた，BidirectionalなGRUをモデルの比較として利用した．
+3DCNNによる3次元画像解析の結果を\fig{depthall}に示す．ここで，深さ方向の取り方は1通りではないため，大きく3つに分けてその差を比較してみた．
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter4/3d/roc/depth_all.pdf}
-	\caption{depth}
-	\label{fig:depthall}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/chapter4/3d/roc/depth_all.pdf}
+		\caption{Dependence of depth}
+		\label{fig:depthall}
+	\end{minipage}
+	\makeatletter
+	\def\@captype{table}
+	\makeatother
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\caption{AUC of ROC for }
+		\label{tab:2DCNNpreprocessing_AUC}
+		\begin{tabular}{cc}\toprule
+			depth & AUC \\ \midrule
+			10 &  \\ 
+			50 &  \\ 
+			100 &  \\ \bottomrule
+		\end{tabular} 
+	\end{minipage}
 \end{figure}
+
+\fig{depthall}に示したように，深さ方向に10, 50, 100と増やしていくと腫瘍と正常の認識精度を向上させることができた．これは，正常の場合だと腺菅構造が深さ方向に一定に変化するのに対して，腫瘍の場合は構造が乱れているので変化も不規則であるという性質など，3次元的な構造を捉えながら学習することができたため，認識精度が上がったと言える．
+
+3DCNNは，学習する際の訓練パラメータが多すぎて，学習が収束しない点や，メモリが大きくてGPUに乗らないという問題があり，時系列解析で行われているLSTMやGRUまた，BidirectionalなGRUをモデルの比較として利用した結果を\fig{2dcnn+LSTM_roc}に示す．
 
 \begin{figure}[H]
 	\centering
 	
-	\begin{minipage}[b]{0.45\columnwidth}
+	\begin{minipage}[b]{0.33\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_10.pdf}
-		\subcaption{depth: 10}
+		\subcaption{depth: 10これだけlegendの色が他と異なります．合わせましょう}
 		\label{fig:}
 	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+	\begin{minipage}[b]{0.33\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_50.pdf}
 		\subcaption{depth: 50}
 		\label{fig:}
 	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+	\begin{minipage}[b]{0.33\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_100.pdf}
 		\subcaption{depth: 100}
@@ -139,62 +188,52 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 	
 \end{figure}
 
-ここでLSTMやGRU, Bi-GRUといったモデルによる精度の差は，ほとんどなかった．GRUがもっとも訓練パラメータが少ないので学習時間や推論時間を早くすることができる．そのため今後はGRUを使って学習をすると効率が良いことが分かった．
+\fig{2dcnn+LSTM_roc}より，LSTMやGRU, Bi-GRUといったモデルによる精度の差は，ほとんどなかった．GRUがもっとも訓練パラメータが少ないので学習時間や推論時間を早くすることができる．そのため今後はGRUを使って学習をすると効率が良いことが分かった．
 
-深さ方向に10, 50, 100と増やしていくと腫瘍と正常の認識精度を向上させることができた．これは，正常の場合だと腺菅構造が深さ方向に一定に変化するのに対して，腫瘍の場合は構造が乱れているので変化も不規則であるという性質など，3次元的な構造を捉えながら学習することができたため，認識精度が上がったと言える．
+\fig{gru_matrix}に2DCNNとGRUを組み合わせた手法における混合行列を示す．図の左側は画像枚数であり，右側はその割合を示している．
+%何か少し説明解説が欲しいです
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}[b]{0.45\columnwidth}
+	\begin{minipage}[b]{\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_10_gru}
-		\subcaption{confusion matrix depth 10}
-		\label{fig:count_10}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_10_gru}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_10_gru}
+		\subcaption{depth: 10}
+		\label{fig:}
 	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+
+	\begin{minipage}[b]{\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_10_gru}
-		\subcaption{normalized matrix depth 10}
-		\label{fig: depth10}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_50_gru}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_50_gru}
+		\subcaption{depth: 50}
+		\label{fig:}
 	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
+
+	\begin{minipage}[b]{\columnwidth}
 		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_50_gru}
-		\subcaption{confusion matrix depth 50}
-		\label{fig: count_he_preprocess}
-	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_50_gru}
-		\subcaption{normalized matrix depth 50}
-		\label{fig: he_preprocess}
-	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_100_gru}
-		\subcaption{confusion matrix depth 100}
-		\label{fig: count_pretrain_preprocess}
-	\end{minipage}
-	\begin{minipage}[b]{0.45\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_100_gru}
-		\subcaption{normalized matrix depth 100}
-		\label{fig: pretrain_preprocess}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/3d/confusion_matrix/count_confusion_matrix_False_100_gru}
+		\includegraphics[clip, width=0.45\linewidth]{fig/chapter4/3d/confusion_matrix/normalized_confusion_matrix_False_100_gru}
+		\subcaption{depth: 100}
+		\label{fig:}
 	\end{minipage}
 	
-	
-	\caption{Confusion Matrix for 2DCNN with different preprocessing}
+	\caption{Confusion Matrix for 2DCNN and GRU}
 	\label{fig:gru_matrix}
 	
 \end{figure}
 
+
+
 \section{教師なし学習による識別精度評価}
+
 \subsection{AutoEncoder}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\linewidth]{fig/chapter4/unet_ae}
-	\caption{Auto Encoder}
+	\includegraphics[width=\linewidth]{fig/chapter4/unet_ae}
+	\caption{Generated images by AutoEncoder}
 	\label{fig:unetae}
 \end{figure}
 
@@ -253,7 +292,7 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 		\label{fig:}
 	\end{minipage}
 	
-	\caption{Transition generated images by GAN}
+	\caption{Transition of generated images by GAN}
 	\label{fig:GANimage}
 	
 \end{figure}
@@ -296,43 +335,46 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 
 部分的には，正常と腫瘍で分布が異なるようになったが，明確な境界線を引くことが難しい．したがって，教師あり学習で境界を明確にし，教師なし学習でデータの構造を抽出することができれば，もっとも精度の高い認識モデルが作れる．
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter4/vae_result_picture}
-	\caption{VAE decoder result}
+	\includegraphics[width=\linewidth]{fig/chapter4/vae_result_picture}
+	\caption{Result of VAE decoder. The image on the lower left is a normal image and the image on the right is the image of the cancer.}
 	\label{fig:vaeresultpicture}
 \end{figure}
 
 VAEで生成される画像が\fig{vaeresultpicture}である．これはプロットの分布を元に画像を再生成した画像であり，左下が正常の傾向の画像で，右側が腫瘍の傾向の画像に生成されていること分かる．画像は正常から腫瘍へと徐々に変化していき，構造的な特徴を学習できている．
 
+
 \section{半教師あり学習による識別精度評価}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter4/accuracy_summary}
-	\caption{VAE Accuracy}
-	\label{fig:accuracysummary}
+	\includegraphics[width=0.8\linewidth]{fig/chapter4/accuracy_summary}
+	\caption{Accuracy of semi-supervised learning model based on VAE}
+	\label{fig:semiVAE_acc}
 \end{figure}
 
-半教師あり学習は，教師あり学習では足りない画像枚数の場合，大量の教師ラベルのない画像に対しても特徴を学習するために利用することができて，結果的に，教師ラベルの予測精度を上げることができた．
+\fig{semiVAE_acc}に半教師あり学習による識別精度の推移を示した．
+教師あり学習では画像枚数が足りない場合においても，半教師あり学習は大量の教師ラベルのない画像に対しても特徴を学習するため，教師ラベルの予測精度を上げることができた．
+
 
 \section{学習結果の可視化}
-深層学習を用いて，腫瘍らしい領域を認識するアルゴリズムを，病理医が見るために画像上に腫瘍の部分が見て分かるように可視化を行った．
+深層学習を用いて，腫瘍の確率が高い領域を認識するアルゴリズムを，病理医が見るために画像上に腫瘍の部分が見て分かるように可視化を行った．
 
-
-まずは，スライドウィンドウで画像を取得していく．そして各ウィンドウの画像に対して病変の確率を出して，その確率をヒートマップにした．これを見て，青い領域は正常であり，黄色や赤色になっている部分が腫瘍と深層学習により認識されている部分であるため，その領域を医師が見ることでスクリーニングになり，人が見落としやすい場所に腫瘍があっても機械では見落としを防止するための診断支援に繋がる可視化にすることができた．
+まずはスライドウィンドウで画像を取得していき，各ウィンドウの画像に対して病変の確率を出して，その確率をヒートマップにした(\fig{cancer_detect_sampleB})．青い領域は正常であり，黄色や赤色になっている部分が腫瘍と深層学習により認識されている部分である．この領域を医師が見ることでスクリーニングになる．\fig{cancer_detect_sampleB}は人が見落としやすい場所に腫瘍があってもAIによって見落としを防止し，診断支援に繋がる可視化の1つの結果である．
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter4/visualization/sample_B}
-	\caption{Visualize cancer detection}
-	\label{fig:sampleb}
+	\includegraphics[width=\linewidth]{fig/chapter4/visualization/sample_B}
+	\caption{Visualize cancer detection. The blue area is normal and the yellow to red area is the cancer.}
+	\label{fig:cancer_detect_sampleB}
 \end{figure}
 
-さらにGrad-CAMを利用することでより詳細に深層学習の判断が可視化されるようになった．
+さらにGrad-CAMを利用することで，より詳細に深層学習の判断が可視化されるようになった．
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter4/large-grad-cam-step100-rm-black}
+	\includegraphics[width=\linewidth]{fig/chapter4/large-grad-cam-step100-rm-black}
 	\caption{Visualization with Grad-CAM}
 	\label{fig:large-grad}
 \end{figure}
