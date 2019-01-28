@@ -356,11 +356,33 @@ v_{ij}^{xyz} = tanh(b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1}　\sum_{q=0}^{Q_i -1}�
 
 
 \subsection{Autoencoder}
-教師なし学習で画像の特徴を抽出する方法としてオートエンコーダがある．画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ」の二つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば画像の分類を教師ラベルがなくても，学習を行うことができる．
+教師なし学習で画像の特徴を抽出する方法としてオートエンコーダがある．\cite{hinton2006reducing}画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ」の二つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{fig/chapter2/auto_encoder}
+	\caption{Auto Encoder Network}
+	\label{fig:autoencoder}
+\end{figure}
+
 
 
 \subsection{Variational Autoencoder}
-本研究では，このオートエンコーダの派生である．Variational Autoencoder(VAE)を利用した．これはオートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，データセットの潜在変数の分布が，正規分布になるような制約を加えて学習を行う手法である．こうすることでAutoencoderの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度を分布が表現することができるところが特徴である．
+本研究では，このオートエンコーダの派生である．Variational Autoencoder(VAE)\cite{kingma2013auto}を利用した．これはオートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，データセットの潜在変数の分布が，正規分布になるような制約を加えて学習を行う手法である．こうすることでAutoencoderの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度を分布が表現することができるところが特徴である\cite{abbasnejad2017infinite}．
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/vae}
+		\subcaption{Variational Auto Encoder Structure}
+	\end{minipage}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/vae_encoder}
+		\subcaption{Variational encoder}
+	\end{minipage}
+	\caption{Variational Auto Encoder Architecture}
+	\label{fig:vae}
+\end{figure}
 
 \subsection{敵対的生成ネットワーク}
 敵対的生成ネットワーク(Generative Advarsarial Network: GAN)は2014年に提案された手法である．\fig {GAN}のようにGANではGeneratorとDiscriminatorの2つのネットワークがある．Generatorは訓練データと同じような画像を生成するネットワークでDiscriminatorは，入力されたデータが訓練データから来たものかGeneratorで生成されたものかを識別するように学習する．
