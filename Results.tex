@@ -93,6 +93,15 @@
 \subsection*{モデルの比較}
 InceptionV3とXception, InceptionResnetV2を比較して，どのネットワークが認識精度が高いのかを実験した．
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter4/2dcnn_model}
+	\caption{Comparing deep learning models}
+	\label{fig:2dcnnmodel}
+\end{figure}
+
+先行研究でも利用されているように，今回の研究に用いた検体データでもInceptionV3がもっともAUCが大きくなるディープラーニングのモデルであることが分かった．XceptionやInceptionResnNetV2など様々なディープラーニングのモデルが研究され利用されているが，一般物体認識では，InceptionResNet，Xception, InceptionV3の順番に精度が高いことが報告されているが，実際のデータが変化するごとに，どのモデルがもっとも精度が高くなるかを事前に判断することが難しいことが分かった．
+
 \subsection{3次元画像解析}
 3DCNNは，学習する際の訓練パラメータが多すぎて，学習が収束しない点や，メモリが大きくてGPUに乗らないという問題があり，時系列解析で行われているLSTMやGRUまた，BidirectionalなGRUをモデルの比較として利用した．
 
@@ -292,17 +301,28 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 	\label{fig:accuracysummary}
 \end{figure}
 
+半教師あり学習は，教師あり学習では足りない画像枚数の場合，大量の教師ラベルのない画像に対しても特徴を学習するために利用することができて，結果的に，教師ラベルの予測精度を上げることができた．
 
 
 \section{学習結果の可視化}
 深層学習を用いて，腫瘍らしい領域を認識するアルゴリズムを，病理医が見るために画像上に腫瘍の部分が見て分かるように可視化を行った．
 
-スライドウィンドウで
 
-Grad-CAMを利用することでより詳細に深層学習の判断が可視化されるようになった．
+まずは，スライドウィンドウで画像を取得していく．そして各ウィンドウの画像に対して病変の確率を出して，その確率をヒートマップにした．これを見て，青い領域は正常であり，黄色や赤色になっている部分が腫瘍と深層学習により認識されている部分であるため，その領域を医師が見ることでスクリーニングになり，人が見落としやすい場所に腫瘍があっても機械では見落としを防止するための診断支援に繋がる可視化にすることができた．
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter4/visualization/sample_B}
+	\caption{Visualize cancer detection}
+	\label{fig:sampleb}
+\end{figure}
+
+さらにGrad-CAMを利用することでより詳細に深層学習の判断が可視化されるようになった．
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter4/large-grad-cam-step100-rm-black}
 	\caption{Visualization with Grad-CAM}
-	\label{fig:large-grad-cam-step100-rm-black}
+	\label{fig:large-grad}
 \end{figure}
+
+\fig{large-grad}で赤色〜青色のヒートマップで塗られている部分が腫瘍であると認識された部分である．また何も塗られていない部分が正常と認識された部分である．このように可視化を行うことで腫瘍の可能性がある領域を一目で確認することができるようになった．
