@@ -389,7 +389,7 @@ VAEよりもGANの方が細部まで鮮明に画像を生成することがで�
 
 \section{半教師あり学習}
 弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．こうすることでデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
-VAEをベースに半教師あり学習のモデルを作ることができる\cite{M2model}，半教師あり学習の，モデルの最適化手法は，教師ラベルがある場合と，教師ラベルがない場合に分けて行われる\cite{narayanaswamy2017learning}．
+VAEをベースに半教師あり学習のモデルを作ることができ，これをM2モデルと呼ばれている．\cite{M2model}，半教師あり学習の，モデルの最適化手法は，推論のモデルと，生成のモデルに分けて行われる\cite{narayanaswamy2017learning}．
 
 \begin{figure}[H]
 	\centering
@@ -406,3 +406,18 @@ VAEをベースに半教師あり学習のモデルを作ることができる\c
 	\caption{VAE M2 Model}
 	\label{fig:vae_m2}
 \end{figure}
+
+推論モデルは\fig{vae_m2}の(a)で以下のように定義する．
+\begin{align}\label{eq:m2_discriminative}
+q_\phi (y | x) & = Categorical(y | \lambda_\phi (x)) \\
+q_\phi (z | x, y) & = N(x | \upmu_\phi(x, y), log(\sigma_\phi^2 (x, y)))
+\end{align}
+
+生成モデルは以下のように定義する．
+\begin{align}\label{eq:m2_generative}
+p(z) & = N (z| 0, 1)  \\
+p(y) & = \frac{1}{N_c} \\
+p_\theta (x|z, y) & = f(x; z, y, \theta) \\
+p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
+\end{align}
+ここで$N_c$はクラス数で，関数$f(x)$は尤度関数で$\theta$はニューラルネットワークのパラメータである．
