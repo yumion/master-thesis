@@ -421,7 +421,7 @@ M2モデルと呼ばれるVAEをベースに半教師あり学習のモデルが
 推論モデルは\fig{m2_discriminative}であり，以下のように定義される．
 \begin{align}\label{eq:m2_discriminative}
 q_\phi (y | x) & = \mathrm{Categorical}(y | \lambda_\phi (x)) \\
-q_\phi (z | x, y) & = N(x | \upmu_\phi(x, y), \log(\sigma_\phi^2 (x, y)))
+q_\phi (z | x, y) & = N(x | \mu_\phi(x, y), \log(\sigma_\phi^2 (x, y)))
 \end{align}
 
 生成モデルは\fig{m2_generative}であり，以下のように定義される．
