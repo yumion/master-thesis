@@ -360,8 +360,8 @@ v_{ij}^{xyz} = \tanh \left[ b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1} \sum_{q=0}^{Q_
 機械学習の手法には，\ref{sec:NeuralNetwork}〜\ref{sec:3Danalysis}節で説明したように，ラベルの貼られているデータセットを用いて学習する教師あり学習と，その反対に，データセットはあっても，そのデータセットの特性を示したラベルが与えられていない場合のデータセットを用いて学習する教師なし学習がある．本節では教師なし学習について述べる．
 
 
-\subsection{Autoencoder}
-教師なし学習で画像の特徴を抽出する方法としてオートエンコーダ(Autoencoder)がある\cite{hinton2006reducing}．画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ(encoder)」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ(decoder)」の2つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
+\subsection{AutoEncoder}
+教師なし学習で画像の特徴を抽出する方法としてオートエンコーダ(AutoEncoder)がある\cite{hinton2006reducing}．画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ(encoder)」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ(decoder)」の2つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
 
 \begin{figure}[H]
 	\centering
@@ -371,8 +371,8 @@ v_{ij}^{xyz} = \tanh \left[ b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1} \sum_{q=0}^{Q_
 \end{figure}
 
 
-\subsection{Variational Autoencoder}
-Variational Autoencoder(VAE)はオートエンコーダの派生である\cite{kingma2013auto}．VAEは，オートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，\eq{vae}のようにデータセットの潜在変数の分布が正規分布になるような制約を加えて学習を行う点でオートエンコーダと異なる．ここで，$N$は正規分布，$\mu$は平均，$\sigma$は分散を示す．
+\subsection{Variational AutoEncoder}
+Variational AutoEncoder(VAE)はオートエンコーダの派生である\cite{kingma2013auto}．VAEは，オートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，\eq{vae}のようにデータセットの潜在変数の分布が正規分布になるような制約を加えて学習を行う点でオートエンコーダと異なる．ここで，$N$は正規分布，$\mu$は平均，$\sigma$は分散を示す．
 
 \begin{align}\label{eq:vae}
 p_\theta (z) & = N (z; 0, 1)  \\
@@ -436,7 +436,7 @@ p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 \section{機械学習の評価指数}
 機械学習の評価のために，混同行列(Confusion Matrix)を用いる．fig{confusionmatrix}で真のクラスと予測クラスに分かれて，PositiveとNegativeは今回のような病理診断の場合は，正常と腫瘍に対応する．したがって，True PositiveとTrue Negativeは，正常の画像を正常と正しく判定し，腫瘍の画像を腫瘍と正しく判定したという意味である．そしてFalse Positiveは，本当は正常の画像を，腫瘍であると間違って判定することである．最後にFalse Negativeは，本当は腫瘍の画像であるものを正常と間違って判定すること，つまり腫瘍を見落としたということになる．見落としを防止するためにはFalse Negativeがゼロになるような診断アルゴリズムを開発することが重要になる．
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{fig/chapter2/confusion_matrix}
 	\caption{Confusion matrix}
