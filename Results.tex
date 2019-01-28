@@ -11,14 +11,14 @@
 %円検出の画像
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/circle_detection}
+	\includegraphics[width=\linewidth]{fig/circle_detection}
 	\caption{Detection of circle.}
 	\label{fig:circle_detection}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/eclips_detection}
+	\includegraphics[width=\linewidth]{fig/eclips_detection}
 	\caption{Detection of ellipse}
 	\label{fig:ellipse_detection}
 \end{figure}
@@ -27,6 +27,7 @@
 真円にフィッティングしているので綺麗な円構造のみの検出となり，正常でも検出できていない部分が多くなっている．全体的に，正常領域で円検出が多く行われ，腫瘍領域では，円検出結果が少なくなる結果となったが，腫瘍部分も円検出されている部分が一部ある．
 
 楕円検出を行った結果は\fig{ellipse_detection}で円検出よりも正常領域の検出が増えた．楕円検出がされた領域の多いところほど正常の領域で，楕円検出が少ない領域が腫瘍であるという傾向を捉えることができた．古典的な画像処理の利点は，画像検出の理由が説明できることである．このような円検出や楕円検出であれば，円形度を算出することができるので，深層学習を用いた結果よりも透明性がある．しかしながら明確な輪郭で無ければ検出できない場合が多く検出精度に限界があることから，これでは腫瘍の見落とし防止に利用することができない．そこで古典的な画像処理の性能を上回る，深層学習を利用するが必要であると分かる．
+
 
 \section{教師あり学習による識別精度評価}
 教師あり学習では，まず2次元画像で，元画像のまま学習した場合と，擬似HE変換した画像を学習する場合，さらに事前学習を行った場合で比較を行った．
