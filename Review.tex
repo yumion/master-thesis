@@ -375,21 +375,6 @@ p_\theta (x|z) & = N (x; \upmu(z), \sigma(z)I) \\
 q_\phi (z|x) & = N (x; \upmu(x), \sigma(x)I)
 \end{align}
 
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{0.4\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter2/vae}
-		\subcaption{Variational Auto Encoder Structure}
-	\end{minipage}
-	\begin{minipage}{0.4\columnwidth}
-		\centering
-		\includegraphics[clip, width=\linewidth]{fig/chapter2/vae_encoder}
-		\subcaption{Variational encoder}
-	\end{minipage}
-	\caption{Variational Auto Encoder Architecture}
-	\label{fig:vae}
-\end{figure}
 
 \subsection{敵対的生成ネットワーク}
 敵対的生成ネットワーク(Generative Advarsarial Network: GAN)は2014年に提案された手法である．\fig {GAN}のようにGANではGeneratorとDiscriminatorの2つのネットワークがある．Generatorは訓練データと同じような画像を生成するネットワークでDiscriminatorは，入力されたデータが訓練データから来たものかGeneratorで生成されたものかを識別するように学習する．
@@ -404,4 +389,20 @@ VAEよりもGANの方が細部まで鮮明に画像を生成することがで�
 
 \section{半教師あり学習}
 弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．こうすることでデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
-VAEをベースに半教師あり学習のモデルを作ることができる\cite{M2model}，半教師あり学習の，モデルの最適化手法は，教師ラベルがある場合と，教師ラベルがない場合の2通りに分けて行われる\cite{narayanaswamy2017learning}．まず教師ラベルがある場合は
+VAEをベースに半教師あり学習のモデルを作ることができる\cite{M2model}，半教師あり学習の，モデルの最適化手法は，教師ラベルがある場合と，教師ラベルがない場合に分けて行われる\cite{narayanaswamy2017learning}．
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/discriminative_vae}
+		\subcaption{Discriminative Model}
+	\end{minipage}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/generative_vae}
+		\subcaption{Generative Model}
+	\end{minipage}
+	\caption{VAE M2 Model}
+	\label{fig:vae_m2}
+\end{figure}
