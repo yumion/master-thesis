@@ -7,7 +7,16 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter1/lucid}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter1/colon_lucid}
+		\subcaption{Trasparent Intestine}
+	\end{minipage}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter1/colon_microscope}
+		\subcaption{Image taken by microscope}
+	\end{minipage}
 	\caption{Transparent specimen}
 	\label{fig:lucid}
 \end{figure}
@@ -29,7 +38,7 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{fig/chapter1/whole_image_analysis}
+	\includegraphics[width=0.9\linewidth]{fig/chapter1/whole_image_analysis}
 	\caption{Schematic of whole image analysis}
 	\label{fig:wholeimageanalysis}
 \end{figure}
@@ -45,9 +54,3 @@
 最後にこの深層学習による腫瘍の検出結果を医師が診断する際のサポートになるように可視化することに取り組んだ．深層学習は判断の理由が分からないためブラックボックスと呼ばれ，信頼性が求められる場面では利用に対して不安視されることがある．そのため腫瘍と正常の診断の判断の理由を可視化する必要がある．
 明らかに正常のものと，腫瘍かもしれない領域で区別して，腫瘍かもしれない部分を医師に提示することで腫瘍を見落とさないような医師の負担を減らすためのスクリーニングとして利用するため可視化処理を行う．
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter1/microscope}
-	\caption{Image taken by multi focus laser microscope}
-	\label{fig:microscope}
-\end{figure}
