@@ -320,7 +320,15 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 
 
 \subsection{3DCNN}
-2次元画像が深さ方向に連続している3次元画像の特徴を抽出するために，2次元のCNNを拡張して，3次元のカーネルを使って畳み込みを行う，3DCNNを利用した手法がある．3DCNNによって，空間的な次元と時間方向の次元を同時に畳み込み計算で特徴を抽出することができる．しかし3DCNNでは．学習パラメータが大きすぎるため学習を安定させるには，入力画像サイズを小さくするか深さ方向を少量に限定して画像を入力しなくてはいけないという問題点がある．
+2次元画像が深さ方向に連続している3次元画像の特徴を抽出するために，2次元のCNNを拡張して，3次元のカーネルを使って畳み込みを行う，3DCNNを利用した手法がある．3DCNNによって，空間的な次元と時間方向の次元を同時に畳み込み計算で特徴を抽出することができる．\cite{ji20133d}
+i番面の層でj番面の特徴マップにおける(x, y, z)の値は，以下の式で与えられる．
+
+\begin{align}\label{eq:3dcnn}
+v_{ij}^{xyz} = tanh(b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1}　\sum_{q=0}^{Q_i -1}　\sum_{r=0}^{R_i -1} \omega_{ijm}^{pqr} v_{(i-1)m}^{(x+p)(y+q)(z+r)})
+\end{align}
+ただし，$R_i$はカーネルの深さ方向の次元であり，$\omega_{ijm}^{pqr}$前層のm番面の特徴マップの(p, q, r)におけるカーネルの値である．
+
+3DCNNでは．学習パラメータが大きすぎるため学習を安定させるには，入力画像サイズを小さくするか深さ方向を少量に限定して画像を入力しなくてはいけないという問題点がある．
 
 \begin{figure}[H]
 	\centering
@@ -328,6 +336,8 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 	\caption{Artchitecture of 3DCNN}
 	\label{fig:3DCNN}
 \end{figure}
+
+
 
 \subsection{LSTMと2DCNNの組み合わせ}
 時系列解析に使われるLSTMを用いて3次元の画像を解析することができる．これはよく動画の解析で行われることがある．つまりフレームごとの画像の特徴を2次元のCNNで計算してから時系列情報をLSTMで解析することで，画像の時系列解析を行うことができる．これを3次元の医療画像でCTやMRIで適用する研究も行われている．3DCNNのデメリットであったパラメータの増大を2DCNNとLSTMの組み合わせで解決することができる．\cite{Donahue_2015_CVPR}
@@ -346,11 +356,25 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 
 
 \subsection{Autoencoder}
-教師なし学習で画像の特徴を抽出する方法としてオートエンコーダがある．画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ」の二つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば画像の分類を教師ラベルがなくても，学習を行うことができる．
+教師なし学習で画像の特徴を抽出する方法としてオートエンコーダがある．\cite{hinton2006reducing}画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ」の二つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{fig/chapter2/auto_encoder}
+	\caption{Auto Encoder Network}
+	\label{fig:autoencoder}
+\end{figure}
+
 
 
 \subsection{Variational Autoencoder}
-本研究では，このオートエンコーダの派生である．Variational Autoencoder(VAE)を利用した．これはオートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，データセットの潜在変数の分布が，正規分布になるような制約を加えて学習を行う手法である．こうすることでAutoencoderの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度を分布が表現することができるところが特徴である．
+本研究では，このオートエンコーダの派生である．Variational Autoencoder(VAE)\cite{kingma2013auto}を利用した．これはオートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，データセットの潜在変数の分布が，正規分布になるような制約を加えて学習を行う手法である．こうすることでAutoencoderの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度を分布が表現することができるところが特徴である\cite{abbasnejad2017infinite}．
+
+\begin{align}\label{eq:vae}
+p_\theta (z) & = N (z; 0, I)  \\
+p_\theta (x|z) & = N (x; \upmu(z), \sigma(z)I) \\
+q_\phi (z|x) & = N (x; \upmu(x), \sigma(x)I)
+\end{align}
+
 
 \subsection{敵対的生成ネットワーク}
 敵対的生成ネットワーク(Generative Advarsarial Network: GAN)は2014年に提案された手法である．\fig {GAN}のようにGANではGeneratorとDiscriminatorの2つのネットワークがある．Generatorは訓練データと同じような画像を生成するネットワークでDiscriminatorは，入力されたデータが訓練データから来たものかGeneratorで生成されたものかを識別するように学習する．
@@ -365,4 +389,35 @@ VAEよりもGANの方が細部まで鮮明に画像を生成することがで�
 
 \section{半教師あり学習}
 弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．こうすることでデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
-VAEをベースに半教師あり学習のモデルを作ることができる\cite{M2model}，半教師あり学習の，モデルの最適化手法は，教師ラベルがある場合と，教師ラベルがない場合の2通りに分けて行われる．まず教師ラベルがある場合は
+VAEをベースに半教師あり学習のモデルを作ることができ，これをM2モデルと呼ばれている．\cite{M2model}，半教師あり学習の，モデルの最適化手法は，推論のモデルと，生成のモデルに分けて行われる\cite{narayanaswamy2017learning}．
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/discriminative_vae}
+		\subcaption{Discriminative Model}
+	\end{minipage}
+	\begin{minipage}{0.4\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/chapter2/generative_vae}
+		\subcaption{Generative Model}
+	\end{minipage}
+	\caption{VAE M2 Model}
+	\label{fig:vae_m2}
+\end{figure}
+
+推論モデルは\fig{vae_m2}の(a)で以下のように定義する．
+\begin{align}\label{eq:m2_discriminative}
+q_\phi (y | x) & = Categorical(y | \lambda_\phi (x)) \\
+q_\phi (z | x, y) & = N(x | \upmu_\phi(x, y), log(\sigma_\phi^2 (x, y)))
+\end{align}
+
+生成モデルは以下のように定義する．
+\begin{align}\label{eq:m2_generative}
+p(z) & = N (z| 0, 1)  \\
+p(y) & = \frac{1}{N_c} \\
+p_\theta (x|z, y) & = f(x; z, y, \theta) \\
+p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
+\end{align}
+ここで$N_c$はクラス数で，関数$f(x)$は尤度関数で$\theta$はニューラルネットワークのパラメータである．
