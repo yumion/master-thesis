@@ -434,7 +434,7 @@ p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 ここで$N_c$はクラス数で，関数$f(x)$は尤度関数で$\theta$はニューラルネットワークのパラメータである．
 
 \section{機械学習の評価指数}
-機械学習の評価のために，混同行列(Confusion Matrix)を用いる．
+機械学習の評価のために，混同行列(Confusion Matrix)を用いる．fig{confusionmatrix}で真のクラスと予測クラスに分かれて，PositiveとNegativeは今回のような病理診断の場合は，正常と腫瘍に対応する．したがって，True PositiveとTrue Negativeは，正常の画像を正常と正しく判定し，腫瘍の画像を腫瘍と正しく判定したという意味である．そしてFalse Positiveは，本当は正常の画像を，腫瘍であると間違って判定することである．最後にFalse Negativeは，本当は腫瘍の画像であるものを正常と間違って判定すること，つまり腫瘍を見落としたということになる．見落としを防止するためにはFalse Negativeがゼロになるような診断アルゴリズムを開発することが重要になる．
 
 \begin{figure}
 	\centering
@@ -460,6 +460,8 @@ p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 	\caption{Example of Confusion matrix}
 	\label{fig:confusion_ex}
 \end{figure}
+
+機械学習による病理診断アルゴリズムを評価するために，3つの指標がある．AccuracyとSpecificty(特異度)とSensitivity(感度)である．なぜ，Accuracyだけではなく，SensitivityとSpecificityが必要かを説明する図が\fig{confusion_ex}である．この場合だとAccuracyが8割弱で良いと判断することもできるが，Sensitivityに注目すると1割しかないので，この機械学習のモデルでは，正常の画像を正常であると認識することができていないことが分かる．また見落とし防止を目標にする場合は，S
 
 \begin{figure}[H]
 	\centering
