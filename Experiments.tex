@@ -1,5 +1,4 @@
-\chapter{自分の研究本体を述べるところ}
-%ここは自分のやった研究を述べる章です。実際の中身に合わせて章を複数立てにする場合もあると思います。「議論」の章を別に分ける場合は、この章では得られた結果までを記述し、その結果に対する議論は「議論」の章に回すのが良いでしょう。この章は必ずしも1つの章のみである必要はありません。研究内容に応じて、複数の章に分割することも一般的に行われます。
+\chapter{実験方法}
 
 \section{胃がんの画像データ取得方法}
 
@@ -420,7 +419,31 @@ Data Augmentationは1エポックごとに行われるので，訓練データ�
 \end{figure}
 
 \subsection*{ランダムクロッピング}
-入力画像をランダムに$256 \times 256$にクロッピングを行った．
+これまでの画像のサイズは，$299 \times 299$であったが，この画像からランダムな場所で$256 \times 256$に切り抜き(クロッピング)を行う．訓練画像はランダムで切り抜くが，テスト画像では，中心を$256 \times 256$に切り抜く．
+
+\begin{figure}[H]
+	\centering
+	
+	\begin{minipage}{0.25\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/preprocessing/data_aug/random_crop/x0_y0}
+		\subcaption{crop left}
+	\end{minipage}
+	\begin{minipage}{0.25\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/preprocessing/data_aug/random_crop/x15_y15}
+		\subcaption{crop center}
+	\end{minipage}
+	\begin{minipage}{0.25\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/preprocessing/data_aug/random_crop/x34_y34}
+		\subcaption{crop right}
+	\end{minipage}	
+	
+	\caption{Random Cropping}
+	\label{fig:ランダムクロッピング}
+	
+\end{figure}
 
 \subsection{テスト画像}
 入力画像の中心を$130\times 130$ pixでクロッピングし，これをテストデータとした．\fig {クロップ}に各検体のクロッピング画像を示す．
@@ -510,19 +533,18 @@ Data Augmentationは1エポックごとに行われるので，訓練データ�
 
 \subsection*{2次元画像}
 用いたネットワーク構造は，InceptionV3，Xception，Inception-Resnetの4つである．
-それぞれに対して，Data Augmentation，事前学習，擬似HE染色のあり・なしで精度がどのように改善されるかを実験した．
+それぞれに対して，事前学習，擬似HE変換のあり・なしで精度がどのように改善されるかを実験した．
 
 \subsection*{3次元画像}
-深さ方向の15枚をまとめて3次元画像として解析した．用いたモデルは3DCNN，2DCNN-LSTMである．
-ここでは，Data Augmentationと事前学習と擬似HE染色は，全て適用して実験を行った．
+深さ方向は10枚, 50枚，100枚の3パターンで3次元画像として解析した．用いたモデルは，擬似HE変換をした画像を事前学習で訓練した2DCNNのモデルをLSTM, GRU, Bidirectional-GRUの3つのモデルを検証した．
 
 
 \section{教師なし学習による識別精度評価}
-Autoencoder，GAN，VAE，VAE-GANで教師なし学習を行った．
+Autoencoder，GAN，VAE，を利用して教師なし学習を行った．Auto EncoderとGANは，生成画像が入力画像と類似するかを実験し，VAEでは，教師なし学習から得られる潜在変数の2次元平面への写像をした．また正常と腫瘍のそれぞれの画像が潜在変数の2次元空間で，構造的な違いからカテゴリーに分かれるかを確認した．
 
 
 \section{半教師あり学習による識別精度評価}
-VAEの考えを利用して，半教師あり学習のネットワークを作成した．
+VAEを利用して，\fig{半教師}のような半教師あり学習のネットワークを作成した．
 
 \begin{figure}[H]
 	\centering
