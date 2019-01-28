@@ -35,7 +35,7 @@
 	\centering
 	\includegraphics[width=0.6\linewidth]{fig/chapter4/2dcnn_preprocessing}
 	\caption{2DCNN with different preprocessing}
-	\label{fig:2dcnnpreprocessing}
+	\label{fig:2d_cnn_preprocessing}
 \end{figure}
 
 \begin{figure}
@@ -76,14 +76,12 @@
 		\subcaption{pretrain: True, he transform: True}
 		\label{fig: pretrain_preprocess}
 	\end{minipage}
-
-	
 	\caption{Confusion Matrix for 2DCNN with different preprocessing}
 	\label{fig:2d_preprocess_matrix}
 	
 \end{figure}
 
-前処理を何も行わない場合が\fig{2dcnnpreprocessing}の緑のプロットでありROCの評価指数である．AUCはhogeで一番認識精度が低かった．また\fig{no_preprocess}のように腫瘍は87\%の精度で検出できているが，正常は40\%の精度でしか検出できていなかった．
+\fig{2d_cnn_preprocessing}で緑のプロットが前処理を何も行わない場合のROC曲線でとなる．一番認識精度が低かった．また\fig{no_preprocess}のように腫瘍は87\%の精度で検出できているが，正常は40\%の精度でしか検出できていなかった．
 
 ここで腫瘍の見落としとなる偽陰性の割合が13\%と低く，偽陽性が高くなっていることが分かる．このようになった理由は，深層学習の学習方法に理由がある．今回学習に用いたデータで正常は，783枚であるのに対して，腫瘍の学習データの枚数は1566枚である．正常の画像よりも腫瘍の画像を2倍多く学習に利用することで，腫瘍の検出がより重要視されるモデルになったのである．これは，病変の見落としリスクを防止するためには，非常に良い結果となった．
 
@@ -300,6 +298,14 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 	\caption{VAE decoder result}
 	\label{fig:vaeresultpicture}
 \end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter4/vae_latent_vectors}
+	\caption{Encoded latent vectors}
+	\label{fig:vaelatentvectors}
+\end{figure}
+
 
 VAEで生成される画像が\fig{vaeresultpicture}である．これはプロットの分布を元に画像を再生成した画像であり，左下が正常の傾向の画像で，右側が腫瘍の傾向の画像に生成されていること分かる．画像は正常から腫瘍へと徐々に変化していき，構造的な特徴を学習できている．
 

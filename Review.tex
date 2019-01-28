@@ -432,3 +432,49 @@ p_\theta (x|z, y) & = f(x; z, y, \theta) \\
 p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 \end{align}
 ここで$N_c$はクラス数で，関数$f(x)$は尤度関数で$\theta$はニューラルネットワークのパラメータである．
+
+\section{機械学習の評価指数}
+機械学習の評価のために，混同行列(Confusion Matrix)を用いる．
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig/chapter2/confusion_matrix}
+	\caption{Confusion matrix}
+	\label{fig:confusionmatrix}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.6\columnwidth}
+		\centering
+		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/confusion_examples}
+		\subcaption{Example of Confusion matrix table}
+		\label{fig:confusion_table}
+	\end{minipage}
+	\begin{minipage}{0.8\columnwidth}
+		\centering
+		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/confusion_math}
+		\subcaption{Accuracy and Sensitivity and Specificity}
+		\label{fig:confusion_math}
+	\end{minipage}
+	\caption{Example of Confusion matrix}
+	\label{fig:confusion_ex}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.6\columnwidth}
+		\centering
+		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/why_roc}
+		\subcaption{How to get ROC curve}
+		\label{fig:why_roc}
+	\end{minipage}
+	\begin{minipage}{0.8\columnwidth}
+		\centering
+		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/roc_curve}
+		\subcaption{ROC Curve}
+		\label{fig:roc_curve}
+	\end{minipage}
+	\caption{ROC Curve and AUC}
+	\label{fig:roc}
+\end{figure}
