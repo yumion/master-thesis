@@ -368,6 +368,13 @@ v_{ij}^{xyz} = tanh(b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1}　\sum_{q=0}^{Q_i -1}�
 
 \subsection{Variational Autoencoder}
 本研究では，このオートエンコーダの派生である．Variational Autoencoder(VAE)\cite{kingma2013auto}を利用した．これはオートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，データセットの潜在変数の分布が，正規分布になるような制約を加えて学習を行う手法である．こうすることでAutoencoderの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度を分布が表現することができるところが特徴である\cite{abbasnejad2017infinite}．
+
+\begin{align}\label{eq:vae}
+p_\theta (z) & = N (z; 0, I)  \\
+p_\theta (x|z) & = N (x; \upmu(z), \sigma(z)I) \\
+q_\phi (z|x) & = N (x; \upmu(x), \sigma(x)I)
+\end{align}
+
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{0.4\columnwidth}
@@ -397,4 +404,4 @@ VAEよりもGANの方が細部まで鮮明に画像を生成することがで�
 
 \section{半教師あり学習}
 弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．こうすることでデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
-VAEをベースに半教師あり学習のモデルを作ることができる\cite{M2model}，半教師あり学習の，モデルの最適化手法は，教師ラベルがある場合と，教師ラベルがない場合の2通りに分けて行われる．まず教師ラベルがある場合は
+VAEをベースに半教師あり学習のモデルを作ることができる\cite{M2model}，半教師あり学習の，モデルの最適化手法は，教師ラベルがある場合と，教師ラベルがない場合の2通りに分けて行われる\cite{narayanaswamy2017learning}．まず教師ラベルがある場合は
