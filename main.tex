@@ -6,21 +6,16 @@
 
 % 画像の取り扱いに必要
 \usepackage{graphicx}
-
-
 % 数式の機能を拡張
 \usepackage{amsmath}
 \usepackage{bm}
 \usepackage{upgreek}
-
 % 複数引用
 \usepackage{cite}
-
-
+%\usepackage{natbib}
 % 複数図を並べる時のcaption
 \usepackage{subcaption}
 \usepackage{here}
-
 % 表関連
 \usepackage{booktabs}
 % 表でセルを複数列で結合する
@@ -29,12 +24,8 @@
 % 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
 %\usepackage{lineno}
 %\linenumbers
-
 % PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
 \usepackage[dvipdfmx, hidelinks]{hyperref}
-
-
-
 % renewcommandなどはここに
 \usepackage{mymacro}
 % 目次でsubsectionまで表示
@@ -84,7 +75,9 @@
 \include{Acknowledgments} % 謝辞
 
 \renewcommand{\bibname}{引用文献}
-\bibliographystyle{elsart-num}
+%\bibliographystyle{jecon}
+%\bibliographystyle{elsart-num}
+\bibliographystyle{bibliography_thesis}
 \bibliography{thesis}
 \label{page:bib}
 
