@@ -23,6 +23,13 @@
 	\label{fig:ellipse_detection}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{fig/chapter4/circle_extraction}
+	\caption{Extraction of distorted  ellipse}
+	\label{fig:ellipse_extraction}
+\end{figure}
+
 \fig{circle_detection}が円検出を利用して正常の構造を検出した結果である．緑色の円の部分が円検出された領域を示している．真円にフィッティングしているため綺麗な円構造のみの検出となり，正常でも検出できていない部分が多くなっている．全体的に正常領域で円検出が多く行われ，腫瘍領域では円検出結果が少なくなる結果となったが，腫瘍部分も円検出されている部分が一部ある．
 
 \fig{ellipse_detection}は楕円検出を行った結果である．円検出よりも正常領域の検出が増えたことが分かる．楕円検出がされた領域の多いところほど正常の領域で，楕円検出が少ない領域が腫瘍であるという傾向を捉えることができた．古典的な画像処理の利点は，画像検出の理由が明確に説明できることである．このような円検出や楕円検出であれば，円形度を算出することができるので，深層学習を用いた結果よりも透明性がある．しかしながら，明確な輪郭で無ければ検出できない場合が多く検出精度に限界があることから，これでは腫瘍の見落とし防止に利用することができない．そこで古典的な画像処理の性能を上回る，深層学習を利用するが必要であると分かる．
@@ -48,9 +55,9 @@
 		\label{tab:2DCNNpreprocessing_AUC}
 		\begin{tabular}{cc}\toprule
 			& AUC \\ \midrule
-			HE: False, pretrain: False &  \\ 
-			HE: True, pretrain: False &  \\ 
-			HE: True, pretrain: True &  \\ \bottomrule
+			HE: False, pretrain: False & 0.75 \\ 
+			HE: True, pretrain: False & 0.79 \\ 
+			HE: True, pretrain: True & 0.79 \\ \bottomrule
 		\end{tabular} 
 	\end{minipage}
 \end{figure}
@@ -121,9 +128,9 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 		\label{tab:2DCNNcompare_AUC}
 		\begin{tabular}{cc}\toprule
 			& AUC \\ \midrule
-			InceptionV3 &  \\ 
-			Xception &  \\ 
-			InceptionResNetV2 &  \\ \bottomrule
+			InceptionV3 & 0.79 \\ 
+			Xception & 0.78 \\ 
+			InceptionResNetV2 & 0.77 \\ \bottomrule
 		\end{tabular} 
 	\end{minipage}
 \end{figure}
@@ -150,9 +157,9 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 		\label{tab:2DCNNpreprocessing_AUC}
 		\begin{tabular}{cc}\toprule
 			depth & AUC \\ \midrule
-			10 &  \\ 
-			50 &  \\ 
-			100 &  \\ \bottomrule
+			10 & 0.82 \\ 
+			50 & 0.81 \\ 
+			100 & 0.85 \\ \bottomrule
 		\end{tabular} 
 	\end{minipage}
 \end{figure}
@@ -167,7 +174,7 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 	\begin{minipage}[b]{0.33\columnwidth}
 		\centering
 		\includegraphics[clip, width=\linewidth]{fig/chapter4/3d/roc/depth_10.pdf}
-		\subcaption{depth: 10これだけlegendの色が他と異なります．合わせましょう}
+		\subcaption{depth: 10}
 		\label{fig:}
 	\end{minipage}
 	\begin{minipage}[b]{0.33\columnwidth}
@@ -190,8 +197,8 @@ InceptionV3とXception, InceptionResnetV2を比較して，どのネットワー
 
 \fig{2dcnn+LSTM_roc}より，LSTMやGRU, Bi-GRUといったモデルによる精度の差は，ほとんどなかった．GRUがもっとも訓練パラメータが少ないので学習時間や推論時間を早くすることができる．そのため今後はGRUを使って学習をすると効率が良いことが分かった．
 
-\fig{gru_matrix}に2DCNNとGRUを組み合わせた手法における混合行列を示す．図の左側は画像枚数であり，右側はその割合を示している．
-%何か少し説明解説が欲しいです
+\fig{gru_matrix}に2DCNNとGRUを組み合わせた手法における混合行列を示す．図の左側は画像枚数であり，右側はその割合を示している．まず深さ方向に10だけ解析対象にした時，Flase Negativeが0.08であり，腫瘍を見落とすことがほとんどゼロにすることができた．しかし正常の画像を正常の認識することがあまりできていない．さらに深さ方向に10,50,100と解析対象を増やしていくと，深さ方向が100の時には，感度も特異度も今までで一番精度の高い認識を行うことができた．
+
 
 \begin{figure}[H]
 	\centering

@@ -5,7 +5,7 @@
 
 細胞組織の形態を観察するための病理染色ではヘマトキシリン・エオジン染色(HE染色)が一般的に用いられる．細胞核を青紫色に染色し，細胞質をピンク色に染色する．正常から異常に変化していくと，細胞核が過度に増殖したり，細胞質の形が崩れたりすることで，その特徴を機械学習によって精度よく検出するための研究が行われている\cite{wang2016deep}．
 
-これまでは核の形やテキスチャーからパターンマッチングなどの画像処理によって腫瘍を検出する研究されてきたが\cite{要出典}，近年になって画像処理に大きなブレークスルーが起きたことをきっかけに，新しい手法で解析するようになってきた．そのブレークスルーがディープラーニングである．
+これまでは核の形やテキスチャーからパターンマッチングなどの画像処理によって腫瘍を検出する研究されてきたが\cite{rathore2015novel}，近年になって画像処理に大きなブレークスルーが起きたことをきっかけに，新しい手法で解析するようになってきた．そのブレークスルーがディープラーニングである．
 
 \section{ニューラルネットワーク}\label{sec:NeuralNetwork}
 人間の脳にはニューロンと呼ばれる神経細胞が1000億個以上あり，それぞれが複数のニューロンが電気信号によって情報を伝達している．また脳にはシナプスという場所があり，ここで電気信号を細胞体へ受け渡す．細胞体はある閾値以上の電気信号がきた場合に他のニューロンへ電気信号を伝播させる(これを発火と呼ぶ)．このようなニューロンとシナプスで行われる演算を模倣したアルゴリズムを作ることができれば，人間のような思考や認識をコンピュータを使って再現できると考えた．そのアルゴリズムがニューラルネットワーク(Neural Network: NN)である．
@@ -311,7 +311,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \end{figure}
 
 \subsection*{セグメンテーション}
-セマンティックセグメンテーションとは，画像を画素レベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．セマンティックセグメンテーションの手法についてディープラーニング以前では，Texton Forests\cite{要出典}や，Random Forests\cite{要出典}に基づいた分類を行っていたが，物体検出と同様にCNNが登場してからは，高精度なセグメンテーションが実現するようになった．CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，2つのアーキテクチャーからできている(\fig {Unet})．1つ目がエンコーダーのアーキテクチャーでCNNとプーリングで特徴を抽出しながら次元を削減していき，2つ目のデコーダーのアーキテクチャーで画像をセグメンテーションの結果になるように復元する．ここで問題になることが，プーリングをすることで位置情報を消してしまっているので，この位置情報を利用して画像を復元するためには，エンコーダーとデコーダーで画像サイズが同じところ同士をショートカットで接続することがUnet構造の優れている点である．
+セマンティックセグメンテーションとは，画像を画素レベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．セマンティックセグメンテーションの手法についてディープラーニング以前では，Texton Forests\cite{shotton2008semantic}や，Random Forests\cite{kontschieder2011structured}に基づいた分類を行っていたが，物体検出と同様にCNNが登場してからは，高精度なセグメンテーションが実現するようになった．CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，2つのアーキテクチャーからできている(\fig {Unet})．1つ目がエンコーダーのアーキテクチャーでCNNとプーリングで特徴を抽出しながら次元を削減していき，2つ目のデコーダーのアーキテクチャーで画像をセグメンテーションの結果になるように復元する．ここで問題になることが，プーリングをすることで位置情報を消してしまっているので，この位置情報を利用して画像を復元するためには，エンコーダーとデコーダーで画像サイズが同じところ同士をショートカットで接続することがUnet構造の優れている点である．
 
 \begin{figure}[H]
 	\centering
@@ -389,8 +389,8 @@ VAEよりもGANの方が細部まで鮮明に画像を生成することがで�
 
 \begin{figure}[H]
 	\centering
-	%\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
-	\caption{Diagram of GAN(https://www.slideshare.net/xavigiro/deep-learning-for-computer-vision-generative-models-and-adversarial-training-upc-2016)slideshare出典はまずいです}
+	\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
+	\caption{Diagram of GAN}
 	\label{fig:GAN}
 \end{figure}
 
@@ -445,13 +445,13 @@ p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{0.6\columnwidth}
+	\begin{minipage}{0.7\columnwidth}
 		\centering
 		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/confusion_examples}
 		\subcaption{Example of Confusion matrix table}
 		\label{fig:confusion_table}
 	\end{minipage}
-	\begin{minipage}{0.8\columnwidth}
+	\begin{minipage}{0.9\columnwidth}
 		\centering
 		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/confusion_math}
 		\subcaption{Accuracy and Sensitivity and Specificity}
@@ -461,17 +461,17 @@ p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 	\label{fig:confusion_ex}
 \end{figure}
 
-機械学習による病理診断アルゴリズムを評価するために，3つの指標がある．AccuracyとSpecificty(特異度)とSensitivity(感度)である．なぜ，Accuracyだけではなく，SensitivityとSpecificityが必要かを説明する図が\fig{confusion_ex}である．この場合だとAccuracyが8割弱で良いと判断することもできるが，Sensitivityに注目すると1割しかないので，この機械学習のモデルでは，正常の画像を正常であると認識することができていないことが分かる．また見落とし防止を目標にする場合は，S
+機械学習による病理診断アルゴリズムを評価するために，3つの指標がある．AccuracyとSpecificty(特異度)とSensitivity(感度)である．なぜ，Accuracyだけではなく，SensitivityとSpecificityが必要かを説明する図が\fig{confusion_ex}である．この場合だとAccuracyが8割弱で良いと判断することもできるが，Sensitivityに注目すると1割しかないので，この機械学習のモデルでは，腫瘍の画像を腫瘍であると認識することができていないことが分かる．見落とし防止を目標にする場合は，Sensitivityが重要な指標になる．
 
 \begin{figure}[H]
 	\centering
-	\begin{minipage}{0.6\columnwidth}
+	\begin{minipage}{0.8\columnwidth}
 		\centering
 		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/why_roc}
 		\subcaption{How to get ROC curve}
 		\label{fig:why_roc}
 	\end{minipage}
-	\begin{minipage}{0.8\columnwidth}
+	\begin{minipage}{0.6\columnwidth}
 		\centering
 		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/roc_curve}
 		\subcaption{ROC Curve}
@@ -480,3 +480,6 @@ p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
 	\caption{ROC Curve and AUC}
 	\label{fig:roc}
 \end{figure}
+
+機械学習を使って推論を行うとき，正常と腫瘍の確率が出る．これを50\%を閾値にして，判定するのではなく，例えば目的に応じて40\%の確率で腫瘍と認識される場合も腫瘍と判定するというように閾値を変更することで，判定結果をSensitivityが高くなるように，またはSpecificityが高くなるように変動させることができる．(\fig{why_roc})
+このように閾値を変化させるときに，変化するSensitivityとSpecificityをプロットしていくと\fig{roc}の点線のような値をとる．これをReceiver Operating Characteristic(ROC)曲線と呼び，機械学習の性能評価で用いられる．また，点線の内側の面積をArea Under Curve(AUC)と呼び，この値を評価指数として利用する．
