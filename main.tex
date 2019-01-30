@@ -26,6 +26,7 @@
 %\linenumbers
 % PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
 \usepackage[dvipdfmx, hidelinks]{hyperref}
+\usepackage{url}
 % renewcommandなどはここに
 \usepackage{mymacro}
 % 目次でsubsectionまで表示
@@ -68,16 +69,16 @@
 % include を使うことで、別ファイルに分割することができます。
 \include{Introduction} % 背景
 \include{Review} % 原理
-%\include{Experiments} % 実験手法
-%\include{Results} % 結果と考察
-%\include{Conclusion} % まとめ
-% \include{Appendix} % 付録
+\include{Experiments} % 実験手法
+\include{Results} % 結果と考察
+\include{Conclusion} % まとめ
+\include{Appendix} % 付録
 \include{Acknowledgments} % 謝辞
 
 \renewcommand{\bibname}{引用文献}
 %\bibliographystyle{jecon}
-%\bibliographystyle{elsart-num}
 \bibliographystyle{bibliography_thesis}
+%\bibliographystyle{junsrt}
 \bibliography{thesis}
 \label{page:bib}
 

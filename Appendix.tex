@@ -1,28 +1,76 @@
-\chapter*{付録} % 章番号を出さない
+\chapter*{付録}
 \addcontentsline{toc}{chapter}{付録} % 目次に載せる
+\setcounter{chapter}{1}
+\setcounter{section}{0}
+\renewcommand{\thechapter}{\Alph{chapter}}
 
-「付録」（appendix）は、論文の本文に載せるには情報として邪魔もしくは必須ではないものの、読者にとって有益となるような情報を載せます。付録を必要としない論文ももちろん存在しますので、そこは著者の判断です。
+\section{作成したモデル}
+\fig{semiVAEmodel}に本研究で提案したモデルのネットワーク構造を示す．
 
-例えば、たくさんの観測データを様々なモデルでフィットした場合、フィット結果の絵がたくさん出てくるはずです。そのような図は本文中に大量に出されても大切な情報を見失ってしまいますので、大部分は付録に載せることが推奨されます。他には、何かしらの長い式変形や証明を載せる必要がある場合、付録に移動する場合があります。
-
-% 付録は chapter の 1 つとして作りますが、章番号は表示しません。
-% また付録の 1 つずつはアルファベットで番号付けをするのが一般的です。
-\setcounter{section}{0} % section の番号をゼロにリセットする
-\renewcommand{\thesection}{\Alph{section}} % 数字ではなくアルファベットで数える
-\setcounter{equation}{0} % 式番号を A.1 のようにする
-\renewcommand{\theequation}{\Alph{section}.\arabic{equation}}
-\setcounter{figure}{0} % 図番号
-\renewcommand{\thefigure}{\Alph{section}.\arabic{figure}}
-\setcounter{table}{0} % 表番号
-\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
-
-\section{すごい長い証明}
-式~(\ref{eq})のように、式番号がアルファベットとアラビア数字の組み合わせになるように、\LaTeX{}ソース中で設定してありますので、中身を眺めてみてください。
-
-\begin{equation}
-  \label{eq}
-  1 + 1 = 2
-\end{equation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=\textheight]{fig/vae_mlp_un_label_v2_tiny}
+	\caption{Network architecture of semi-supervised learning model based on VAE with InceptionV3}
+	\label{fig:semiVAEmodel}
+\end{figure}
 
 
-\section{すごいたくさんのフィットの図}
+\section{GANによる画像生成}
+VAE-GANを実装するにあたり，まずはGANによる検体画像の生成を行った．\fig{GANimage}はGANによる画像生成の過程である．\fig{unetae}のAutoEncoderよりGANの方が高精細に生成されていることが分かる．しかし，\fig{vaeresultpicture}に示したVAEで生成された画像よりは不鮮明である．GANを使って高精細な画像を生成することは難しく，安定に生成させるには正確なパラメータチューニングやヒューリスティックが不可欠である．本研究では，ここまでが限界であった．今後のGANの発展に期待したい．
+
+\begin{figure}[H]
+	\centering
+	
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0000_0000}
+		\subcaption{epochs = 0}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0079_0000}
+		\subcaption{epochs = 79}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0641_0000}
+		\subcaption{epochs = 641}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/0969_0000}
+		\subcaption{epochs = 969}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/1213_0000}
+		\subcaption{epochs = 1213}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/1619_0000}
+		\subcaption{epochs = 1619}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/2004_0000}
+		\subcaption{epochs = 2004}
+		\label{fig:}
+	\end{minipage}
+	\begin{minipage}{0.24\columnwidth}
+		\centering
+		\includegraphics[clip, width=\linewidth]{fig/generative_adversarial_nets/3208_0000}
+		\subcaption{epochs = 3208}
+		\label{fig:}
+	\end{minipage}
+	
+	\caption{Transition of generated images by GAN}
+	\label{fig:GANimage}
+	
+\end{figure}
