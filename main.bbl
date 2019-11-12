@@ -1,0 +1,210 @@
+\begin{thebibliography}{10}
+
+\bibitem{LeNet}
+Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
+\newblock {\em Proceedings of the {IEEE}} {\bfseries 86},  2278--2324 (1998).
+
+\bibitem{simpleRNN}
+Y.~LeCun, Y.~Bengio, and G.~E. Hinton.
+\newblock {\em Nature} {\bfseries 521},  436--444 (2015).
+
+\bibitem{SSD}
+W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~E. Reed, C.-Y. Fu, and A.~C.
+  Berg.
+\newblock {\em CoRR} {\bfseries abs/1512.02325}, (2015).
+
+\bibitem{Unet}
+O.~Ronneberger, P.~Fischer, and T.~Brox.
+\newblock {\em CoRR} {\bfseries abs/1505.04597}, (2015).
+
+\bibitem{Hosseini-AslGE16}
+E.~Hosseini-Asl, G.~L. Gimel'farb, and A.~El-Baz.
+\newblock {\em CoRR} {\bfseries abs/1607.00556}, (2016).
+
+\bibitem{Donahue_2015_CVPR}
+J.~Donahue, L.~A. Hendricks, S.~Guadarrama, M.~Rohrbach, S.~Venugopalan,
+  T.~Darrell, and K.~Saenko.
+\newblock  2625--2634. IEEE Computer Society (2015).
+
+\bibitem{hinton2006reducing}
+G.~E. Hinton and R.~R. Salakhutdinov.
+\newblock {\em science} {\bfseries 313},  504--507 (2006).
+
+\bibitem{pathology}
+一般社団法人 日本病理学会，認定病理専門医一覧.
+\newblock http://pathology.or.jp/senmoni/board-certified.html.
+
+\bibitem{sekitani2016ultraflexible}
+T.~Sekitani, T.~Yokota, K.~Kuribara, M.~Kaltenbrunner, T.~Fukushima, Y.~Inoue,
+  M.~Sekino, T.~Isoyama, Y.~Abe, H.~Onodera, {\em et~al}.
+\newblock {\em Nature communications} {\bfseries 7},  11425 (2016).
+
+\bibitem{lecun2015deep}
+Y.~LeCun, Y.~Bengio, and G.~Hinton.
+\newblock {\em nature} {\bfseries 521},  436 (2015).
+
+\bibitem{hoo2016deep}
+S.~Hoo-Chang, H.~R. Roth, M.~Gao, L.~Lu, Z.~Xu, I.~Nogues, J.~Yao, D.~Mollura,
+  and R.~M. Summers.
+\newblock {\em IEEE transactions on medical imaging} {\bfseries 35},  1285
+  (2016).
+
+\bibitem{AlexNet}
+A.~Krizhevsky, I.~Sutskever, and G.~E. Hinton.
+\newblock  2012 (2012).
+
+\bibitem{ResNet}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun.
+\newblock  {IEEE} jun 2016.
+
+\bibitem{inglese2017deep}
+P.~Inglese, J.~S. McKenzie, A.~Mroz, J.~Kinross, K.~Veselkov, E.~Holmes,
+  Z.~Takats, J.~K. Nicholson, and R.~C. Glen.
+\newblock {\em Chemical science} {\bfseries 8},  3500--3511 (2017).
+
+\bibitem{havaei2017brain}
+M.~Havaei, A.~Davy, D.~Warde-Farley, A.~Biard, A.~Courville, Y.~Bengio, C.~Pal,
+  P.-M. Jodoin, and H.~Larochelle.
+\newblock {\em Medical image analysis} {\bfseries 35},  18--31 (2017).
+
+\bibitem{wang2016deep}
+D.~Wang, A.~Khosla, R.~Gargeya, H.~Irshad, and A.~H. Beck.
+\newblock (2016).
+
+\bibitem{esteva2017dermatologist}
+A.~Esteva, B.~Kuprel, R.~A. Novoa, J.~Ko, S.~M. Swetter, H.~M. Blau, and
+  S.~Thrun.
+\newblock {\em Nature} {\bfseries 542},  115 (2017).
+
+\bibitem{dou20163d}
+
+\newblock  149--157 (2016).
+
+\bibitem{fmri}
+S.~Sarraf and G.~Tofighi.
+\newblock {\em CoRR} {\bfseries abs/1603.08631}, (2016).
+
+\bibitem{litjens2017survey}
+G.~Litjens, T.~Kooi, B.~E. Bejnordi, A.~A.~A. Setio, F.~Ciompi, M.~Ghafoorian,
+  J.~A. Van Der~Laak, B.~Van~Ginneken, and C.~I. S{\'a}nchez.
+\newblock {\em Medical image analysis} {\bfseries 42},  60--88 (2017).
+
+\bibitem{rathore2015novel}
+S.~Rathore, M.~Hussain, M.~A. Iftikhar, and A.~Jalil.
+\newblock {\em Computer methods and programs in biomedicine} {\bfseries 121},
+  92--108 (2015).
+
+\bibitem{HOG}
+N.~Dalal and B.~Triggs.
+\newblock {\em Computer Vision and Pattern Recognition, 2005. CVPR 2005. IEEE
+  Computer Society Conference on} {\bfseries 1},  886--893 (2005).
+
+\bibitem{SIFT}
+D.~G. Lowe.
+\newblock {\em Int. J. Comput. Vision} {\bfseries 60},  91--110 November 2004.
+
+\bibitem{SURF}
+H.~Bay, A.~Ess, T.~Tuytelaars, and L.~V. Gool.
+\newblock {\em Computer Vision and Image Understanding} {\bfseries 110},  346
+  -- 359 (2008).
+\newblock Similarity Matching in Computer Vision and Multimedia.
+
+\bibitem{SVM}
+C.~Cortes and V.~Vapnik.
+\newblock {\em Machine Learning} {\bfseries 20},  273--297 (1995).
+
+\bibitem{cho2014learning}
+K.~Cho, B.~Van~Merri{\"e}nboer, C.~Gulcehre, D.~Bahdanau, F.~Bougares,
+  H.~Schwenk, and Y.~Bengio.
+\newblock (2014).
+
+\bibitem{Backprop}
+D.~E. Rumelhart, G.~E. Hinton, and R.~J. Williams.
+\newblock {\em Nature} {\bfseries 323},  533-- October 1986.
+
+\bibitem{Adam}
+D.~P. Kingma and J.~Ba.
+\newblock {\em CoRR} {\bfseries abs/1412.6980}, (2014).
+
+\bibitem{Dropout}
+N.~Srivastava, G.~Hinton, A.~Krizhevsky, I.~Sutskever, and R.~Salakhutdinov.
+\newblock {\em Journal of Machine Learning Research} {\bfseries 15},
+  1929--1958 (2014).
+
+\bibitem{BatchNorm}
+S.~Ioffe and C.~Szegedy.
+\newblock  448--456. JMLR.org (2015).
+
+\bibitem{VGGNet}
+K.~Simonyan and A.~Zisserman.
+\newblock {\em CoRR} {\bfseries abs/1409.1556}, (2014).
+
+\bibitem{GoogLeNet}
+C.~Szegedy, W.~Liu, Y.~Jia, P.~Sermanet, S.~Reed, D.~Anguelov, D.~Erhan,
+  V.~Vanhoucke, and A.~Rabinovich.
+\newblock  {IEEE} jun 2015.
+
+\bibitem{YOLOv3}
+J.~Redmon and A.~Farhadi.
+\newblock {\em CoRR} {\bfseries abs/1804.02767}, (2018).
+
+\bibitem{shotton2008semantic}
+J.~Shotton, M.~Johnson, and R.~Cipolla.
+\newblock  1--8. IEEE (2008).
+
+\bibitem{kontschieder2011structured}
+P.~Kontschieder, S.~R. Bulo, H.~Bischof, and M.~Pelillo.
+\newblock  2190--2197. IEEE (2011).
+
+\bibitem{BroschTYLTT16}
+T.~Brosch, L.~Y.~W. Tang, Y.~Yoo, D.~K.~B. Li, A.~Traboulsee, and R.~C. Tam.
+\newblock {\em IEEE Trans. Med. Imaging} {\bfseries 35},  1229--1239 (2016).
+
+\bibitem{ji20133d}
+S.~Ji, W.~Xu, M.~Yang, and K.~Yu.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence}
+  {\bfseries 35},  221--231 (2013).
+
+\bibitem{wang2016image}
+C.~Wang, H.~Yang, C.~Bartz, and C.~Meinel.
+\newblock  988--997. ACM (2016).
+
+\bibitem{RadfordMC15}
+A.~Radford, L.~Metz, and S.~Chintala.
+\newblock {\em CoRR} {\bfseries abs/1511.06434}, (2015).
+
+\bibitem{kingma2013auto}
+D.~P. Kingma and M.~Welling.
+\newblock {\em CoRR} {\bfseries abs/1312.6114}, (2013).
+
+\bibitem{abbasnejad2017infinite}
+M.~E. Abbasnejad, A.~Dick, and A.~v.~d. Hengel.
+\newblock  781--790. IEEE (2017).
+
+\bibitem{GAN}
+I.~J. Goodfellow, J.~Pouget-Abadie, M.~Mirza, B.~Xu, D.~Warde-Farley, S.~Ozair,
+  A.~C. Courville, and Y.~Bengio.
+\newblock  2672--2680 (2014).
+
+\bibitem{M2model}
+D.~P. Kingma, D.~J. Rezende, S.~Mohamed, and M.~Welling.
+\newblock {\em CoRR} {\bfseries abs/1406.5298}, (2014).
+
+\bibitem{narayanaswamy2017learning}
+S.~Narayanaswamy, T.~B. Paige, J.-W. V.~d. Meent, A.~Desmaison, N.~Goodman,
+  P.~Kohli, F.~Wood, and P.~Torr.
+\newblock  5925--5935 (2017).
+
+\bibitem{grad-cam}
+R.~R. Selvaraju, M.~Cogswell, A.~Das, R.~Vedantam, D.~Parikh, and D.~Batra.
+\newblock  618--626. IEEE Computer Society (2017).
+
+\bibitem{xingjian2015convolutional}
+X.~Shi, Z.~Chen, H.~Wang, D.-Y. Yeung, W.-K. Wong, and W.~c.~Woo.
+\newblock  802--810 (2015).
+
+\bibitem{bao2017cvae}
+J.~Bao, D.~Chen, F.~Wen, H.~Li, and G.~Hua.
+\newblock {\em CoRR, abs/1703.10155} {\bfseries 5}, (2017).
+
+\end{thebibliography}

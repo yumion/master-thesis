@@ -1,0 +1,105 @@
+This is upBibTeX, Version 0.99d-j0.33-u1.22 (utf8.uptex) (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: Introduction.aux
+A level-1 auxiliary file: Review.aux
+A level-1 auxiliary file: Experiments.aux
+A level-1 auxiliary file: Results.aux
+A level-1 auxiliary file: Conclusion.aux
+A level-1 auxiliary file: Appendix.aux
+A level-1 auxiliary file: Acknowledgments.aux
+The style file: bibliography_thesis.bst
+Database file #1: thesis.bib
+You're missing a field name---line 1051 of file thesis.bib
+ : 
+ : =======
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 1133 of file thesis.bib
+ : @article{hoo2016deep
+ :                     ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1159 of file thesis.bib
+ : 
+ : >>>>>>> ca217455f0ac3110450cb311005901c99048c7b9
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+A bad cross reference---entry "grad-cam"
+refers to entry "conf/iccv/2017", which doesn't exist
+Warning--I didn't find a database entry for "conf/iccv/2017"
+You can't pop an empty literal stack for entry Donahue_2015_CVPR
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry AlexNet
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry ResNet
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry wang2016deep
+while executing---line 1234 of file bibliography_thesis.bst
+Warning--empty journal. in dou20163d
+You can't pop an empty literal stack for entry dou20163d
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry cho2014learning
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry BatchNorm
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry GoogLeNet
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry shotton2008semantic
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry kontschieder2011structured
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry wang2016image
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry abbasnejad2017infinite
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry GAN
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry narayanaswamy2017learning
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry grad-cam
+while executing---line 1234 of file bibliography_thesis.bst
+You can't pop an empty literal stack for entry xingjian2015convolutional
+while executing---line 1234 of file bibliography_thesis.bst
+You've used 47 entries,
+            2353 wiz_defined-function locations,
+            809 strings with 13395 characters,
+and the built_in function-call counts, 16559 in all, are:
+= -- 1221
+> -- 730
+< -- 31
++ -- 274
+- -- 227
+* -- 1065
+:= -- 2046
+add.period$ -- 104
+call.type$ -- 47
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 48
+duplicate$ -- 993
+empty$ -- 1346
+format.name$ -- 454
+if$ -- 3985
+int.to.chr$ -- 0
+int.to.str$ -- 47
+missing$ -- 46
+newline$ -- 192
+num.names$ -- 50
+pop$ -- 267
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 844
+stack$ -- 0
+substring$ -- 859
+swap$ -- 414
+text.length$ -- 31
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 123
+width$ -- 49
+write$ -- 448
+is.kanji.str$ -- 616
+(There were 20 error messages)

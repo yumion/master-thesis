@@ -1,11 +1,5 @@
-\chapter{病理画像診断のための深層学習}
+\chapter{ロボット制御と深層学習}
 \label{chap_review}
-
-病理画像をデジタルで保存することが始まったのは数十年前になる．これによって遠隔地でも診断することができるようになったり，情報を共有することができるようになり，複数の医師で診断しミスを防止するセカンド・オピニオンが容易になった．計算機科学の分野の側面ではデータを収集できるようになり，研究が盛んに行われることになった．近年では，様々な病理データでより改良されたアルゴリズムの提案が行われている\cite{litjens2017survey}．
-
-細胞組織の形態を観察するための病理染色ではヘマトキシリン・エオジン染色(HE染色)が一般的に用いられる．細胞核を青紫色に染色し，細胞質をピンク色に染色する．正常から異常に変化していくと，細胞核が過度に増殖したり，細胞質の形が崩れたりすることで，その特徴を機械学習によって精度よく検出するための研究が行われている\cite{wang2016deep}．
-
-これまでは核の形やテキスチャーからパターンマッチングなどの画像処理によって腫瘍を検出する研究されてきたが\cite{rathore2015novel}，近年になって画像処理に大きなブレークスルーが起きたことをきっかけに，新しい手法で解析するようになってきた．そのブレークスルーがディープラーニングである．
 
 \section{ニューラルネットワーク}\label{sec:NeuralNetwork}
 人間の脳にはニューロンと呼ばれる神経細胞が1000億個以上あり，それぞれが複数のニューロンが電気信号によって情報を伝達している．また脳にはシナプスという場所があり，ここで電気信号を細胞体へ受け渡す．細胞体はある閾値以上の電気信号がきた場合に他のニューロンへ電気信号を伝播させる(これを発火と呼ぶ)．このようなニューロンとシナプスで行われる演算を模倣したアルゴリズムを作ることができれば，人間のような思考や認識をコンピュータを使って再現できると考えた．そのアルゴリズムがニューラルネットワーク(Neural Network: NN)である．
@@ -17,13 +11,13 @@
 	\centering
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=1.2\linewidth]{fig/MLP}
+		\includegraphics[width=1.2\linewidth]{fig/Review/MLP}
 		\subcaption{Muti-layer perceptron}
 		\label{fig:mlp}
 	\end{minipage}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=0.7\linewidth]{fig/simple_perceptron}
+		\includegraphics[width=0.7\linewidth]{fig/Review/simple_perceptron}
 		\subcaption{Simple perceptron}
 		\label{fig:perceptron}
 	\end{minipage}
@@ -61,7 +55,7 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/LeNet}
+	\includegraphics[width=0.7\linewidth]{fig/Review/LeNet}
 	\caption{Architecture of convolutional neural network\cite{LeNet}}
 	\label{fig:LeNet}
 \end{figure}
@@ -80,27 +74,27 @@
 	\centering
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/conv_ex1}
+		\includegraphics[width=\linewidth]{fig/Review/conv_ex1}
 		\subcaption{}
 		\label{fig:conv_ex1}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/conv_ex2}
+		\includegraphics[width=\linewidth]{fig/Review/conv_ex2}
 		\subcaption{}
 		\label{fig:conv_ex2}
 	\end{minipage}
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/conv_ex3}
+		\includegraphics[width=\linewidth]{fig/Review/conv_ex3}
 		\subcaption{}
 		\label{fig:conv_ex3}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/conv_ex4}
+		\includegraphics[width=\linewidth]{fig/Review/conv_ex4}
 		\subcaption{}
 		\label{fig:conv_ex4}
 	\end{minipage}
@@ -117,27 +111,27 @@
 	\centering
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/pooling_ex1}
+		\includegraphics[width=\linewidth]{fig/Review/pooling_ex1}
 		\subcaption{}
 		\label{fig:pooling_ex1}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/pooling_ex2}
+		\includegraphics[width=\linewidth]{fig/Review/pooling_ex2}
 		\subcaption{}
 		\label{fig:pooling_ex2}
 	\end{minipage}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/pooling_ex3}
+		\includegraphics[width=\linewidth]{fig/Review/pooling_ex3}
 		\subcaption{}
 		\label{fig:pooling_ex3}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/pooling_ex4}
+		\includegraphics[width=\linewidth]{fig/Review/pooling_ex4}
 		\subcaption{}
 		\label{fig:pooling_ex4}
 	\end{minipage}
@@ -148,67 +142,6 @@
 プーリング層では画像のサイズを小さくして(コンピュータの)計算コストを減らし，微小な変化に対してロバストになる．
 
 この畳み込みとプーリングを繰り返して，入力からフィルターの数だけ特徴を抽出し，この抽出した特徴マップをFC層へ繋げて識別を行う手法がCNNである．
-
-
-\subsection{再帰的ニューラルネットワーク}
-再帰的ニューラルネットワーク(Recurrent Neural Network: RNN)は時系列解析や自然言語処理に利用されるニューラルネットワークである．\fig {simpleRNN}に示すように，内部にループを持つことで過去の情報を保持しておくことができる．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/simpleRNN}
-	\caption{Architecture of RNN\cite{simpleRNN}}
-	\label{fig:simpleRNN}
-\end{figure}
-
-
-時系列の入力$\bm{x} = (x_1, \cdots , x_T)$があった時に，出力$\bm{y} = (y_1, \cdots , y_T)$と隠れ層のベクトル$\bm{h} = (h1, \cdots ,h_T)$をそれぞれ以下の式で計算する．
-
-\begin{align}\label{eq:RNN}
-	h_t & = H(W_{ih} x_t + W_{hh} h_{t-1} + b_h) \\ 
-	y_t & = W_{ho} h_t + b_o
-\end{align}
-
-ここで，$\bm{W}$は重み行列($W_{ih}$は入力と隠れ層間の重み行列)であり，$\bm{b}$はバイアス項，$H$は活性化関数である．
-
-
-\subsection*{LSTM}
-RNNは，過去の情報をどこまで遡って関連性を見つけるか判断することができない．そのため，時系列データが長くなるほどその長期の依存性を学習するには人が慎重にパラメータを設計する必要があり，長期的なデータは学習が難しい問題があった．この問題を解決するためにLong-short term memory(LSTM)が提案された．\fig {LSTM}に示すように，LSTMもRNNの一種であるため繰り返し構造を持ち，3つのゲートを持つ層からなっている．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/lstm.png}
-	\caption{Architecture of LSTM}
-	\label{fig:LSTM}
-\end{figure}
-
-\begin{align}\label{eq:LSTM}
-	f_t & = \sigma(W_{xf} x_t + W_{hf} h_{t-1} + W_{cf} c_{t-1} + b_f ) \\
-	i_t & = \sigma(W_{xi} x_t + W_{hi} h_{t-1} + W_{ci} c_{t-1} + b_i) \\
-	c_t & = f_t c_{t-1} + i_t \tanh(W_{xc} x_t + W_{hc} h_{t-1} + b_c) \\
-	o_t & = \sigma(W_{xo} x_t + W_{ho} h_{t-1} + W_{co} c_t + b_o) \\
-	h_t & = o_t \tanh(c_t) 
-\end{align}
-
-ここで，活性化関数にはシグモイド関数および$\tanh$を用いる．シグモイド関数は次の式で定義される．
-\begin{equation}\label{eq:sigmoid}
-	\sigma (x) = \dfrac{1}{1 + e^{-x}}
-\end{equation}
-
-$f_t$で示される層は忘却ゲート層と呼ばれ，過去の情報で捨てるべき情報を判断する．これはシグモイド層によって行われ，0と1の間の値を出力し，0は完全に忘れる．1は完全に維持するという意味である．
-$i_t$や$c_t$で示される層は，入力ゲート層と呼ばれ，$i_t$で新たに入力された情報から，どの情報を更新するかを判断し，$c_t$で古い情報を落とし新しい情報を加え値を更新する．
-最後が$o_t$や$h_t$で示される層で，出力ゲート層と呼ばれる．まず何を出力するべきかを$o_t$のゲートで判断して，$c_t$に$\tanh$を適用して掛けることで出力が計算される．
-
-\subsection*{GRU}
-GRUはLSTMと似た構造をもつニューラルネットワークであるが，より単純であるため計算量を少なくすることができる,\cite{cho2014learning}．
-\fig{gru}における$z$と$r$がゲートの役割でゲート$z$で新しく値を更新するかどうかを決定し，$r$で前の情報を無視するか利用するかを判断する．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter2/gru}
-	\caption{GRU structure}
-	\label{fig:gru}
-\end{figure}
-
 
 
 \section{推論と学習}
@@ -280,14 +213,65 @@ Batch Normalizationを用いると，学習を速く進行させることがで�
 Data Augumentation(データ拡張)は，訓練データを人工的に水増しする手法である．例えば，入力画像に対して回転や縦横の移動，上下反転，鏡面反転などの操作をして訓練データを擬似的に増やす．これは，ニューラルネットは大きな位置ずれや対象物が回転した状態にあると別のものとして認識してしまうことを逆手にとった手法である．訓練データが少ないときに大きな効果を発揮する．
 
 
-\section{画像認識におけるディープラーニング}
-%教師あり学習であることもここで触れておきたい
+\section{機械学習の評価指数}
+機械学習の評価のために，混同行列(Confusion Matrix)を用いる．\fig{confusionmatrix}で真のクラスと予測クラスに分かれて，PositiveとNegativeは今回のような病理診断の場合は，正常と腫瘍に対応する．したがって，True PositiveとTrue Negativeは，正常の画像を正常と正しく判定し，腫瘍の画像を腫瘍と正しく判定したという意味である．そしてFalse Positiveは，本当は正常の画像を，腫瘍であると間違って判定することである．最後にFalse Negativeは，本当は腫瘍の画像であるものを正常と間違って判定すること，つまり腫瘍を見落としたということになる．見落としを防止するためにはFalse Negativeがゼロになるような診断アルゴリズムを開発することが重要になる．
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{fig/Review/confusion_matrix}
+    \caption{Confusion matrix}
+    \label{fig:confusionmatrix}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.7\columnwidth}
+        \centering
+        \includegraphics[clip, width=0.7\linewidth]{fig/Review/confusion_examples}
+        \subcaption{Example of Confusion matrix table}
+        \label{fig:confusion_table}
+    \end{minipage}
+    \begin{minipage}{0.9\columnwidth}
+        \centering
+        \includegraphics[clip, width=0.7\linewidth]{fig/Review/confusion_math}
+        \subcaption{Accuracy and Sensitivity and Specificity}
+        \label{fig:confusion_math}
+    \end{minipage}
+    \caption{Example of Confusion matrix}
+    \label{fig:confusion_ex}
+\end{figure}
+
+機械学習による病理診断アルゴリズムを評価するために，3つの指標がある．AccuracyとSpecificty(特異度)とSensitivity(感度)である．なぜ，Accuracyだけではなく，SensitivityとSpecificityが必要かを説明する図が\fig{confusion_ex}である．この場合だとAccuracyが8割弱で良いと判断することもできるが，Sensitivityに注目すると1割しかないので，この機械学習のモデルでは，腫瘍の画像を腫瘍であると認識することができていないことが分かる．見落とし防止を目標にする場合は，Sensitivityが重要な指標になる．
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.8\columnwidth}
+        \centering
+        \includegraphics[clip, width=0.7\linewidth]{fig/Review/why_roc}
+        \subcaption{How to get ROC curve}
+        \label{fig:why_roc}
+    \end{minipage}
+    \begin{minipage}{0.6\columnwidth}
+        \centering
+        \includegraphics[clip, width=0.7\linewidth]{fig/Review/roc_curve}
+        \subcaption{ROC Curve}
+        \label{fig:roc_curve}
+    \end{minipage}
+    \caption{ROC Curve and AUC}
+    \label{fig:roc}
+\end{figure}
+
+機械学習を使って推論を行うとき，正常と腫瘍の確率が出る．これを50\%を閾値にして，判定するのではなく，例えば目的に応じて40\%の確率で腫瘍と認識される場合も腫瘍と判定するというように閾値を変更することで，判定結果をSensitivityが高くなるように，またはSpecificityが高くなるように変動させることができる．(\fig{why_roc})
+このように閾値を変化させるときに，変化するSensitivityとSpecificityをプロットしていくと\fig{roc}の点線のような値をとる．これをReceiver Operating Characteristic(ROC)曲線と呼び，機械学習の性能評価で用いられる．また，点線の内側の面積をArea Under Curve(AUC)と呼び，この値を評価指数として利用する．
+
+
+\section{画像認識と深層学習}
 Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Deep"とは，ニューラルネットワークの層が深いことに由来している．
 
 \fig {ImageNet}に画像認識タスクの精度の近年の推移を示す．これはImageNet Large Scale Visual Recognition Challenge (ILSVRC)と呼ばれる世界的な画像認識のコンペティションである(2010年から始まった)．カテゴリ数は1000クラスで，画像枚数は120万枚の訓練データと15万枚のテストデータが用意されている．
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/ILSVRC}
+	\includegraphics[width=0.7\linewidth]{fig/Review/ILSVRC}
 	\caption{Transition of accuracy of image recognition on ILSVRC}
 	\label{fig:ImageNet}
 \end{figure}
@@ -305,7 +289,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/yolo_ssd.png}
+	\includegraphics[width=0.7\linewidth]{fig/Review/yolo_ssd.png}
 	\caption{Network Architecture of SSD and YOLO\cite{SSD}}
 	\label{fig:SSD}
 \end{figure}
@@ -315,174 +299,12 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/unet.png}
+	\includegraphics[width=0.7\linewidth]{fig/Review/unet.png}
 	\caption{Artchitecture of Unet\cite{Unet}}
 	\label{fig:Unet}
 \end{figure}
 
 
-\section{深層学習による3次元画像解析}\label{sec:3Danalysis}
-3次元画像には，動画またはボリューム画像があるが，2次元画像とその深さ方向(動画であれば，時間方向)には異方性があることから，機械学習の方法に工夫が必要になる．今まで考案されている手法として，2DCNNを3次元に拡張した3DCNN，また時系列解析でよく用いられるLSTMとCNNを組み合わせた手法と，LSTM内部にCNNを組み込んだ手法が研究されている．
+\section{強化学習}
 
 
-\subsection{3DCNN}
-2次元画像が深さ方向に連続している3次元画像の特徴を抽出するために，2次元のCNNを拡張して，3次元のカーネルを使って畳み込みを行う，3DCNN\cite{Hosseini-AslGE16, BroschTYLTT16, ji20133d}を利用した手法がある．3DCNNによって，空間的な次元と時間方向の次元を同時に畳み込み計算で特徴を抽出することができる．
-i番面の層でj番面の特徴マップにおける(x, y, z)の値は，以下の式で与えられる．
-\begin{align}\label{eq:3dcnn}
-v_{ij}^{xyz} = \tanh \left[ b_{ij} + \sum_{m} \sum_{p=0}^{P_i -1} \sum_{q=0}^{Q_i -1} \sum_{r=0}^{R_i -1} \omega_{ijm}^{pqr} v_{(i-1)m}^{(x+p)(y+q)(z+r)}\right]
-\end{align}
-ただし，$R_i$はカーネルの深さ方向の次元であり，$\omega_{ijm}^{pqr}$は前層の$m$番面の特徴マップの$(p, q, r)$におけるカーネルの値である．
-
-3DCNNでは．学習パラメータが大きすぎるため学習を安定させるには，入力画像サイズを小さくするか深さ方向を少量に限定して画像を入力しなくてはいけないという問題点がある．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/3d_cnn.png}
-	\caption{Artchitecture of 3DCNN\cite{Hosseini-AslGE16}}
-	\label{fig:3DCNN}
-\end{figure}
-
-
-\subsection{LSTMと2DCNNの組み合わせ}
-時系列解析に使われるLSTMを用いて3次元の画像を解析することができる．これはよく動画の解析で行われることがある．つまりフレームごとの画像の特徴を2次元のCNNで計算してから時系列情報をLSTMで解析することで，画像の時系列解析を行うことができる．3DCNNのデメリットであったパラメータの増大を2DCNNとLSTMの組み合わせで解決することができる\cite{Donahue_2015_CVPR}．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter2/cnn_lstm}
-	\caption{Action recognition with CNN-LSTM\cite{Donahue_2015_CVPR}}
-	\label{fig:cnnlstm}
-\end{figure}
-
-また，LSTMの研究も盛んに行われているため，その改良モデルが数多く存在する．特に，LSTMの学習効率を上げたGRU(Gated Linear Unit)\cite{cho2014learning}や，順方向だけでなく逆方向の時系列も計算に入れるBiLSTM\cite{wang2016image}が時系列解析の精度向上になっている報告がある．
-
-
-\section{教師なし学習}
-機械学習の手法には，\ref{sec:NeuralNetwork}〜\ref{sec:3Danalysis}節で説明したように，ラベルの貼られているデータセットを用いて学習する教師あり学習と，その反対に，データセットはあっても，そのデータセットの特性を示したラベルが与えられていない場合のデータセットを用いて学習する教師なし学習がある．\cite{RadfordMC15}本節では教師なし学習について述べる．
-
-
-\subsection{AutoEncoder}
-教師なし学習で画像の特徴を抽出する方法としてオートエンコーダ(AutoEncoder)がある\cite{hinton2006reducing}．画像の場合におけるオートエンコーダの手法とは，ある画像から情報を圧縮する「エンコーダ(encoder)」と言われる部分と，その圧縮した情報から画像を復元する「デコーダ(decoder)」の2つからなる．入力とデコーダから復元された画像が同じ画像になるようにニューラルネットワークで学習させる．この学習の結果，潜在変数は似てる画像どうしで近い値になるように変化し，この分布を見れば教師ラベルがなくても画像の分類を行うことができる．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\linewidth]{fig/chapter2/auto_encoder}
-	\caption{AutoEncoder Network\cite{hinton2006reducing}}
-	\label{fig:autoencoder}
-\end{figure}
-
-
-\subsection{Variational AutoEncoder}
-Variational AutoEncoder(VAE)はオートエンコーダの派生である\cite{kingma2013auto}．VAEは，オートエンコーダの「エンコーダ」と「デコーダ」は同じネットワーク構造であるが，\eq{vae}のようにデータセットの潜在変数の分布が正規分布になるような制約を加えて学習を行う点でオートエンコーダと異なる．ここで，$N$は正規分布，$\mu$は平均，$\sigma$は分散を示す．
-
-\begin{align}\label{eq:vae}
-p_\theta (z) & = N (z; 0, 1)  \\
-p_\theta (x|z) & = N (x; \mu(z), \sigma(z)) \\
-q_\phi (z|x) & = N (x; \mu(x), \sigma(x))
-\end{align}
-
-オートエンコーダの潜在変数では分布の距離に意味ないが，VAEでは正規分布に埋め込まれるため，画像の類似度の分布が表現することができるところが特徴である\cite{abbasnejad2017infinite}．
-
-\subsection{敵対的生成ネットワーク}
-敵対的生成ネットワーク(Generative Advarsarial Network: GAN)は2014年に提案された手法である\cite{GAN}．\fig {GAN}のようにGANではGeneratorとDiscriminatorの2つのネットワークが存在する．Generatorは訓練データと同じような画像を生成するネットワークで，Discriminatorは入力されたデータが訓練データから来たものかGeneratorで生成されたものかを識別するように学習する．
-
-VAEよりもGANの方が細部まで鮮明に画像を生成することができる．しかし，GANは計算時間がかかるという問題や，DiscriminatorかGeneratorのどちらかか強くなってしまい学習が安定しない問題があるため，これらについての多くの研究報告がされている．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/generative_adversarial_nets.png}
-	\caption{Diagram of GAN}
-	\label{fig:GAN}
-\end{figure}
-
-\section{半教師あり学習}
-弱教師あり学習とも呼ばれる．これは，教師あり学習と教師なし学習を組み合わせて学習する方法である．これによりデータに教師ラベルをつけているものが少数であっても，データの特徴を学習しながら少量のラベルで識別境界を決めることができる．
-
-M2モデルと呼ばれるVAEをベースに半教師あり学習のモデルがある\cite{M2model}．
-半教師あり学習のモデルの最適化は，推論のモデルと生成のモデルに分けて行われる\cite{narayanaswamy2017learning}．
-
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{0.4\columnwidth}
-		\centering
-		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/discriminative_vae}
-		\subcaption{Discriminative Model}
-		\label{fig:m2_discriminative}
-	\end{minipage}
-	\begin{minipage}{0.4\columnwidth}
-		\centering
-		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/generative_vae}
-		\subcaption{Generative Model}
-		\label{fig:m2_generative}
-	\end{minipage}
-	\caption{VAE M2 Model}
-	\label{fig:vae_m2}
-\end{figure}
-
-推論モデルは\fig{m2_discriminative}であり，以下のように定義される．
-\begin{align}\label{eq:m2_discriminative}
-q_\phi (y | x) & = \mathrm{Categorical}(y | \lambda_\phi (x)) \\
-q_\phi (z | x, y) & = N(x | \mu_\phi(x, y), \log(\sigma_\phi^2 (x, y)))
-\end{align}
-
-生成モデルは\fig{m2_generative}であり，以下のように定義される．
-\begin{align}\label{eq:m2_generative}
-p(z) & = N (z| 0, 1)  \\
-p(y) & = \frac{1}{N_c} \\
-p_\theta (x|z, y) & = f(x; z, y, \theta) \\
-p_\theta (x, z, y) & = p_\theta (x|z, y) p(z) p(y)
-\end{align}
-ここで$N_c$はクラス数で，関数$f(x)$は尤度関数で$\theta$はニューラルネットワークのパラメータである．
-
-\section{機械学習の評価指数}
-機械学習の評価のために，混同行列(Confusion Matrix)を用いる．\fig{confusionmatrix}で真のクラスと予測クラスに分かれて，PositiveとNegativeは今回のような病理診断の場合は，正常と腫瘍に対応する．したがって，True PositiveとTrue Negativeは，正常の画像を正常と正しく判定し，腫瘍の画像を腫瘍と正しく判定したという意味である．そしてFalse Positiveは，本当は正常の画像を，腫瘍であると間違って判定することである．最後にFalse Negativeは，本当は腫瘍の画像であるものを正常と間違って判定すること，つまり腫瘍を見落としたということになる．見落としを防止するためにはFalse Negativeがゼロになるような診断アルゴリズムを開発することが重要になる．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{fig/chapter2/confusion_matrix}
-	\caption{Confusion matrix}
-	\label{fig:confusionmatrix}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{0.7\columnwidth}
-		\centering
-		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/confusion_examples}
-		\subcaption{Example of Confusion matrix table}
-		\label{fig:confusion_table}
-	\end{minipage}
-	\begin{minipage}{0.9\columnwidth}
-		\centering
-		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/confusion_math}
-		\subcaption{Accuracy and Sensitivity and Specificity}
-		\label{fig:confusion_math}
-	\end{minipage}
-	\caption{Example of Confusion matrix}
-	\label{fig:confusion_ex}
-\end{figure}
-
-機械学習による病理診断アルゴリズムを評価するために，3つの指標がある．AccuracyとSpecificty(特異度)とSensitivity(感度)である．なぜ，Accuracyだけではなく，SensitivityとSpecificityが必要かを説明する図が\fig{confusion_ex}である．この場合だとAccuracyが8割弱で良いと判断することもできるが，Sensitivityに注目すると1割しかないので，この機械学習のモデルでは，腫瘍の画像を腫瘍であると認識することができていないことが分かる．見落とし防止を目標にする場合は，Sensitivityが重要な指標になる．
-
-\begin{figure}[H]
-	\centering
-	\begin{minipage}{0.8\columnwidth}
-		\centering
-		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/why_roc}
-		\subcaption{How to get ROC curve}
-		\label{fig:why_roc}
-	\end{minipage}
-	\begin{minipage}{0.6\columnwidth}
-		\centering
-		\includegraphics[clip, width=0.7\linewidth]{fig/chapter2/roc_curve}
-		\subcaption{ROC Curve}
-		\label{fig:roc_curve}
-	\end{minipage}
-	\caption{ROC Curve and AUC}
-	\label{fig:roc}
-\end{figure}
-
-機械学習を使って推論を行うとき，正常と腫瘍の確率が出る．これを50\%を閾値にして，判定するのではなく，例えば目的に応じて40\%の確率で腫瘍と認識される場合も腫瘍と判定するというように閾値を変更することで，判定結果をSensitivityが高くなるように，またはSpecificityが高くなるように変動させることができる．(\fig{why_roc})
-このように閾値を変化させるときに，変化するSensitivityとSpecificityをプロットしていくと\fig{roc}の点線のような値をとる．これをReceiver Operating Characteristic(ROC)曲線と呼び，機械学習の性能評価で用いられる．また，点線の内側の面積をArea Under Curve(AUC)と呼び，この値を評価指数として利用する．
-
-\section{CNNの判断の可視化}
-Class Activation Map(CAM)と呼ばれる可視化手法で，入力画像からクラス活性化のヒートマップを生成する．Grad-CAM\cite{grad-cam}では畳み込み層の特徴マップの各チャンネルを重み付けする．重み付けは，そのチャンネルに関するクラスの勾配に基づいて行われる．よって，入力画像によってそのクラスがどれくらい強く活性化されるかを表す空間マップを得る．
