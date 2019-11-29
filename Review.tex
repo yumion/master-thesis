@@ -1,4 +1,4 @@
-\chapter{ロボット制御と深層学習}
+\chapter{深層学習とロボット制御}
 \label{chap_review}
 
 \section{ニューラルネットワーク}\label{sec:NeuralNetwork}
@@ -213,6 +213,7 @@ Batch Normalizationを用いると，学習を速く進行させることがで�
 Data Augumentation(データ拡張)は，訓練データを人工的に水増しする手法である．例えば，入力画像に対して回転や縦横の移動，上下反転，鏡面反転などの操作をして訓練データを擬似的に増やす．これは，ニューラルネットは大きな位置ずれや対象物が回転した状態にあると別のものとして認識してしまうことを逆手にとった手法である．訓練データが少ないときに大きな効果を発揮する．
 
 
+\begin{comment}
 \section{機械学習の評価指数}
 機械学習の評価のために，混同行列(Confusion Matrix)を用いる．\fig{confusionmatrix}で真のクラスと予測クラスに分かれて，PositiveとNegativeは今回のような病理診断の場合は，正常と腫瘍に対応する．したがって，True PositiveとTrue Negativeは，正常の画像を正常と正しく判定し，腫瘍の画像を腫瘍と正しく判定したという意味である．そしてFalse Positiveは，本当は正常の画像を，腫瘍であると間違って判定することである．最後にFalse Negativeは，本当は腫瘍の画像であるものを正常と間違って判定すること，つまり腫瘍を見落としたということになる．見落としを防止するためにはFalse Negativeがゼロになるような診断アルゴリズムを開発することが重要になる．
 
@@ -225,13 +226,13 @@ Data Augumentation(データ拡張)は，訓練データを人工的に水増し
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.7\columnwidth}
+    \begin{minipage}{0.4\columnwidth}
         \centering
         \includegraphics[clip, width=0.7\linewidth]{fig/Review/confusion_examples}
         \subcaption{Example of Confusion matrix table}
         \label{fig:confusion_table}
     \end{minipage}
-    \begin{minipage}{0.9\columnwidth}
+    \begin{minipage}{0.4\columnwidth}
         \centering
         \includegraphics[clip, width=0.7\linewidth]{fig/Review/confusion_math}
         \subcaption{Accuracy and Sensitivity and Specificity}
@@ -263,6 +264,7 @@ Data Augumentation(データ拡張)は，訓練データを人工的に水増し
 
 機械学習を使って推論を行うとき，正常と腫瘍の確率が出る．これを50\%を閾値にして，判定するのではなく，例えば目的に応じて40\%の確率で腫瘍と認識される場合も腫瘍と判定するというように閾値を変更することで，判定結果をSensitivityが高くなるように，またはSpecificityが高くなるように変動させることができる．(\fig{why_roc})
 このように閾値を変化させるときに，変化するSensitivityとSpecificityをプロットしていくと\fig{roc}の点線のような値をとる．これをReceiver Operating Characteristic(ROC)曲線と呼び，機械学習の性能評価で用いられる．また，点線の内側の面積をArea Under Curve(AUC)と呼び，この値を評価指数として利用する．
+\end{comment}
 
 
 \section{画像認識と深層学習}
@@ -285,7 +287,11 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 クラス分類は画像に写っている物体が「dog」「airplane」「bird toy」など事前に定義されたラベルのどれが適切かを識別するタスクである．この識別は，事前に定義されたラベルの特徴べクトルと入力画像の特徴べクトルの距離計算を行い，距離値が小さければ同一，そうでなければ否と判定する．指紋照合，顔照合，人物照合では，本人と他人を判定するタスクとなる．深層学習では，同一人物のペア画像間の距離値が小さく，他人の画像との距離値が大きくなるような損失関数を設計し，ネットワークを構築することで人物照合問題を解いている．
 
 \subsection*{物体検出}
-物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOG\cite{HOG}やSIFT\cite{SIFT}など局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkが主流となり，データのみから抽象的な特徴量を複数得ることができる．\fig {SSD}に物体検出で有名はアルゴリズムであるSSD\cite{SSD}とYOLO\cite{YOLOv3}のアーキテクチャを示す．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
+物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOG\cite{HOG}やSIFT\cite{SIFT}など局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkが主流となり，データのみから抽象的な特徴量を複数得ることができる．
+
+物体検出で主流であるのはFaster R-CNNである\cite{faster_R-CNN}．
+
+Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite{SSD}とYOLO\cite{YOLOv3}である（\fig {SSD}）．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
 
 \begin{figure}[H]
 	\centering
@@ -295,6 +301,8 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \end{figure}
 
 \subsection*{セグメンテーション}
+セグメンテーションにはセマンティックセグメンテーションとインスタンスセグメンテーションの2つがある．
+
 セマンティックセグメンテーションとは，画像を画素レベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．セマンティックセグメンテーションの手法についてディープラーニング以前では，Texton Forests\cite{shotton2008semantic}や，Random Forests\cite{kontschieder2011structured}に基づいた分類を行っていたが，物体検出と同様にCNNが登場してからは，高精度なセグメンテーションが実現するようになった．CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，2つのアーキテクチャーからできている(\fig {Unet})．1つ目がエンコーダーのアーキテクチャーでCNNとプーリングで特徴を抽出しながら次元を削減していき，2つ目のデコーダーのアーキテクチャーで画像をセグメンテーションの結果になるように復元する．ここで問題になることが，プーリングをすることで位置情報を消してしまっているので，この位置情報を利用して画像を復元するためには，エンコーダーとデコーダーで画像サイズが同じところ同士をショートカットで接続することがUnet構造の優れている点である．
 
 \begin{figure}[H]
@@ -304,7 +312,52 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 	\label{fig:Unet}
 \end{figure}
 
+インスタンスセグメンテーションとは，同じクラスの物体も別として認識することである．まず，入力画像に対して物体検出を行い，検出したBounding Box内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{Mask_R-CNN}．
 
-\section{強化学習}
+
+
+
+\section{強化学習}\label{sec:強化学習}
 % 上の話は教師あり学習で，ここからは強化学習という分野である．
+今まで述べてきたことは全て教師あり学習と呼ばれる手法であり，機械学習の1種である．ここからは強化学習という機械学習について述べる．
 
+\subsection{マルコフ決定過程}
+\fig {RLframework}に強化学習の概念図を示す．強化学習は，エージェントと呼ばれるプレーヤーが，与えられた環境と相互作用し，探索と知識の利用を行って目標を達成する方法を求める．強化学習は教師あり学習に似ているが，教師による明確な「答え」は提示されない．代わりに「行動の選択肢」と「報酬」が提示される．ここで，強化学習においての報酬は「各行動」に対してではなく，「連続した行動の結果」に対して与えられる．この報酬を最大化することが強化学習の目的である．
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{fig/Review/RL_framework}
+    \caption{Framework of Reinforcement learning}
+    \label{fig:RLframework}
+\end{figure}
+この\fig {RLframework}を表す数理モデルとして，マルコフ決定過程(Markov Decision Process: MDP)がある．MDPは時刻$t$における状態を$s_t$，行動を$a_t$，報酬を$r_t$，状態$s_t$における行動を返す方策$\pi(a_t|s_t)$，次の状態$s_{t+1}$へ移る状態遷移確率$P(s_{t+1}|s_t, a_t)$によって記述される確率過程である．マルコフというのはマルコフ性という意味で，次の行動$s_{t+1}$には現在の状態$s_t$しか関与しないという性質を表している．1回の報酬を指標にに最適な行動を求めてはすぐに局所解に落ち着いてしまい，後に来る大きな報酬を得ることができないため，よい指標にはならない．そこで，ある期間で得られた累積の報酬(収益)$R_t$を導入する．
+\begin{align}\label{eq:reward}
+    R_t & = \sum _{\tau=0} ^{\infty} \gamma ^\tau r_{t+1+\tau} \\
+        & = r_{t+1} + \gamma r_{t+2} + \gamma ^2 r_{t+3} + \cdots
+\end{align}
+と表され，これを割引報酬和(discounted total reward)と呼ぶ．ここで$\gamma(0<\gamma<1)$は割引率と呼び，未来の報酬をどの程度割り引くかを決めている．概ね1に近い値を用いる．この収益は，機関の中で報酬の和を取るため，ある行動が期間内における報酬の獲得に結び付いていた場合には，それがずっと後のことであっても，指標に反映することができる．
+
+しかし収益は，区間の開始時点での状態に依存して，相互作用の内容が確率的に決定されるため，収益も確率的に変動してしまう．そのため，状態$s$と行動$a$を条件として収益の期待値を取り，これを行動価値(action value)と呼ぶ．行動価値関数$Q(s,a)$は，ある状態から方策$\pi$に従って行動を決定したときに得られる収益の期待値であるから，
+
+\begin{align}\label{eq:Qfunction}
+  Q^{\pi}(s_t, a_t) & = \mathbb{E}\bigl[ \bigl. R_{t+1} \bigr| s_t, a_t\bigr] \\
+    & = \underset{s_{t+1}, a_{t+1} }{\mathbb{E}}\bigl[ \bigl. r_t + \gamma Q^{\pi}(s_{t+1}, a_{t+1}) \bigr| s_t, a_t \bigr]
+\end{align}
+で表される．これを指標として，最適な方策$\pi ^*$に基づく最適行動価値関数$Q^*$を求める．
+
+\subsection{Temporal-Difference Learning}
+最適価値関数を求める方法として，Temporal-Difference Learning(TD学習)が用いられる．TD学習は，環境のモデルを使わず経験的に学習を行い，最終結果を待たずに評価を途中で更新する．TD学習は次のステップを待ち価値関数を更新する．
+\begin{align}\label{eq:TD}
+Q(s_t, a_t) \leftarrow & Q(s_t, a_t) + \alpha (r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t) )
+\end{align}
+$\alpha(0<\alpha<1)$は学習率である．ここで，$r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)$をTD誤差と呼び，収束からの離れ具合を示す．学習が収束したとすればTD誤差が0になり，その収束値が最適価値関数となる．
+
+\subsection{Q-Learning\cite{QLearning}}
+Q学習では，TD誤差に基づいて次のように価値関数$Q$を更新する．
+\begin{align}\label{eq:Qupdate}
+    Q(s,a) \leftarrow & Q(s,a) + \alpha (r + \gamma\underset{a'}{\max}{Q(s',a')} - Q(s,a))
+\end{align}
+更新式で実際に採用した行動$a'$を使っていない(方策に関わらず価値関数の最大値を与える行動を使っている)ことが特徴である．ここで，方策$\pi$としては，まずはランダムに行動することで状態と行動のセット$(s,a)$を蓄積していき，その中で行動価値関数が最大となるような行動を取る．これを$\epsilon$-greedy方策と呼ぶ．確率$\epsilon$でランダムに行動することで，局所解に陥らずに最大値へ収束することができる．
+
+端的に言えば，「どの状態で、どう行動したら、どういう報酬が得られるのか」を明らかすることがQ-Learningである．実際はこの報酬の見込みの表形式で表し，これをQ-Tableと呼ぶ．
+
+Q-LearningはQ-Tableが求まれば良いが，環境から得られる状態の次元や行動の次元が大きいと求められない場合がある．そのため，Q-Learningを設計する場合は，環境から特徴を取り出し低次元にする必要がある．また，行動も連続的な行動ではなく，離散的な行動選択に絞る必要がある．
