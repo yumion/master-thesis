@@ -11,13 +11,13 @@
 	\centering
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=1.2\linewidth]{fig/Review/MLP}
+		\includegraphics[width=1.2\linewidth]{figure/Review/MLP}
 		\subcaption{Muti-layer perceptron}
 		\label{fig:mlp}
 	\end{minipage}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=0.7\linewidth]{fig/Review/simple_perceptron}
+		\includegraphics[width=0.7\linewidth]{figure/Review/simple_perceptron}
 		\subcaption{Simple perceptron}
 		\label{fig:perceptron}
 	\end{minipage}
@@ -55,7 +55,7 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/Review/LeNet}
+	\includegraphics[width=0.7\linewidth]{figure/Review/LeNet}
 	\caption{Architecture of convolutional neural network\cite{LeNet}}
 	\label{fig:LeNet}
 \end{figure}
@@ -74,27 +74,27 @@
 	\centering
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/conv_ex1}
+		\includegraphics[width=\linewidth]{figure/Review/conv_ex1}
 		\subcaption{}
 		\label{fig:conv_ex1}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/conv_ex2}
+		\includegraphics[width=\linewidth]{figure/Review/conv_ex2}
 		\subcaption{}
 		\label{fig:conv_ex2}
 	\end{minipage}
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/conv_ex3}
+		\includegraphics[width=\linewidth]{figure/Review/conv_ex3}
 		\subcaption{}
 		\label{fig:conv_ex3}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}{0.45\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/conv_ex4}
+		\includegraphics[width=\linewidth]{figure/Review/conv_ex4}
 		\subcaption{}
 		\label{fig:conv_ex4}
 	\end{minipage}
@@ -111,27 +111,27 @@
 	\centering
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/pooling_ex1}
+		\includegraphics[width=\linewidth]{figure/Review/pooling_ex1}
 		\subcaption{}
 		\label{fig:pooling_ex1}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/pooling_ex2}
+		\includegraphics[width=\linewidth]{figure/Review/pooling_ex2}
 		\subcaption{}
 		\label{fig:pooling_ex2}
 	\end{minipage}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/pooling_ex3}
+		\includegraphics[width=\linewidth]{figure/Review/pooling_ex3}
 		\subcaption{}
 		\label{fig:pooling_ex3}
 	\end{minipage}
 	\hspace{10truemm}
 	\begin{minipage}[b]{0.4\columnwidth}
 		\centering
-		\includegraphics[width=\linewidth]{fig/Review/pooling_ex4}
+		\includegraphics[width=\linewidth]{figure/Review/pooling_ex4}
 		\subcaption{}
 		\label{fig:pooling_ex4}
 	\end{minipage}
@@ -209,63 +209,6 @@ Batch Normalization\cite{BatchNorm}は，ネットワークにおける各層で
 
 Batch Normalizationを用いると，学習を速く進行させることができる，初期値にそれほど依存しない，過学習を抑制できるといった効果が期待できる．
 
-\subsection*{Data Augumentation}
-Data Augumentation(データ拡張)は，訓練データを人工的に水増しする手法である．例えば，入力画像に対して回転や縦横の移動，上下反転，鏡面反転などの操作をして訓練データを擬似的に増やす．これは，ニューラルネットは大きな位置ずれや対象物が回転した状態にあると別のものとして認識してしまうことを逆手にとった手法である．訓練データが少ないときに大きな効果を発揮する．
-
-
-\begin{comment}
-\section{機械学習の評価指数}
-機械学習の評価のために，混同行列(Confusion Matrix)を用いる．\fig{confusionmatrix}で真のクラスと予測クラスに分かれて，PositiveとNegativeは今回のような病理診断の場合は，正常と腫瘍に対応する．したがって，True PositiveとTrue Negativeは，正常の画像を正常と正しく判定し，腫瘍の画像を腫瘍と正しく判定したという意味である．そしてFalse Positiveは，本当は正常の画像を，腫瘍であると間違って判定することである．最後にFalse Negativeは，本当は腫瘍の画像であるものを正常と間違って判定すること，つまり腫瘍を見落としたということになる．見落としを防止するためにはFalse Negativeがゼロになるような診断アルゴリズムを開発することが重要になる．
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\linewidth]{fig/Review/confusion_matrix}
-    \caption{Confusion matrix}
-    \label{fig:confusionmatrix}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.4\columnwidth}
-        \centering
-        \includegraphics[clip, width=0.7\linewidth]{fig/Review/confusion_examples}
-        \subcaption{Example of Confusion matrix table}
-        \label{fig:confusion_table}
-    \end{minipage}
-    \begin{minipage}{0.4\columnwidth}
-        \centering
-        \includegraphics[clip, width=0.7\linewidth]{fig/Review/confusion_math}
-        \subcaption{Accuracy and Sensitivity and Specificity}
-        \label{fig:confusion_math}
-    \end{minipage}
-    \caption{Example of Confusion matrix}
-    \label{fig:confusion_ex}
-\end{figure}
-
-機械学習による病理診断アルゴリズムを評価するために，3つの指標がある．AccuracyとSpecificty(特異度)とSensitivity(感度)である．なぜ，Accuracyだけではなく，SensitivityとSpecificityが必要かを説明する図が\fig{confusion_ex}である．この場合だとAccuracyが8割弱で良いと判断することもできるが，Sensitivityに注目すると1割しかないので，この機械学習のモデルでは，腫瘍の画像を腫瘍であると認識することができていないことが分かる．見落とし防止を目標にする場合は，Sensitivityが重要な指標になる．
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.8\columnwidth}
-        \centering
-        \includegraphics[clip, width=0.7\linewidth]{fig/Review/why_roc}
-        \subcaption{How to get ROC curve}
-        \label{fig:why_roc}
-    \end{minipage}
-    \begin{minipage}{0.6\columnwidth}
-        \centering
-        \includegraphics[clip, width=0.7\linewidth]{fig/Review/roc_curve}
-        \subcaption{ROC Curve}
-        \label{fig:roc_curve}
-    \end{minipage}
-    \caption{ROC Curve and AUC}
-    \label{fig:roc}
-\end{figure}
-
-機械学習を使って推論を行うとき，正常と腫瘍の確率が出る．これを50\%を閾値にして，判定するのではなく，例えば目的に応じて40\%の確率で腫瘍と認識される場合も腫瘍と判定するというように閾値を変更することで，判定結果をSensitivityが高くなるように，またはSpecificityが高くなるように変動させることができる．(\fig{why_roc})
-このように閾値を変化させるときに，変化するSensitivityとSpecificityをプロットしていくと\fig{roc}の点線のような値をとる．これをReceiver Operating Characteristic(ROC)曲線と呼び，機械学習の性能評価で用いられる．また，点線の内側の面積をArea Under Curve(AUC)と呼び，この値を評価指数として利用する．
-\end{comment}
-
 
 \section{画像認識と深層学習}
 Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Deep"とは，ニューラルネットワークの層が深いことに由来している．
@@ -273,7 +216,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \fig {ImageNet}に画像認識タスクの精度の近年の推移を示す．これはImageNet Large Scale Visual Recognition Challenge (ILSVRC)と呼ばれる世界的な画像認識のコンペティションである(2010年から始まった)．カテゴリ数は1000クラスで，画像枚数は120万枚の訓練データと15万枚のテストデータが用意されている．
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/Review/ILSVRC}
+	\includegraphics[width=0.7\linewidth]{figure/Review/ILSVRC}
 	\caption{Transition of accuracy of image recognition on ILSVRC}
 	\label{fig:ImageNet}
 \end{figure}
@@ -295,7 +238,7 @@ Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/Review/yolo_ssd.png}
+	\includegraphics[width=0.7\linewidth]{figure/Review/yolo_ssd.png}
 	\caption{Network Architecture of SSD and YOLO\cite{SSD}}
 	\label{fig:SSD}
 \end{figure}
@@ -307,7 +250,7 @@ Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig/Review/unet.png}
+	\includegraphics[width=0.7\linewidth]{figure/Review/unet.png}
 	\caption{Artchitecture of Unet\cite{Unet}}
 	\label{fig:Unet}
 \end{figure}
@@ -325,7 +268,7 @@ Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite
 \fig {RLframework}に強化学習の概念図を示す．強化学習は，エージェントと呼ばれるプレーヤーが，与えられた環境と相互作用し，探索と知識の利用を行って目標を達成する方法を求める．強化学習は教師あり学習に似ているが，教師による明確な「答え」は提示されない．代わりに「行動の選択肢」と「報酬」が提示される．ここで，強化学習においての報酬は「各行動」に対してではなく，「連続した行動の結果」に対して与えられる．この報酬を最大化することが強化学習の目的である．
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{fig/Review/RL_framework}
+    \includegraphics[width=0.7\linewidth]{figure/Review/RL_framework}
     \caption{Framework of Reinforcement learning}
     \label{fig:RLframework}
 \end{figure}
@@ -344,7 +287,6 @@ Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite
 \end{align}
 で表される．これを指標として，最適な方策$\pi ^*$に基づく最適行動価値関数$Q^*$を求める．
 
-\subsection{Temporal-Difference Learning}
 最適価値関数を求める方法として，Temporal-Difference Learning(TD学習)が用いられる．TD学習は，環境のモデルを使わず経験的に学習を行い，最終結果を待たずに評価を途中で更新する．TD学習は次のステップを待ち価値関数を更新する．
 \begin{align}\label{eq:TD}
 Q(s_t, a_t) \leftarrow & Q(s_t, a_t) + \alpha (r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t) )
@@ -361,3 +303,39 @@ Q学習では，TD誤差に基づいて次のように価値関数$Q$を更新�
 端的に言えば，「どの状態で、どう行動したら、どういう報酬が得られるのか」を明らかすることがQ-Learningである．実際はこの報酬の見込みの表形式で表し，これをQ-Tableと呼ぶ．
 
 Q-LearningはQ-Tableが求まれば良いが，環境から得られる状態の次元や行動の次元が大きいと求められない場合がある．そのため，Q-Learningを設計する場合は，環境から特徴を取り出し低次元にする必要がある．また，行動も連続的な行動ではなく，離散的な行動選択に絞る必要がある．
+
+
+\subsection{強化学習のロボット制御への応用}
+Guらは人間の手を介さずドアを開ける動作を初めて成功させた\cite{Gu2017}(\fig {Gu})．ここでは，Q-LearningをベースとしたNormalized Advantage Function(NAF)という手法を用いている．観測する状態として，7つの間接角度とその時間微分，ハンドエフェクタ・手・ドアのそれぞれの位置，手・ドアのそれぞれの角度の計25次元を入力し，Actionは連続値で出力する．シミュレーション上で4機で非同期分散学習させた後，実世界では最大2機で非同期分散学習を行った．実世界では成功率100\%になるまでに1機では4時間，2機では2.5時間という短い時間で達成した．シミュレーションから実世界への転移は難しいことが多く，Guらは成功判定を緩めることで解決した．
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure/Introduction/Gu}
+    \caption{Two robots learning to open doors using asynchronous NAF. The final policy learned with two workers could achieve a 100\% success rate on the task across 20 consecutive trials\cite{Gu2017}.}
+    \label{fig:Gu}
+\end{figure}
+
+Levineらは初めてvisionベースでグラスピングタスクを成功させた\cite{Levine2017}(\fig {Levine})．この手法は厳密にはQ-Learningではないが，Q-Learningとも解釈できると言っている．入力としてRGBの画像とモーターのコマンドを入れ，出力として把持可能性を確率で返す．最大14台のロボットで非同期分散学習を行い，800,000回以上の試行を行った．
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure/Introduction/Levine_grasp}
+    \caption{Col- ors indicate their probabilities of success: green is 1.0 and red is 0.0\cite{Levine2017}.}
+    \label{fig:Levine}
+\end{figure}
+
+またDmitryらは，Q-Learningを改良したQT-optという手法を提案した\cite{Dmitry2018}(\fig {Dmitry})．これはより汎用性の高いタスクをロボットに学習させることを目的として，1000種類以上の物体を把持できるような学習を行った．QT-Optを実行すると、より多くのオフラインデータが蓄積され，より良いデータを収集できるように，より良いモデルを訓練できるようになる．このアプローチを使い，ロボットで物を掴む事を学習させるために7つの実世界のロボットを使用し，4ヶ月間にわたって合計800時間学習させた．学習を早めるために，最初は人間が手動で設計した15～30\%程度の成功率のポリシーを使用して開始した．状態としてRGBのカメラ画像を取得し，行動として腕とグリッパの移動方法を返す．報酬は成功したら+1，失敗したら0としている．また，失敗した時の報酬を-0.05とすると学習を早めることができる．シンプルな仮定ではあるが，QT-optは目標物体を掴むために周りの邪魔な物体を弾いたり，掴みやすいように物体を倒したりすることを学習した．また，従来の手法より少ない学習データで高い成功率を達成した．
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure/Introduction/Dmitry}
+    \caption{Pregrasp manipulation (a, b), grasp readjustment (c, d), grasping dynamic objects and recovery from perturba- tions (e, f), and grasping in clutter (g, h)\cite{Dmitry2018}.Video: \url{https://sites.google.com/view/qtopt}}
+    \label{fig:Dmitry}
+\end{figure}
+
+
+OpenAIチームはvisionベースで自由度が26もある手を模したロボットでサイコロを任意の向きに変える複雑な動作を達成した\cite{OpenAI2018}(\fig {OpenAI})．今回は方策を直接学習するProximal Policy Optimiztion(PPO)と呼ばれる手法を用いている．状態として3つのカメラからのRGB画像を与え，行動として接続部の角度を返す．報酬として成功したら+5，失敗したら-20，途中の報酬は現在とゴールの回転角度の差分を与えた．シミュレーション上で環境にノイズを加えて学習することで，実世界においても性能を発揮できるような学習を行ったことがポイントである．
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure/Introduction/openAI_cube}
+    \caption{A five-fingered humanoid hand trained with reinforcement learning manipulating a block from an initial configuration to a goal configuration using vision for sensing\cite{OpenAI2018}.Video:\url{https://blog.openai.com/learning-dexterity/}}
+    \label{fig:OpenAI}
+\end{figure}

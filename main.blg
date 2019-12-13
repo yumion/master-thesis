@@ -19,6 +19,13 @@ I was expecting a `,' or a `}'---line 1159 of file thesis.bib
  : >>>>>>> ca217455f0ac3110450cb311005901c99048c7b9
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "お片づけロボット"
+Warning--I didn't find a database entry for "リハビリテーション"
+Warning--I didn't find a database entry for "HSR"
+Warning--I didn't find a database entry for "faster_R-CNN"
+Warning--I didn't find a database entry for "Mask_R-CNN"
+You can't pop an empty literal stack for entry Gu2017
+while executing---line 1234 of file bibliography_thesis.bst
 You can't pop an empty literal stack for entry BatchNorm
 while executing---line 1234 of file bibliography_thesis.bst
 You can't pop an empty literal stack for entry AlexNet
@@ -31,46 +38,46 @@ You can't pop an empty literal stack for entry shotton2008semantic
 while executing---line 1234 of file bibliography_thesis.bst
 You can't pop an empty literal stack for entry kontschieder2011structured
 while executing---line 1234 of file bibliography_thesis.bst
-You've used 19 entries,
+You've used 23 entries,
             2353 wiz_defined-function locations,
-            653 strings with 6828 characters,
-and the built_in function-call counts, 6094 in all, are:
-= -- 475
-> -- 211
-< -- 11
-+ -- 83
-- -- 64
-* -- 373
-:= -- 740
-add.period$ -- 44
-call.type$ -- 19
+            686 strings with 7857 characters,
+and the built_in function-call counts, 7264 in all, are:
+= -- 545
+> -- 278
+< -- 12
++ -- 108
+- -- 85
+* -- 455
+:= -- 897
+add.period$ -- 53
+call.type$ -- 23
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 392
-empty$ -- 534
-format.name$ -- 128
-if$ -- 1481
+cite$ -- 23
+duplicate$ -- 462
+empty$ -- 629
+format.name$ -- 170
+if$ -- 1751
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 19
-newline$ -- 80
-num.names$ -- 19
-pop$ -- 104
+int.to.str$ -- 23
+missing$ -- 23
+newline$ -- 96
+num.names$ -- 23
+pop$ -- 126
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 321
+skip$ -- 371
 stack$ -- 0
-substring$ -- 318
-swap$ -- 154
-text.length$ -- 11
+substring$ -- 350
+swap$ -- 173
+text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 47
-width$ -- 21
-write$ -- 185
-is.kanji.str$ -- 221
-(There were 8 error messages)
+while$ -- 54
+width$ -- 25
+write$ -- 222
+is.kanji.str$ -- 274
+(There were 9 error messages)

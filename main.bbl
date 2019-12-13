@@ -17,6 +17,24 @@ W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~E. Reed, C.-Y. Fu, and A.~C.
 O.~Ronneberger, P.~Fischer, and T.~Brox.
 \newblock {\em CoRR} {\bfseries abs/1505.04597}, (2015).
 
+\bibitem{Gu2017}
+S.~Gu, E.~Holly, T.~Lillicrap, and S.~Levine.
+\newblock  {IEEE} may 2017.
+
+\bibitem{Levine2017}
+S.~Levine, P.~Pastor, A.~Krizhevsky, J.~Ibarz, and D.~Quillen.
+\newblock {\em The International Journal of Robotics Research} {\bfseries 37},
+  421--436 jun 2017.
+
+\bibitem{Dmitry2018}
+D.~Kalashnikov, A.~Irpan, P.~Pastor, J.~Ibarz, A.~Herzog, E.~Jang, D.~Quillen,
+  E.~Holly, M.~Kalakrishnan, V.~Vanhoucke, and S.~Levine.
+\newblock {\em CoRR} {\bfseries abs/1806.10293}, (2018).
+
+\bibitem{OpenAI2018}
+OpenAI.
+\newblock {\em CoRR} {\bfseries abs/1808.00177}, (2018).
+
 \bibitem{HOG}
 N.~Dalal and B.~Triggs.
 \newblock {\em Computer Vision and Pattern Recognition, 2005. CVPR 2005. IEEE
