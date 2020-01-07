@@ -1,39 +1,22 @@
 \begin{thebibliography}{10}
 
-\bibitem{QLearning}
-C.~J. C.~H. Watkins and P.~Dayan.
-\newblock {\em Machine Learning} {\bfseries 8}, (1992).
-
 \bibitem{LeNet}
 Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
 \newblock {\em Proceedings of the {IEEE}} {\bfseries 86},  2278--2324 (1998).
 
-\bibitem{SSD}
-W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, S.~E. Reed, C.-Y. Fu, and A.~C.
-  Berg.
-\newblock {\em CoRR} {\bfseries abs/1512.02325}, (2015).
-
-\bibitem{Unet}
-O.~Ronneberger, P.~Fischer, and T.~Brox.
-\newblock {\em CoRR} {\bfseries abs/1505.04597}, (2015).
-
 \bibitem{Gu2017}
 S.~Gu, E.~Holly, T.~Lillicrap, and S.~Levine.
 \newblock  {IEEE} may 2017.
-
-\bibitem{Levine2017}
-S.~Levine, P.~Pastor, A.~Krizhevsky, J.~Ibarz, and D.~Quillen.
-\newblock {\em The International Journal of Robotics Research} {\bfseries 37},
-  421--436 jun 2017.
 
 \bibitem{Dmitry2018}
 D.~Kalashnikov, A.~Irpan, P.~Pastor, J.~Ibarz, A.~Herzog, E.~Jang, D.~Quillen,
   E.~Holly, M.~Kalakrishnan, V.~Vanhoucke, and S.~Levine.
 \newblock {\em CoRR} {\bfseries abs/1806.10293}, (2018).
 
-\bibitem{OpenAI2018}
-OpenAI.
-\newblock {\em CoRR} {\bfseries abs/1808.00177}, (2018).
+\bibitem{Levine2017}
+S.~Levine, P.~Pastor, A.~Krizhevsky, J.~Ibarz, and D.~Quillen.
+\newblock {\em The International Journal of Robotics Research} {\bfseries 37},
+  421--436 jun 2017.
 
 \bibitem{HOG}
 N.~Dalal and B.~Triggs.
@@ -88,16 +71,12 @@ C.~Szegedy, W.~Liu, Y.~Jia, P.~Sermanet, S.~Reed, D.~Anguelov, D.~Erhan,
 K.~He, X.~Zhang, S.~Ren, and J.~Sun.
 \newblock  {IEEE} jun 2016.
 
-\bibitem{YOLOv3}
-J.~Redmon and A.~Farhadi.
-\newblock {\em CoRR} {\bfseries abs/1804.02767}, (2018).
+\bibitem{QLearning}
+C.~J. C.~H. Watkins and P.~Dayan.
+\newblock {\em Machine Learning} {\bfseries 8}, (1992).
 
-\bibitem{shotton2008semantic}
-J.~Shotton, M.~Johnson, and R.~Cipolla.
-\newblock  1--8. IEEE (2008).
-
-\bibitem{kontschieder2011structured}
-P.~Kontschieder, S.~R. Bulo, H.~Bischof, and M.~Pelillo.
-\newblock  2190--2197. IEEE (2011).
+\bibitem{NAF}
+S.~Gu, T.~P. Lillicrap, I.~Sutskever, and S.~Levine.
+\newblock {\em CoRR} {\bfseries abs/1603.00748}, (2016).
 
 \end{thebibliography}

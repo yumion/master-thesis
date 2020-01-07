@@ -11,6 +11,8 @@
 \usepackage{bm}
 \usepackage{upgreek}
 \usepackage{newtxmath,newtxtext}
+% コードを表示
+\usepackage{listings}
 % 複数引用
 \usepackage{cite}
 %\usepackage{natbib}
@@ -74,7 +76,6 @@
 \include{chapter4} % 結果と考察
 \include{chapter5} % まとめ
 %\include{Appendix} % 付録
-\include{Acknowledgments} % 謝辞
 
 \renewcommand{\bibname}{引用文献}
 %\bibliographystyle{jecon}
@@ -83,12 +84,7 @@
 \bibliography{thesis}
 \label{page:bib}
 
-
-\chapter*{研究業績}
-\begin{enumerate}
-	\item （口頭発表）山田敦史，松崎博貴，樽茶好彦，武田伊織，小野寺宏 「頭足類吸盤構造の3次元解析 に基づく吸着システムの造形」第36回日本ロボット学会学術講演会（2018年9月）
-	\item （口頭発表）山田敦史，松崎博貴，武田伊織，小野寺宏「強化学習を用いたパーソナルロボットハンドの開発」 電気学会センサ・マイクロマシン部門（E部門）2019年 バイオ・マイクロシステム研究会（2019年7月）
-    \item （口頭発表）山田敦史，松崎博貴，武田伊織，小野寺宏 「上肢機能障がい者のための強化学習を用いた自律型ロボットハンドの開発」第37回日本ロボット学会学術講演会（2019年9月）
-\end{enumerate}
+\include{Achievements} % 研究業績
+\include{Acknowledgments} % 謝辞
 
 \end{document}

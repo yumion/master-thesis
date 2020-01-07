@@ -57,7 +57,7 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{figure/chapter2/LeNet}
-	\caption{Architecture of convolutional neural network\cite{LeNet}}
+	\caption[Architecture of convolutional neural network]{Architecture of convolutional neural network\cite{LeNet}}
 	\label{fig:LeNet}
 \end{figure}
 
@@ -152,11 +152,11 @@
 
 損失関数は解く問題の目的に合わせて選ぶ必要がある．回帰問題では平均二乗和誤差(mean squared error: MSE)が用いられる．
 \begin{align}\label{eq:mse}
-	L_{\mathrm{MSE}} = \dfrac{1}{2} \sum_{k} (y_k - t_k)^2
+	MSE = \dfrac{1}{N} \sum_{k}^N (y_k - t_k)^2
 \end{align}
 また，クラス分け問題では交差エントロピー誤差(cross entropy error)が用いられる．
 \begin{align}\label{eq:crossentropy}
-	L_{\mathrm{cross}} = - \sum_k t_k \ln {y_k}
+	CE = - \sum_k ^N t_k \ln {y_k}
 \end{align}
 ここで，$y$は予測ラベルで，$t$は教師ラベルである．
 
@@ -164,7 +164,7 @@
 損失関数を用いてパラメータを更新するが，更新手法にはいくつか方法があるため，ここでは本研究で使用した最適化手法について述べる．
 
 \subsection*{SGD}
-SGDは日本語で確率的勾配降下法(Stochastic gradient descent)と呼ばれる手法で，最も単純な最適化手法である．画像認識の分野では多く使われている．
+SGDは確率的勾配降下法(Stochastic gradient descent)と呼ばれる手法で，最も単純な最適化手法である．画像認識の分野では多く使われている．
 
 SGDでは以下の式\eq {SGD}でパラメータを更新する．
 \begin{align}\label{eq:SGD}
@@ -214,27 +214,36 @@ Batch Normalizationを用いると，学習を速く進行させることがで�
 \section{画像認識と深層学習}
 Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Deep"とは，ニューラルネットワークの層が深いことに由来している．
 
-\fig {ImageNet}に画像認識タスクの精度の近年の推移を示す．これはImageNet Large Scale Visual Recognition Challenge (ILSVRC)と呼ばれる世界的な画像認識のコンペティションである(2010年から始まった)．カテゴリ数は1000クラスで，画像枚数は120万枚の訓練データと15万枚のテストデータが用意されている．
+\fig {ImageNet}に画像認識タスクの精度の近年の推移を示す．これはImageNet Large Scale Visual Recognition Challenge(ILSVRC)と呼ばれる世界的な画像認識のコンペティションである(2010年から始まった)．カテゴリ数は1000クラスで，画像枚数は120万枚の訓練データと15万枚のテストデータが用意されている．
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{figure/chapter2/ILSVRC}
 	\caption{Transition of accuracy of image recognition on ILSVRC}
 	\label{fig:ImageNet}
 \end{figure}
-2011年と2012年は約10\%もの大差でAlexNet\cite{AlexNet}が優勝している．これがディープラーニングの始まりである．AlexNetは5つの畳み込み層と3つの全結合層を持っている．2014年にはVGGNet\cite{VGGNet}やGoogLeNet\cite{GoogLeNet}が9割の精度を超えた．VGGNetはAlexNet(8層)よりさらに深い構造(19層)であり，GoogLeNetは22層もある．そして2015年にはResNet\cite{ResNet}が人間の精度をも超える認識精度を達成した．ResNetはGoogLeNetよりもさらに深く152層もある．CNNを複数回かけて検出を行う場合，CNNの浅い側では空間分解能はあるが抽象的な情報が少ない．深い側では意味論的な情報は取得できる（ポーズ，変形など）が空間分解能が小さいため幾何学的な情報が失われる．
+2011年と2012年は約10\%もの大差でAlexNet\cite{AlexNet}が優勝している．これがディープラーニングの始まりである．AlexNetは5つの畳み込み層と3つの全結合層を持っている．2014年にはVGGNet\cite{VGGNet}やGoogLeNet\cite{GoogLeNet}が9割の精度を超えた．VGGNetはAlexNet（8層）よりさらに深い構造（19層）であり，GoogLeNetでは22層もある．そして2015年にはResNet\cite{ResNet}が人間の精度をも超える認識精度を達成した．ResNetはGoogLeNetよりもさらに深く152層もある．CNNを複数回かけて検出を行う場合，CNNの浅い層では空間分解能はあるが抽象的な情報が少なく，深い層では意味論的な情報は取得できる（ポーズ，変形など）が空間分解能が小さいため幾何学的な情報が失われるといった特徴がある．
 
-アーキテクチャの進化の方向は大きく3つある．1つ目は層を深くすることである．2つ目はFC層の使用を避ける，またはInceptionモジュールの使用することである．これにより学習するパラメータ数を削減することができる．3つ目はResNetなどのショートカット接続の利用や，事前学習・転移学習を行うことである．これによって学習効率を向上させ，最終的にモデルの精度向上へと繋がる．ここで，事前学習のデータセットと適用データとの間には類似性があると良い．
+% アーキテクチャの進化の方向は大きく3つある．1つ目は層を深くすることである．2つ目はFC層の使用を避ける，またはInceptionモジュールの使用することである．これにより学習するパラメータ数を削減することができる．3つ目はResNetなどのショートカット接続の利用や，事前学習・転移学習を行うことである．これによって学習効率を向上させ，最終的にモデルの精度向上へと繋がる．ここで，事前学習のデータセットと適用データとの間には類似性があると良い．
 
 画像処理におけるディープラーニングでは大きく3つのタスクがあり，それぞれ，クラス分類，物体検出，セグメンテーションである．以下に詳細を述べる．
 
-\subsection*{クラス分類}
-クラス分類は画像に写っている物体が「dog」「airplane」「bird toy」など事前に定義されたラベルのどれが適切かを識別するタスクである．この識別は，事前に定義されたラベルの特徴べクトルと入力画像の特徴べクトルの距離計算を行い，距離値が小さければ同一，そうでなければ否と判定する．指紋照合，顔照合，人物照合では，本人と他人を判定するタスクとなる．深層学習では，同一人物のペア画像間の距離値が小さく，他人の画像との距離値が大きくなるような損失関数を設計し，ネットワークを構築することで人物照合問題を解いている．
+\subsection*{Classification（クラス分類）}
+クラス分類は画像に写っている物体が"dog", "airplane", "bird", "toy"など事前に定義されたラベルのどれに該当するかを識別するタスクである．ILSVRCはクラス分類のコンペである．この識別は，事前に定義されたラベルの特徴べクトルと入力画像の特徴べクトルの距離計算を行い，距離値が小さければ同一，そうでなければ否と判定する．深層学習では同一人物のペア画像間の距離値が小さく，他人の画像との距離値が大きくなるような損失関数を設計しネットワークを構築することでクラス分類問題を解いている．上述したAlexNetやVGGNet，GoogLeNet，ResNetなどはクラス分類を解くためのアーキテクチャである．画像認識タスクにおいてクラス分類は後述する物体検出やセグメンテーションにおいて基幹となるタスクであるため，ResNetなどクラス分類を解くネットワーク必ずベースとして使われBackboneと呼ばれる．
 
-\subsection*{物体検出}
-物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOG\cite{HOG}やSIFT\cite{SIFT}など局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkが主流となり，データのみから抽象的な特徴量を複数得ることができる．
+ここでは，Backboneとしてよく用いられるResNetについて説明する．\fig{ResNet}にResNetのアーキテクチャを示す．
+% resnetについて書く
+クラス分類で使われる特徴抽出器(Feature Extraction Layer)と識別器(Classifier)に分けて解釈できる．畳み込み層で入力画像から特徴を抽出し，全結合層でクラス識別を行う．ResNet以前では特徴抽出器である畳み込み層が過学習などの問題によって深くできず，良い特徴を得られなかったためどんな識別器を用いても高い精度での識別には限界があった．しかし，ResNetで提案されたSkip connectionによって層を深くしても過学習を抑えられるようになり，劇的に改善した．Skip connectionとは\fig{skipconnection}に示すように，前の層の出力を次の層の出力と足し合わせる結合である．例えば前の層が良い特徴であって，次の畳み込みによって失われてしまっても，Skip connectionによって良い特徴を保ったまま次の層へ進めることができるようになる．言い換えるとSkipされた層が有用であるかどうかを自動で判断できるようになる．
+
+
+\subsection*{Object Detection（物体検出）}
+物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．
+% 歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOG\cite{HOG}やSIFT\cite{SIFT}など局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkが主流となり，データのみから抽象的な特徴量を複数得ることができる．
 
 物体検出で主流であるのはFaster R-CNNである\cite{faster_R-CNN}．
+% R-CNN系の説明を詳しく書く
 
+
+\begin{comment}
 Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite{SSD}とYOLO\cite{YOLOv3}である（\fig {SSD}）．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
 
 \begin{figure}[H]
@@ -243,22 +252,31 @@ Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite
 	\caption{Network Architecture of SSD and YOLO\cite{SSD}}
 	\label{fig:SSD}
 \end{figure}
+\end{comment}
 
-\subsection*{セグメンテーション}
-セグメンテーションにはセマンティックセグメンテーションとインスタンスセグメンテーションの2つがある．
 
-セマンティックセグメンテーションとは，画像を画素レベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．セマンティックセグメンテーションの手法についてディープラーニング以前では，Texton Forests\cite{shotton2008semantic}や，Random Forests\cite{kontschieder2011structured}に基づいた分類を行っていたが，物体検出と同様にCNNが登場してからは，高精度なセグメンテーションが実現するようになった．CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，2つのアーキテクチャーからできている(\fig {Unet})．1つ目がエンコーダーのアーキテクチャーでCNNとプーリングで特徴を抽出しながら次元を削減していき，2つ目のデコーダーのアーキテクチャーで画像をセグメンテーションの結果になるように復元する．ここで問題になることが，プーリングをすることで位置情報を消してしまっているので，この位置情報を利用して画像を復元するためには，エンコーダーとデコーダーで画像サイズが同じところ同士をショートカットで接続することがUnet構造の優れている点である．
+\subsection*{Segmentation（セグメンテーション）}
+セグメンテーションにはSemantic Segmentation（セマンティックセグメンテーション）とInstance Segmentation（インスタンスセグメンテーション）の2つがある．
+
+セマンティックセグメンテーションとは画像をピクセルレベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．
+
+\begin{comment}
+CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，エンコーダーとデコーダーと呼ばれる2つのアーキテクチャーからできている(\fig {Unet})．エンコーダーでは畳み込みとプーリングによって特徴を抽出しながら次元を削減していき，デコーダーで逆畳み込み（Deconvolution）で画像サイズを上げてマスクを出力する．プーリングをすることで位置情報を失っているため，エンコーダーとデコーダーにおいて画像サイズが同じ層同士をショートカットで接続することで，プーリング前の特徴も捉えることができる．
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{figure/chapter2/unet.png}
-	\caption{Artchitecture of Unet\cite{Unet}}
-	\label{fig:Unet}
+\centering
+\includegraphics[width=0.7\linewidth]{figure/chapter2/unet.png}
+\caption{Artchitecture of Unet\cite{Unet}}
+\label{fig:Unet}
 \end{figure}
+\end{comment}
 
-インスタンスセグメンテーションとは，同じクラスの物体も別として認識することである．まず，入力画像に対して物体検出を行い，検出したBounding Box内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{Mask_R-CNN}．
+セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FPN)である\cite{FPN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FPN}）．これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
 
 
+インスタンスセグメンテーションとは同じクラスの物体も別として認識することである．まず，入力画像に対して物体検出を行い，検出したBounding Box内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{Mask_R-CNN}．
+%Mask R-CNNの説明を書く
+Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNと全く同じであるため説明は割愛する．Segmentation branchでは畳み込みを複数回行い，最後に逆畳み込みを行うというFPNと同じ構造で提案領域におけるマスクを生成する．
 
 
 \section{強化学習}\label{sec:強化学習}
@@ -294,8 +312,8 @@ Q(s_t, a_t) \leftarrow & Q(s_t, a_t) + \alpha (r_{t+1} + \gamma Q(s_{t+1}, a_{t+
 \end{align}
 $\alpha(0<\alpha<1)$は学習率である．ここで，$r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)$をTD誤差と呼び，収束からの離れ具合を示す．学習が収束したとすればTD誤差が0になり，その収束値が最適価値関数となる．
 
-\subsection{Q-Learning\cite{QLearning}}
-Q学習では，TD誤差に基づいて次のように価値関数$Q$を更新する．
+\subsection{Q-Learning}
+Q学習\cite{QLearning}と呼ばれる手法ではTD誤差に基づいて，次のように価値関数$Q$を更新する．
 \begin{align}\label{eq:Qupdate}
     Q(s,a) \leftarrow & Q(s,a) + \alpha (r + \gamma\underset{a'}{\max}{Q(s',a')} - Q(s,a))
 \end{align}
@@ -306,21 +324,17 @@ Q学習では，TD誤差に基づいて次のように価値関数$Q$を更新�
 Q-LearningはQ-Tableが求まれば良いが，環境から得られる状態の次元や行動の次元が大きいと求められない場合がある．そのため，Q-Learningを設計する場合は，環境から特徴を取り出し低次元にする必要がある．また，行動も連続的な行動ではなく，離散的な行動選択に絞る必要がある．
 
 
-\subsection{強化学習のロボット制御への応用}
-Guらは人間の手を介さずドアを開ける動作を初めて成功させた\cite{Gu2017}(\fig {Gu})．ここでは，Q-LearningをベースとしたNormalized Advantage Function(NAF)という手法を用いている．観測する状態として，7つの間接角度とその時間微分，ハンドエフェクタ・手・ドアのそれぞれの位置，手・ドアのそれぞれの角度の計25次元を入力し，Actionは連続値で出力する．シミュレーション上で4機で非同期分散学習させた後，実世界では最大2機で非同期分散学習を行った．実世界では成功率100\%になるまでに1機では4時間，2機では2.5時間という短い時間で達成した．シミュレーションから実世界への転移は難しいことが多く，Guらは成功判定を緩めることで解決した．
+\subsection{機械学習のロボット制御への応用}
+強化学習は戦略が必要なタスクに適用できる．ロボット制御への応用も多く研究されている．例えばロボットによるピッキングタスクを行うとすると，多くのパラメータを制御する必要があり使用する環境ごとにチューニングする必要があるが，強化学習を用いることで最適な行動をするようにパラメータを獲得でき，かつどんな環境に対してもロバストになる．
+
+どのように強化学習を適用するか，先行研究を追いながら述べる．
+
+Guらは人間の手を介さずドアを開ける動作を初めて成功させた\cite{Gu2017}(\fig {Gu})．ここでは，Q-LearningをベースとしたNormalized Advantage Function(NAF)という手法\cite{NAF}を用いている．観測する状態として，7つの間接角度とその時間微分，ハンドエフェクタ・手・ドアのそれぞれの位置，手・ドアのそれぞれの角度の計25次元を入力し，Actionは連続値で出力する．シミュレーション上で4機で非同期分散学習させた後，実世界では最大2機で非同期分散学習を行った．実世界では成功率100\%になるまでに1機では4時間，2機では2.5時間という短い時間で達成した．シミュレーションから実世界への転移は難しいことが多く，Guらは成功判定を緩めることで解決した．
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figure/chapter2/Gu}
-    \caption{Two robots learning to open doors using asynchronous NAF. The final policy learned with two workers could achieve a 100\% success rate on the task across 20 consecutive trials\cite{Gu2017}.}
+    \caption[Two robots learning to open doors using asynchronous NAF. The final policy learned with two workers could achieve a 100\% success rate on the task across 20 consecutive trials.]{Two robots learning to open doors using asynchronous NAF. The final policy learned with two workers could achieve a 100\% success rate on the task across 20 consecutive trials\cite{Gu2017}.}
     \label{fig:Gu}
-\end{figure}
-
-Levineらは初めてvisionベースでグラスピングタスクを成功させた\cite{Levine2017}(\fig {Levine})．この手法は厳密にはQ-Learningではないが，Q-Learningとも解釈できると言っている．入力としてRGBの画像とモーターのコマンドを入れ，出力として把持可能性を確率で返す．最大14台のロボットで非同期分散学習を行い，800,000回以上の試行を行った．
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figure/chapter2/Levine_grasp}
-    \caption{Col- ors indicate their probabilities of success: green is 1.0 and red is 0.0\cite{Levine2017}.}
-    \label{fig:Levine}
 \end{figure}
 
 またDmitryらは，Q-Learningを改良したQT-optという手法を提案した\cite{Dmitry2018}(\fig {Dmitry})．これはより汎用性の高いタスクをロボットに学習させることを目的として，1000種類以上の物体を把持できるような学習を行った．QT-Optを実行すると、より多くのオフラインデータが蓄積され，より良いデータを収集できるように，より良いモデルを訓練できるようになる．このアプローチを使い，ロボットで物を掴む事を学習させるために7つの実世界のロボットを使用し，4ヶ月間にわたって合計800時間学習させた．学習を早めるために，最初は人間が手動で設計した15～30\%程度の成功率のポリシーを使用して開始した．状態としてRGBのカメラ画像を取得し，行動として腕とグリッパの移動方法を返す．報酬は成功したら+1，失敗したら0としている．また，失敗した時の報酬を-0.05とすると学習を早めることができる．シンプルな仮定ではあるが，QT-optは目標物体を掴むために周りの邪魔な物体を弾いたり，掴みやすいように物体を倒したりすることを学習した．また，従来の手法より少ない学習データで高い成功率を達成した．
@@ -328,15 +342,18 @@ Levineらは初めてvisionベースでグラスピングタスクを成功さ�
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figure/chapter2/Dmitry}
-    \caption{Pregrasp manipulation (a, b), grasp readjustment (c, d), grasping dynamic objects and recovery from perturba- tions (e, f), and grasping in clutter (g, h)\cite{Dmitry2018}.Video: \url{https://sites.google.com/view/qtopt}}
+    \caption[Pregrasp manipulation (a, b), grasp readjustment (c, d), grasping dynamic objects and recovery from perturba- tions (e, f), and grasping in clutter (g, h).]{Pregrasp manipulation (a, b), grasp readjustment (c, d), grasping dynamic objects and recovery from perturba- tions (e, f), and grasping in clutter (g, h)\cite{Dmitry2018}.Video: \url{https://sites.google.com/view/qtopt}}
     \label{fig:Dmitry}
 \end{figure}
 
+以上のように，強化学習での学習には多くの試行回数及び時間がかかることがわかる．教師あり学習と異なり，エージェントが用意された環境から教師信号をサンプルする必要があるためである．ロボット制御においては教師データを集めることが困難な場合があるため強化学習が有効である．
 
-OpenAIチームはvisionベースで自由度が26もある手を模したロボットでサイコロを任意の向きに変える複雑な動作を達成した\cite{OpenAI2018}(\fig {OpenAI})．今回は方策を直接学習するProximal Policy Optimiztion(PPO)と呼ばれる手法を用いている．状態として3つのカメラからのRGB画像を与え，行動として接続部の角度を返す．報酬として成功したら+5，失敗したら-20，途中の報酬は現在とゴールの回転角度の差分を与えた．シミュレーション上で環境にノイズを加えて学習することで，実世界においても性能を発揮できるような学習を行ったことがポイントである．
+一方で強化学習はそもそも最適化問題として難しく学習が困難な場合が多い．そこで教師あり学習によってロボットを制御する手法もある．
+
+Levineらは初めてvisionベースでグラスピングタスクを成功させた\cite{Levine2017}(\fig {Levine})．この手法は教師あり学習で画像とモーターのコマンドを入力して把持可能性(graspability)を出力するネットワークを学習し，その出力にしたがってロボットを動かす手法である．厳密にはQ-LearningではないがQ-Learningとも解釈できると言っている．最大14台のロボットで非同期分散学習を行い，800,000回以上の試行を行った．
 \begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{figure/chapter2/openAI_cube}
-    \caption{A five-fingered humanoid hand trained with reinforcement learning manipulating a block from an initial configuration to a goal configuration using vision for sensing\cite{OpenAI2018}.Video:\url{https://blog.openai.com/learning-dexterity/}}
-    \label{fig:OpenAI}
+\centering
+\includegraphics[width=\linewidth]{figure/chapter2/Levine_grasp}
+\caption[Colors indicate their probabilities of success: green is 1.0 and red is 0.0]{Colors indicate their probabilities of success: green is 1.0 and red is 0.0\cite{Levine2017}.}
+\label{fig:Levine}
 \end{figure}

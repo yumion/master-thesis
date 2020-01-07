@@ -1,13 +1,14 @@
 This is upBibTeX, Version 0.99d-j0.33-u1.22 (utf8.uptex) (TeX Live 2017)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: main.aux
+The top-level auxiliary file: 37-186508＿山田敦史.aux
 A level-1 auxiliary file: chapter1.aux
 A level-1 auxiliary file: chapter2.aux
 A level-1 auxiliary file: chapter3.aux
 A level-1 auxiliary file: chapter4.aux
 A level-1 auxiliary file: chapter5.aux
-A level-1 auxiliary file: Acknowledgments.aux
 The style file: bibliography_thesis.bst
+A level-1 auxiliary file: Achievements.aux
+A level-1 auxiliary file: Acknowledgments.aux
 Database file #1: thesis.bib
 You're missing a field name---line 1051 of file thesis.bib
  : 
@@ -21,7 +22,9 @@ I was expecting a `,' or a `}'---line 1159 of file thesis.bib
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "お片づけロボット"
 Warning--I didn't find a database entry for "リハビリテーション"
+Warning--I didn't find a database entry for "HSR"
 Warning--I didn't find a database entry for "faster_R-CNN"
+Warning--I didn't find a database entry for "FPN"
 Warning--I didn't find a database entry for "Mask_R-CNN"
 You can't pop an empty literal stack for entry Gu2017
 while executing---line 1234 of file bibliography_thesis.bst
@@ -33,50 +36,46 @@ You can't pop an empty literal stack for entry GoogLeNet
 while executing---line 1234 of file bibliography_thesis.bst
 You can't pop an empty literal stack for entry ResNet
 while executing---line 1234 of file bibliography_thesis.bst
-You can't pop an empty literal stack for entry shotton2008semantic
-while executing---line 1234 of file bibliography_thesis.bst
-You can't pop an empty literal stack for entry kontschieder2011structured
-while executing---line 1234 of file bibliography_thesis.bst
-You've used 23 entries,
+You've used 18 entries,
             2353 wiz_defined-function locations,
-            684 strings with 7845 characters,
-and the built_in function-call counts, 7264 in all, are:
-= -- 545
-> -- 278
-< -- 12
-+ -- 108
-- -- 85
-* -- 455
-:= -- 897
-add.period$ -- 53
-call.type$ -- 23
+            662 strings with 7084 characters,
+and the built_in function-call counts, 5845 in all, are:
+= -- 441
+> -- 225
+< -- 10
++ -- 87
+- -- 69
+* -- 369
+:= -- 721
+add.period$ -- 41
+call.type$ -- 18
 change.case$ -- 0
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 462
-empty$ -- 629
-format.name$ -- 170
-if$ -- 1751
+cite$ -- 18
+duplicate$ -- 369
+empty$ -- 499
+format.name$ -- 138
+if$ -- 1410
 int.to.chr$ -- 0
-int.to.str$ -- 23
-missing$ -- 23
-newline$ -- 96
-num.names$ -- 23
-pop$ -- 126
+int.to.str$ -- 18
+missing$ -- 18
+newline$ -- 76
+num.names$ -- 18
+pop$ -- 95
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 371
+skip$ -- 303
 stack$ -- 0
-substring$ -- 350
-swap$ -- 173
-text.length$ -- 12
+substring$ -- 294
+swap$ -- 142
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 54
-width$ -- 25
-write$ -- 222
-is.kanji.str$ -- 274
-(There were 9 error messages)
+while$ -- 43
+width$ -- 20
+write$ -- 175
+is.kanji.str$ -- 217
+(There were 7 error messages)
