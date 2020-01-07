@@ -6,5 +6,6 @@
 *.lot
 *.toc
 37-186508*.pdf
+*.dvi
 *.gz
 reference/
