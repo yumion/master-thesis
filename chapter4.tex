@@ -35,10 +35,12 @@
 
 接近動作では2段階に分けて行う．まず対象物までのラフな接近について述べる．
 対象物のマスクを取得し重心を計算する．その重心がロボットハンドの中心軸に来るように左右輪のスピードをそれぞれ独立に以下の更新式によって制御しながら接近する．
+
 \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
     r_motor = (1 - error_distance) / 2 * MAX_SPEED
     l_motor = (1 + error_distance) / 2 * MAX_SPEED
 \end{lstlisting}
+
 ここで\texttt{MAX\_SPEED}はモーターの最大スピードで今回は100とした．\texttt{error\_distance}はロボットハンドと対象物との画像内におけるx軸方向のズレを画像の横の長さで規格した値であり，-1から1の値をとる．そして対象物から20cmまで近づいたら停止させる．
 
 次に，対象物の重心にハンドの把持中心が来るように横方向にラックピニオンで修正を加える．この時，画像におけるピクセル間距離を実距離に変換し重心とハンド中心の変位をなるべく小さくするようにサーボを動かす．そしてデプスカメラが対象物に覆われて見えなくなるまで直進する．
@@ -52,15 +54,41 @@
 \subsection{デプスカメラを使用したカメラ画像内における実距離推定}
 把持位置を制御する際，画像内の実際の長さ知る必要がある．そこで，ピクセル間距離から実距離を回帰処理によって求めた．また，カメラから測る対象物までの距離にも依存するため，デプスカメラを用いて距離依存性についても回帰処理を行い，2段階で求めた．
 
-壁に30cm定規を置き，カメラは壁と平行になるよう設置した．壁からカメラの距離$z$を変えながら定規の目盛りのピクセル座標を取得し，横軸にピクセル差分$\Delta \rm{pixel}$，縦軸にそのピクセルに対応する定規の目盛り幅$\Delta x$をプロットした（\fig{ピクセル間距離}）．また，各$z$で線形回帰を行ったあと横軸に壁からカメラの距離$z$，縦軸に傾き$a$をプロットし線形回帰を行い，全ての距離$z$におけるピクセル間距離を求めた（\fig{深さ依存性}）．
+壁に30cm定規を置き，カメラは壁と平行になるよう設置した．壁からカメラの距離$z$(cm)を変えながら定規の目盛りのピクセル座標を取得し，横軸にピクセル差分$\Delta \rm{pixel}$，縦軸にそのピクセルに対応する定規の目盛り幅$\Delta x$(cm)をプロットした（\fig{pix2dist}）．また，各$z$で線形回帰を行ったあと横軸に壁からカメラの距離$z$，縦軸に傾き$a$をプロットし線形回帰を行い，全ての距離$z$におけるピクセル間距離を求めた（\fig{depth2grad}）．
 
-以上から，実距離$\Delta x$(cm)はピクセル間距離$\Delta \rm{pixel}$とカメラと対象物の距離$z$(cm)を用いて
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/chapter4/pixel2distance}
+        \subcaption{Pixel to Distance}
+        \label{fig:pix2dist}
+    \end{minipage}
+    \begin{minipage}{0.45\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/chapter4/depth2gradient}
+        \subcaption{Dependency of depth}
+        \label{fig:depth2grad}
+    \end{minipage}
+    \caption{Convert pixel-wise to distance in real.}
+    \label{fig:pix2distance}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figure/chapter4/servo2distance}
+    \caption{Convert servo input to distance.}
+    \label{fig:servo2dist}
+\end{figure}
+
+以上から，実距離$\Delta x$はピクセル間距離$\Delta \rm{pixel}$とカメラと対象物の距離$z$を用いて
 \begin{align}\label{eq:ピクセル間距離}
-    \Delta x \simeq (0.0016z - 0.0004) \cdot \Delta \rm{pixel}
+    \Delta x \simeq (0.0016z + 0.0006) \cdot \Delta \rm{pixel}
 \end{align}
 と推定できる．
 
-また，ラック\&ピニオンの回転から水平移動に変換するためには，サーボが0\deg -- 180\deg まで可動するため，その移動最大距離を測定しておき（4cm），各角度における0\deg からの移動量をプロットすることで以下のように求められる．
+また，ラック\&ピニオンの回転から水平移動に変換するためには，サーボが0\deg -- 180\deg まで可動するため，その移動最大距離を測定しておき（4cm），各角度における0\deg からの移動量をプロットし線形回帰する（\fig{servo2dist}）ことで以下のように求められる．
+
 \begin{align}\label{eq:スライド角度}
     \Delta x \simeq 0.0216 \theta
 \end{align}
@@ -68,7 +96,7 @@
 \eq{ピクセル間距離}と\eq{スライド角度}から
 \begin{align}
     \theta & \simeq \dfrac{\Delta x}{0.0216} \\
-           & = \dfrac{0.0016z - 0.0004}{0.0216} \Delta \rm{pixel} \\
+           & = \dfrac{0.0016z + 0.0006}{0.0216} \Delta \rm{pixel} \\
 \end{align}
 として画像からサーボを何度動かせばいいか分かる．なお，実装上はサーボの可動範囲が0\deg -- 180\deg を考慮して
 \begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
@@ -82,21 +110,20 @@
 Instance Segmentationの手法の1つであるMask R-CNNを用いた．MSCOCO2014データセットで学習した．
 学習した結果を\tab{MSCOCO評価}に示す．
 
-\begin{table}
+\begin{table}[H]
     \centering
     \caption{Results of Mask R-CNN validated by COCO.}
     \begin{tabular}{ccc}\toprule
         & Object Detection & Segmentation \\ \midrule
-        $\rm{AP}^{\rm{IoU}=0.50:0.95}@Area=all \u{maxDets=100}$ & 0.352 & 0.334 \\ 
-        $\rm{AR}^{\rm{IoU}=0.50:0.95}@Area=all \u{maxDets=100}$ & 0.438 & 0.405 \\ 
+        $\rm{AP}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.352 & 0.334 \\ 
+        $\rm{AR}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.438 & 0.405 \\ 
         FPS & 4.078 & 4.013 \\ \bottomrule
     \end{tabular} 
     \label{tab:MSCOCO評価}
 \end{table}
 
-また，デプスカメラを用いて検出した物体の距離も同時に測定した．Mask R-CNNの出力であるマスクの重心を求め，その座標までの距離をデプスカメラで測定した．
+また，デプスカメラを用いて検出した物体の距離も同時に測定した．Mask R-CNNの出力であるマスクの重心を求め，その座標までの距離をデプスカメラで測定した．以上の学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．
 
-以上の学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．
 
 
 

@@ -12,7 +12,7 @@
 これらを考慮してロボットハンドにはスマホを搭載し，スマートフォンのフロントカメラから環境を認識する．またタイヤを搭載しDCモータで駆動させる．把持にはサーボモータを用いる．簡便性を考慮して強化学習の演算もスマホで行う．モータの制御にはArduinoを使用し，スマホとシリアル通信を行い強化学習によって出力される行動を実行に移す．
 使用した部品を\tab{1号機部品}まとめた．
 
-\begin{table}
+\begin{table}[H]
     \centering
     \caption{Components of prototype No.1}
     \begin{tabular}{cc}\toprule
@@ -27,7 +27,7 @@
 
 ロボットハンドのフレームは3DCAD（123D Design Autodesk社）で設計し，簡便さと軽さを考慮し3Dプリンタ（TITAN GENKEI社）で造形を行った．作製したロボットハンドの外観を示す（\fig{1号機外観}）．スマホは腕の上部に装着し，フロントカメラに鏡を45度で置くことで前方を捉えることができる．また，腕部分にバッテリーとタイヤ，そしてArduinoを含む回路を収め，上から見るとスマホと手のみが見えるように工夫して組み立てた．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{\linewidth}
         \centering
@@ -53,7 +53,8 @@
 
 \section{評価}
 実機で2日間に渡り，約300episodes学習を行った．その学習の中で成功したepisodeにおけるロボットの挙動を\fig{1号機例}にまとめた．まず，旋回することであたりを探索する．カメラにターゲットを捉えたらそれに向かって接近し，一定の距離まで近づいたら把持を行う．このような流れで学習が進んでいることが示唆された．
-\begin{figure}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{figure/chapter3/robothand-v1_demo}
     \caption{Demonstration of prototype No.1 at sucess episode.}
@@ -67,7 +68,7 @@
 強化学習では学習に多くの時間がかかる．また実機ではバッテリー残量や壁にぶつかった際に位置を直す必要がある．そこでより学習を進めかつ自動で学習ループを回すために物理シミュレーションを用いた．これにより学習過程を常に記録・参照することができる．
 シミュレーション物理エンジンとしてBullet Physics Engineを用いた．実装においてはAPIがPythonで用意されているPyBulletを使用した．\fig{1号機simu}にCADで作製したロボットハンドをシミュレーション環境にレンダリングした画像を示す．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{figure/chapter3/bullet_demo}
     \caption{Environment of bullet physics simulation.}
@@ -83,7 +84,7 @@
 
 また，状態としては先ほどと同様に相対位置及び相対向きの2次元を与え，報酬としてターゲットの面積値を与え学習を行った（\fig{報酬面積}）．Episodeが進むとなだらかに報酬が増加し，400episode付近から報酬が飽和していることがわかる．このことから学習が収束していると言える．このパラメータでレンダリングして確認してみると，確かに学習が成功していることが分かった．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.4\linewidth}
         \centering
