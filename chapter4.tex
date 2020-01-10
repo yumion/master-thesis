@@ -36,7 +36,7 @@
 接近動作では2段階に分けて行う．まず対象物までのラフな接近について述べる．
 対象物のマスクを取得し重心を計算する．その重心がロボットハンドの中心軸に来るように左右輪のスピードをそれぞれ独立に以下の更新式によって制御しながら接近する．
 
-\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[label=code:motor]
     r_motor = (1 - error_distance) / 2 * MAX_SPEED
     l_motor = (1 + error_distance) / 2 * MAX_SPEED
 \end{lstlisting}
@@ -45,6 +45,11 @@
 
 次に，対象物の重心にハンドの把持中心が来るように横方向にラックピニオンで修正を加える．この時，画像におけるピクセル間距離を実距離に変換し重心とハンド中心の変位をなるべく小さくするようにサーボを動かす．そしてデプスカメラが対象物に覆われて見えなくなるまで直進する．
 そこからさらに4cm直進しグリッパーを閉じる．その後腕を上げ物体を持ち上げ，この際のデプス画像を保持しておく．そこから1秒ごとにデプス画像の現フレームとのピクセル数比を取り，50\%以下であったら失敗とし，5秒落とさず維持したら把持成功とした．
+
+
+\subsection{シリアル通信における情報圧縮}
+Arduinoとのシリアル通信では1回に2byteまでしか送信できず，Stringでモーター5つの情報を送信すると遅延や読み飛ばしが発生した．そこで2号機ではモーターの取る値をデジタル化し情報を圧縮した．
+
 
 
 % \subsection{色抽出}
@@ -98,43 +103,51 @@
     \theta & \simeq \dfrac{\Delta x}{0.0216} \\
            & = \dfrac{0.0016z + 0.0006}{0.0216} \Delta \rm{pixel} \\
 \end{align}
-として画像からサーボを何度動かせばいいか分かる．なお，実装上はサーボの可動範囲が0\deg -- 180\deg を考慮して
-\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+として画像からサーボを何度動かせば良いかが分かる．なお，実装上はサーボの可動範囲が0\deg -- 180\deg を考慮して
+\begin{lstlisting}[label=code:servo]
     vertical_deg =\
         (max(min(vertical_pos // 0.0216, 90), -90) + 90) // 10
 \end{lstlisting}
 とすることで入力の最小0，最大を180とし，サーボへの入力が0の時に真ん中である90\deg とし，それを1/10にデジタル化して送信する．\texttt{vertical\_pos}は$\Delta x$(cm)，\texttt{vertical\_deg}は$\theta$(deg)である．
 
 
-\subsection{Mask R-CNNを用いた物体のマスクと測距}
-Instance Segmentationの手法の1つであるMask R-CNNを用いた．MSCOCO2014データセットで学習した．
+\subsection{Mask R-CNNを用いた物体のセグメンテーションと測距}
+Instance Segmentationの手法の1つであるMask R-CNNを用いた．MSCOCO2014および2017のデータセットで学習した．
 学習した結果を\tab{MSCOCO評価}に示す．
 
 \begin{table}[H]
     \centering
     \caption{Results of Mask R-CNN validated by COCO.}
-    \begin{tabular}{ccc}\toprule
-        & Object Detection & Segmentation \\ \midrule
-        $\rm{AP}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.352 & 0.334 \\ 
-        $\rm{AR}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.438 & 0.405 \\ 
-        FPS & 4.078 & 4.013 \\ \bottomrule
+    \begin{tabular}{ccccc}\toprule
+        & \multicolumn{2}{c}{Object Detection} & \multicolumn{2}{c}{Segmentation} \\ 
+         & 2014 & 2017 & 2014 & 2017 \\ \midrule
+        $\rm{AP}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.352 & 0.227 & 0.334 & 0.243 \\ 
+        $\rm{AR}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.438 & 0.299 & 0.405 & 0.301 \\ 
+        FPS & 4.078 & 3.880 & 4.013 & 4.002 \\ \bottomrule
     \end{tabular} 
     \label{tab:MSCOCO評価}
 \end{table}
 
-また，デプスカメラを用いて検出した物体の距離も同時に測定した．Mask R-CNNの出力であるマスクの重心を求め，その座標までの距離をデプスカメラで測定した．以上の学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．
+また，デプスカメラを用いて検出した物体の距離も同時に測定した．Mask R-CNNの出力であるマスクの重心を求め，その座標までの距離をデプスカメラで測定した．\fig{maskrcnn例}に学習済みモデルを使用した物体検出およびその物体までの測距の例を示す．
 
 
 
+このように，マスクが完璧出なくとも対象物の重心はおおよそ把握できるため，IoUよりもPrecisionを重視し物体検出におけるFPSが高い2014年学習モデルを使う．
 
 
 \section{評価}
 今回2号機でアップデートしたのは，対象物の識別と把持動作であったため，この2点に関して評価を行う．
 
-
 MSCOCOデータセットの中で，机の上にあるものを把持できるかを検証した．
 今回，対象とした物体は以下の4点である．
+\begin{itemize}
+    \item bottle
+    \item cup
+    \item cell phone
+    \item apple
+\end{itemize}
 
+まず，学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．
 
 
 
