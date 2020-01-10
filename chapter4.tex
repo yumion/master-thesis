@@ -27,6 +27,28 @@
 
 把持点を正確に掴むために，手は把持点に対して対称に掴むよう設計した．
 
+3Dプリンタ（Adventure3）で印刷した．
+
+\begin{table}[H]
+    \centering
+    \caption{Components of prototype No.2}
+    \begin{tabular}{cc}\toprule
+        本体フレーム & PLA（赤） \\
+        デプスカメラ & RealSense D435i \\ 
+        マイコン & Arduino Nano \\ 
+        DCモータ & \href{http://akizukidenshi.com/catalog/g/gM-12379/}{STLギヤモータ 栄42D長軸型} \\ 
+        サーボモータ & \href{https://hitecrcd.co.jp/products/servo32225/}{HS-225MG} x1，\href{https://hitecrcd.com/products/servos/discontinued-servos-servo-accessories/hsr-5990tg-hmi-ultra-premium-robot-servo/product}{HSR-5990TG} x1，\href{https://hitecrcd.co.jp/products/servo31422s/}{HS-422} x1 \\ 
+        バッテリー & モバイルバッテリー \\ 
+        タイヤ & \href{https://tamiya.com/japan/products/70194/index.html}{TAMIYA製スパイクタイヤ} \\
+        リニアガイド &  \\
+        ラック\&ピニオン &  \\ \bottomrule
+    \end{tabular} 
+    \label{tab:2号機部品}
+\end{table}
+
+デプスカメラおよびArduinoの制御はDeepLearning BoxII（Ubuntu16.04）を使用し，計算リソースはNVIDIA社のGPU（TITAN RTX）を使用した．
+
+
 % 向きの定義（x軸，y軸，z軸）
 
 
@@ -46,14 +68,7 @@
 次に，対象物の重心にハンドの把持中心が来るように横方向にラックピニオンで修正を加える．この時，画像におけるピクセル間距離を実距離に変換し重心とハンド中心の変位をなるべく小さくするようにサーボを動かす．そしてデプスカメラが対象物に覆われて見えなくなるまで直進する．
 そこからさらに4cm直進しグリッパーを閉じる．その後腕を上げ物体を持ち上げ，この際のデプス画像を保持しておく．そこから1秒ごとにデプス画像の現フレームとのピクセル数比を取り，50\%以下であったら失敗とし，5秒落とさず維持したら把持成功とした．
 
-
-\subsection{シリアル通信における情報圧縮}
-Arduinoとのシリアル通信では1回に2byteまでしか送信できず，Stringでモーター5つの情報を送信すると遅延や読み飛ばしが発生した．そこで2号機ではモーターの取る値をデジタル化し情報を圧縮した．
-
-
-
-% \subsection{色抽出}
-
+なお，Arduinoとのシリアル通信では1回に2byteまでしか送信できず，String型でモーター5つの情報を送信すると遅延や読み飛ばしが発生した．そこで2号機ではモーターの取る値をデジタル化し情報を圧縮してByte型で送信するようにした．
 
 
 \subsection{デプスカメラを使用したカメラ画像内における実距離推定}
