@@ -165,8 +165,14 @@ MSCOCOデータセットの中で，机の上にあるものを把持できる�
     \item cell phone
     \item apple
 \end{itemize}
-
-まず，学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．
+まず，学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．各対象物において，ロボットハンドとの距離を変えながらMask R-CNNの検出精度およびそのクラス分類の精度を測定した（\fig{mrcnn距離}）
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figure/chapter4/mrcnn_depth}
+    \caption{Dependency of distance between camera and object.}
+    \label{fig:mrcnn距離}
+\end{figure}
+appleは全ての場所・向きにおいて認識できなかったため，\fig{mrcnn距離}には載せていない．
 
 
 次に，各物体に対して把持成功率を検証した．
