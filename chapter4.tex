@@ -149,6 +149,12 @@ Instance Segmentationの手法の1つであるMask R-CNNを用いた．MSCOCO201
 
 また，デプスカメラを用いて検出した物体の距離も同時に測定した．Mask R-CNNの出力であるマスクの重心を求め，その座標までの距離をデプスカメラで測定した．\fig{maskrcnn例}に学習済みモデルを使用した物体検出およびその物体までの測距の例を示す．
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figure/chapter4/MaskR-CNN_screenshot}
+    \caption{Examples of Mask R-CNN inference.}
+    \label{fig:maskrcnn例}
+\end{figure}
 
 
 このように，マスクが完璧出なくとも対象物の重心はおおよそ把握できるため，IoUよりもPrecisionを重視し物体検出におけるFPSが高い2014年学習モデルを使う．
@@ -158,13 +164,56 @@ Instance Segmentationの手法の1つであるMask R-CNNを用いた．MSCOCO201
 今回2号機でアップデートしたのは，対象物の識別と把持動作であったため，この2点に関して評価を行う．
 
 MSCOCOデータセットの中で，机の上にあるものを把持できるかを検証した．
-今回，対象とした物体は以下の4点である．
-\begin{itemize}
-    \item bottle
-    \item cup
-    \item cell phone
-    \item apple
-\end{itemize}
+今回，対象とした物体は以下の4種類である．
+\begin{figure}[H]
+    \centering
+    
+    \begin{minipage}{0.19\columnwidth}
+        \centering
+        \includegraphics[clip, width=\linewidth]{figure/chapter4/bottle_350ml}
+        \subcaption{bottle(350ml)}
+    \end{minipage}
+    \begin{minipage}{0.19\columnwidth}
+        \centering
+        \includegraphics[clip, width=\linewidth]{figure/chapter4/bottle_650ml}
+        \subcaption{bottle(350ml)}
+    \end{minipage}
+    \begin{minipage}{0.19\columnwidth}
+        \centering
+        \includegraphics[clip, width=\linewidth]{figure/chapter4/cellphone}
+        \subcaption{cell phone}
+    \end{minipage}
+    \begin{minipage}{0.19\columnwidth}
+        \centering
+        \includegraphics[clip, width=\linewidth]{figure/chapter4/cup}
+        \subcaption{cup}
+    \end{minipage}
+    \begin{minipage}{0.19\columnwidth}
+        \centering
+        \includegraphics[clip, width=\linewidth]{figure/chapter4/apple}
+        \subcaption{apple}
+    \end{minipage}
+    
+    \caption{Objects.}
+    \label{fig:対象物}
+    
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \caption{Details of objects.}
+    \begin{tabular}{cccccc}\toprule
+        & Height(cm) & Width(cm) & Depth(cm) & Weight(cm) & Notes \\ \midrule
+        bottle(350ml) & 16.5 &  &  &  & Empty \\ 
+        bottle(650ml) & 22.0 &  &  &  & Empty \\ 
+        cell phone & 12.0 &  &  &  & iPhone SE \\ 
+        cup & 9.5 &  &  &  & Empty \\ 
+        apple &  &  &  &  & Raw \\ \bottomrule
+    \end{tabular}
+    \label{tab:対象物}
+\end{table}
+
+
 まず，学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．各対象物において，ロボットハンドとの距離を変えながらMask R-CNNの検出精度およびそのクラス分類の精度を測定した（\fig{mrcnn距離}）
 \begin{figure}[H]
     \centering
@@ -175,7 +224,9 @@ MSCOCOデータセットの中で，机の上にあるものを把持できる�
 appleは全ての場所・向きにおいて認識できなかったため，\fig{mrcnn距離}には載せていない．
 
 
+
 次に，各物体に対して把持成功率を検証した．
+
 
 
 \section{まとめ}
