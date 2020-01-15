@@ -202,19 +202,19 @@ MSCOCOデータセットの中で，机の上にあるものを把持できる�
 \begin{table}[H]
     \centering
     \caption{Details of objects.}
-    \begin{tabular}{cccc}\toprule
-        & Size & \# of Training data & Notes \\ \midrule
-        bottle(350 ml) & 16.5 cm $\times$  $\phi$ & 8880 & Empty \\ 
-        bottle(650 ml) & 22.0 $\times$  $\phi$ &  & Empty \\ 
-        cell phone & 12.0 $\times$  $\times$  & 5017 & iPhone SE \\ 
-        cup & 9.5 $\times$  $\phi$ & 9579 & Empty \\ 
-        apple & $\phi$ & 1662 & Raw \\ \bottomrule
+    \begin{tabular}{ccccc}\toprule
+        & Size & Weight & \# of Training data & Notes \\ \midrule
+        bottle(350 ml) & 16.5 cm $\times$  $\phi$ &  & 8880 & Empty \\ 
+        bottle(650 ml) & 22.0 $\times$  $\phi$ &  &  & Empty \\ 
+        cell phone & 12.0 $\times$  $\times$  &  & 5017 & iPhone SE \\ 
+        cup & 9.5 $\times$  $\phi$ &  & 9579 & Empty \\ 
+        apple & $\phi$ &  & 1662 & Raw \\ \bottomrule
     \end{tabular}
     \label{tab:対象物}
 \end{table}
 
 
-まず，学習済みモデルを使用して識別精度の対象物との距離依存性を検証した．各対象物において，ロボットハンドとの距離を変えながらMask R-CNNの検出精度およびそのクラス分類の精度を測定した（\fig{mrcnn距離}）．
+まず，学習済みモデルを使用して識別精度の対象物との距離依存性検証した．各対象物において，ロボットハンドとの距離を変えながらMask R-CNNの検出精度およびそのクラス分類の精度を測定した（\fig{mrcnn距離}）．
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{figure/chapter4/mrcnn_depth}

@@ -237,25 +237,32 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 % resnetについて書く
 クラス分類で使われる特徴抽出器(Feature Extraction Layer)と識別器(Classifier)に分けて解釈できる．畳み込み層で入力画像から特徴を抽出し，全結合層でクラス識別を行う．ResNet以前では特徴抽出器である畳み込み層が過学習などの問題によって深くできず，良い特徴を得られなかったためどんな識別器を用いても高い精度での識別には限界があった．しかし，ResNetで提案されたSkip connectionによって層を深くしても過学習を抑えられるようになり，劇的に改善した．Skip connectionとは\fig{skipconnection}に示すように，前の層の出力を次の層の出力と足し合わせる結合である．例えば前の層が良い特徴であって，次の畳み込みによって失われてしまっても，Skip connectionによって良い特徴を保ったまま次の層へ進めることができるようになる．言い換えるとSkipされた層が有用であるかどうかを自動で判断できるようになる．
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure/chapter2/resnet34}
+    \caption{Architecture of ResNet34.}
+    \label{fig:ResNet}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figure/chapter2/skipconnection}
+    \caption{Residual block: Skip Connection}
+    \label{fig:skipconnection}
+\end{figure}
+
+
 
 \subsection{Object Detection（物体検出）}
-物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．
-% 歴史的には幾何的情報，手動特徴量，そしてそのカスケードを利用していた．その後，HOG\cite{HOG}やSIFT\cite{SIFT}など局所特徴量を抽出する方法を設計するようになったが，これは深い専門知識を必要とした．また広い範囲でオブジェクトを正確に検出する方法は，メモリ容量と処理時間に課題がある．現在はDeep Neural Networkが主流となり，データのみから抽象的な特徴量を複数得ることができる．
+物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．物体検出で主流であるのはFaster R-CNNである\cite{fasterRCNN}．\fig{fasterRCNN}に示すように，Faster R-CNNでは特徴抽出器であるCNNとRegion Proposal Network(RPN)の2つからなる．CNNで得た特徴マップの各点を中心としたBounding Box(BBox)を，1辺の長さおよび縦横比を変えて複数用意しRPNに入力する．RPNでは入力されたBBoxに物体か背景かを判定し，物体ならばGround truthからどれだけずれているかを学習する．これにより入力画像内のどこに物体がいるかという物体候補領域(Region of Interest: RoI)を決定する．CNNによって抽出した特徴マップと求めたRoIを照らし合わせ，該当する特徴マップをプーリングして物体候補ごとの固定サイズの特徴マップを作る（RoI pooling）．RoI poolingされた特徴マップから識別器によってどのクラスに属するのか決定する．
+以上のようにして，Faster R-CNNではモデル全体をEnd-to-Endで学習できる．
 
-物体検出で主流であるのはFaster R-CNNである\cite{faster_R-CNN}．
-% R-CNN系の説明を詳しく書く
-
-
-\begin{comment}
-Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite{SSD}とYOLO\cite{YOLOv3}である（\fig {SSD}）．クラス分けの場合は数1000のカテゴリを学習してTop Error Rateが2\%以下と人間よりも認識精度が高いが，物体検出においては，現状ではカテゴリが数100程度くらいまででも認識精度が人間よりも低くなってしまう．また物体検出は精度を上げるために処理に時間がかかることが多いため，リアルタイムに物体検出を行う時は，速度と精度のトレードオフが生じてしまう．
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{figure/chapter2/yolo_ssd.png}
-	\caption{Network Architecture of SSD and YOLO\cite{SSD}}
-	\label{fig:SSD}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{figure/chapter2/fasterr-cnn}
+    \caption[Architecture of Faster R-CNN.]{Architecture of Faster R-CNN\cite{fasterRCNN}.}
+    \label{fig:fasterRCNN}
 \end{figure}
-\end{comment}
 
 
 \subsection{Segmentation（セグメンテーション）}
@@ -263,26 +270,44 @@ Faster R-CNNよりも高速に検出を行えるようにしたのが，SSD\cite
 
 セマンティックセグメンテーションとは画像をピクセルレベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．
 
-\begin{comment}
-CNNを使ったセグメンテーションの手法で一般的に使われるようになったものがUnetである\cite{Unet}．このUnetは文字通りUの形をしたネットワークであることが特徴で，エンコーダーとデコーダーと呼ばれる2つのアーキテクチャーからできている(\fig {Unet})．エンコーダーでは畳み込みとプーリングによって特徴を抽出しながら次元を削減していき，デコーダーで逆畳み込み（Deconvolution）で画像サイズを上げてマスクを出力する．プーリングをすることで位置情報を失っているため，エンコーダーとデコーダーにおいて画像サイズが同じ層同士をショートカットで接続することで，プーリング前の特徴も捉えることができる．
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\linewidth]{figure/chapter2/unet.png}
-\caption{Artchitecture of Unet\cite{Unet}}
-\label{fig:Unet}
-\end{figure}
-\end{comment}
-
 セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FPN)である\cite{FPN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FPN}）．これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
+% FCNについてもう少し詳しく書く
+\begin{figure}
+    \centering
+    \begin{minipage}[t]{0.45\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/chapter2/FCN}
+        \caption[Faster R-CNN framework.]{Faster R-CNN framework\cite{FCN}.}
+        \label{fig:FCN}
+    \end{minipage}
+    \begin{minipage}[t]{0.05\columnwidth}
+        \hspace{5pt}
+    \end{minipage}
+    \begin{minipage}[t]{0.45\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/chapter2/FCN2}
+        \caption[Transforming fully connected layers into convolution layers.]{Transforming fully connected layers into convolution layers\cite{FCN}.}
+        \label{fig:FCN}
+    \end{minipage}
+    \caption{Architecture of FCN.}
+    \label{fig:FCN}
+\end{figure}
 
 
 インスタンスセグメンテーションとは同じクラスの物体も別として認識することである．まず，入力画像に対して物体検出を行い，検出したBounding Box内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{MaskRCNN}．
 %Mask R-CNNの説明を書く
 Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNと全く同じであるため説明は割愛する．Segmentation branchでは畳み込みを複数回行い，最後に逆畳み込みを行うというFPNと同じ構造で提案領域におけるマスクを生成する．
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{figure/chapter2/mrcnn}
+    \caption[Architecture of Mask R-CNN.]{Architecture of Mask R-CNN\cite{MaskRCNN}.}
+    \label{fig:mrcnn}
+\end{figure}
 
-\subsection{評価指標}
+
+
+\subsection{画像認識における評価指標}
 % IoUとmAP，FPS
 IoUとAverage Precision，Average Recall
 COCO AP
