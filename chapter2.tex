@@ -270,35 +270,37 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 
 セマンティックセグメンテーションとは画像をピクセルレベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．
 
-セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FPN)である\cite{FPN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FPN}）．これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
-% FCNについてもう少し詳しく書く
-\begin{figure}
+セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FPN)である\cite{FPN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FPN概要}）．\fig{FCN最終層}のように，これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
+
+特徴マップのサイズはMax Poolingを経て小さくなっているため，入力画像に対して特徴マップのサイズは小さくなっている．そのためこれをUp samplingして入力画像のサイズまで拡大する．Up samplingには逆畳み込み（Deconvolution）を行う．逆畳み込みとは畳み込みの逆操作によって特徴マップから畳み込む前の画像・特徴を復元するのではなく，元となる特徴マップをpaddingやdiliateによって拡大してから畳み込む操作である．数学的にはカーネルの転置で畳み込むため転置畳み込み（Transposed Convolution）とも呼ばれる．またFCNでは途中の畳み込み層の出力も使いPoolingによって失われた細かい位置情報も利用しており，これによって出力画像がぼやけずに物体の詳細な情報を捉えたセグメンテーションが可能となる．
+
+\begin{figure}[H]
     \centering
     \begin{minipage}[t]{0.45\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{figure/chapter2/FCN}
-        \caption[Faster R-CNN framework.]{Faster R-CNN framework\cite{FCN}.}
-        \label{fig:FCN}
+        \includegraphics[width=\linewidth]{figure/chapter2/FCN_architecture}
+        \subcaption[FCN framework.]{FCN framework\cite{FCN}.}
+        \label{fig:FCNアーキテクチャ}
     \end{minipage}
     \begin{minipage}[t]{0.05\columnwidth}
         \hspace{5pt}
     \end{minipage}
     \begin{minipage}[t]{0.45\columnwidth}
         \centering
-        \includegraphics[width=\linewidth]{figure/chapter2/FCN2}
-        \caption[Transforming fully connected layers into convolution layers.]{Transforming fully connected layers into convolution layers\cite{FCN}.}
-        \label{fig:FCN}
+        \includegraphics[width=\linewidth]{figure/chapter2/FCN_output_heatmap}
+        \subcaption[Transforming fully connected layers into convolution layers.]{Transforming fully connected layers into convolution layers\cite{FCN}.}
+        \label{fig:FCN最終層}
     \end{minipage}
     \caption{Architecture of FCN.}
-    \label{fig:FCN}
+    \label{fig:FCN概要}
 \end{figure}
 
 
-インスタンスセグメンテーションとは同じクラスの物体も別として認識することである．まず，入力画像に対して物体検出を行い，検出したBounding Box内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{MaskRCNN}．
-%Mask R-CNNの説明を書く
-Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNと全く同じであるため説明は割愛する．Segmentation branchでは畳み込みを複数回行い，最後に逆畳み込みを行うというFPNと同じ構造で提案領域におけるマスクを生成する．
+インスタンスセグメンテーションとは同じクラスの物体も別として認識することである．まず入力画像に対して物体検出を行い，検出したBBox内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{MaskRCNN}．
 
-\begin{figure}
+Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNと全く同じであるため説明は割愛する．Segmentation branchでは畳み込みを複数回行い，最後にFPN\cite{FPN}と同じ構造で逆畳み込みを処理することで提案候補領域におけるマスクを生成する．
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{figure/chapter2/mrcnn}
     \caption[Architecture of Mask R-CNN.]{Architecture of Mask R-CNN\cite{MaskRCNN}.}
@@ -308,7 +310,8 @@ Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマ�
 
 
 \subsection{画像認識における評価指標}
-% IoUとmAP，FPS
+
+
 IoUとAverage Precision，Average Recall
 COCO AP
 
