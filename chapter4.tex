@@ -227,7 +227,19 @@ appleは全ての場所・向きにおいて認識できなかったため，\fi
 
 次に，各物体に対して把持成功率を検証した．
 
+\begin{table}[H]
+    \centering
+    \caption{Success rate of grasping objects by Prototype No.2}
+    \begin{tabular}{cc}\toprule
+        Objects & Success rate \\ \midrule
+        bottle(350 ml) & 90\% \\ 
+        cell phone & 50\% \\ 
+        cup & 50\% \\ \bottomrule
+    \end{tabular} 
+    \label{tab:把持成功率}
+\end{table}
 
+失敗例は，掴み方が悪く掴んでも落とした，掴んで持ち上げたがロボットハンド自体が横転した，持ち上げたがズレ落ちた，などがあった．
 
 \section{まとめ}
 物体の種類を識別し，把持し，元の位置に持ち帰ることができた．
