@@ -1,6 +1,7 @@
 # 2019年度修士論文
 ## タイトル
 機械学習を用いたパーソナルロボットハンドの開発～上肢機能障害者の支援を目指して〜
+
 Personal Robot Hands Supported by Machine Learning and Deep Learning: Help the disabled in the future
 
 ## 概要
