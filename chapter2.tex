@@ -226,9 +226,8 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \end{figure}
 2011年と2012年は約10\%もの大差でAlexNet\cite{AlexNet}が優勝している．これがディープラーニングの始まりである．AlexNetは5つの畳み込み層と3つの全結合層を持っている．2014年にはVGGNet\cite{VGGNet}やGoogLeNet\cite{GoogLeNet}が9割の精度を超えた．VGGNetはAlexNet（8層）よりさらに深い構造（19層）であり，GoogLeNetでは22層もある．そして2015年にはResNet\cite{ResNet}が人間の精度をも超える認識精度を達成した．ResNetはGoogLeNetよりもさらに深く152層もある．CNNを複数回かけて検出を行う場合，CNNの浅い層では空間分解能はあるが抽象的な情報が少なく，深い層では意味論的な情報は取得できる（ポーズ，変形など）が空間分解能が小さいため幾何学的な情報が失われるといった特徴がある．
 
-% アーキテクチャの進化の方向は大きく3つある．1つ目は層を深くすることである．2つ目はFC層の使用を避ける，またはInceptionモジュールの使用することである．これにより学習するパラメータ数を削減することができる．3つ目はResNetなどのショートカット接続の利用や，事前学習・転移学習を行うことである．これによって学習効率を向上させ，最終的にモデルの精度向上へと繋がる．ここで，事前学習のデータセットと適用データとの間には類似性があると良い．
+画像処理におけるディープラーニングでは大きく3つのタスクがあり，それぞれ，クラス分類，物体検出，セグメンテーションである．ImageNetはクラス分類のタスクであったが，近年ではより難しい物体検出やセグメンテーションのタスクを含むMSCOCOというデータセットが主流になってきている．
 
-画像処理におけるディープラーニングでは大きく3つのタスクがあり，それぞれ，クラス分類，物体検出，セグメンテーションである．以下に詳細を述べる．
 
 \subsection{Classification（クラス分類）}
 クラス分類は画像に写っている物体が"dog", "airplane", "bird", "toy"など事前に定義されたラベルのどれに該当するかを識別するタスクである．ILSVRCはクラス分類のコンペである．この識別は，事前に定義されたラベルの特徴べクトルと入力画像の特徴べクトルの距離計算を行い，距離値が小さければ同一，そうでなければ否と判定する．深層学習では同一人物のペア画像間の距離値が小さく，他人の画像との距離値が大きくなるような損失関数を設計しネットワークを構築することでクラス分類問題を解いている．上述したAlexNetやVGGNet，GoogLeNet，ResNetなどはクラス分類を解くためのアーキテクチャである．画像認識タスクにおいてクラス分類は後述する物体検出やセグメンテーションにおいて基幹となるタスクであるため，ResNetなどクラス分類を解くネットワーク必ずベースとして使われBackboneと呼ばれる．
@@ -257,7 +256,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 物体検出とはBounding Boxで物体の位置とその物体の種類を特定する方法である．物体検出で主流であるのはFaster R-CNNである\cite{fasterRCNN}．\fig{fasterRCNN}に示すように，Faster R-CNNでは特徴抽出器であるCNNとRegion Proposal Network(RPN)の2つからなる．CNNで得た特徴マップの各点を中心としたBounding Box(BBox)を，1辺の長さおよび縦横比を変えて複数用意しRPNに入力する．RPNでは入力されたBBoxに物体か背景かを判定し，物体ならばGround truthからどれだけずれているかを学習する．これにより入力画像内のどこに物体がいるかという物体候補領域(Region of Interest: RoI)を決定する．CNNによって抽出した特徴マップと求めたRoIを照らし合わせ，該当する特徴マップをプーリングして物体候補ごとの固定サイズの特徴マップを作る（RoI pooling）．RoI poolingされた特徴マップから識別器によってどのクラスに属するのか決定する．
 以上のようにして，Faster R-CNNではモデル全体をEnd-to-Endで学習できる．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{figure/chapter2/fasterr-cnn}
     \caption[Architecture of Faster R-CNN.]{Architecture of Faster R-CNN\cite{fasterRCNN}.}
@@ -270,7 +269,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 
 セマンティックセグメンテーションとは画像をピクセルレベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．
 
-セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FPN)である\cite{FPN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FPN概要}）．\fig{FCN最終層}のように，これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
+セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FCN)である\cite{FCN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FCN概要}）．\fig{FCN最終層}のように，これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
 
 特徴マップのサイズはMax Poolingを経て小さくなっているため，入力画像に対して特徴マップのサイズは小さくなっている．そのためこれをUp samplingして入力画像のサイズまで拡大する．Up samplingには逆畳み込み（Deconvolution）を行う．逆畳み込みとは畳み込みの逆操作によって特徴マップから畳み込む前の画像・特徴を復元するのではなく，元となる特徴マップをpaddingやdiliateによって拡大してから畳み込む操作である．数学的にはカーネルの転置で畳み込むため転置畳み込み（Transposed Convolution）とも呼ばれる．またFCNでは途中の畳み込み層の出力も使いPoolingによって失われた細かい位置情報も利用しており，これによって出力画像がぼやけずに物体の詳細な情報を捉えたセグメンテーションが可能となる．
 
@@ -310,11 +309,57 @@ Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマ�
 
 
 \subsection{画像認識における評価指標}
-IoUとAverage Precision，Average Recall
-COCO AP
+機械学習における評価指標を説明する上で混同行列というものを用いる．\tab{混同行列}に2クラス分類における混同行列を示す．混同行列の要素はTrueは正解でFalseは不正解を示しており，Positiveは予測が真，Negativeは予測が偽を出力することを表している．すなわち，$TP$は正解ラベルを正しく予測できた，$TN$は正解ラベルじゃないものを正解じゃないと予測できたことを示しており，一方$FP$は正解じゃないものを正解と予測してしまった，$FN$は正解ラベルを正解と予測できなかったことを示している．この混同行列の要素を用いて，\eq{精度}に示す3つの評価指標を定義する．
 
+\begin{table}
+    \centering
+    \caption{Confusion Matrix on 2 class classification.}
+    \begin{tabular}{|c|c|c|c|}\hline
+        \multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{Actual} \\ \cline{3-4}        \multicolumn{2}{|c|}{} & Positive & Negative \\ \hline
+        \multirow{2}{*}{Predicted} & Positive & True Positive($TP$) & False Positive($FP$) \\ \cline{2-4}
+        & Negative & False Negative($FN$) & True Negative($TN$) \\ \hline
+    \end{tabular} 
+    \label{tab:混同行列}
+\end{table}
 
+\begin{align}\label{eq:精度}
+    \mathrm{Accuracy} & = \frac{TP+TN}{TP+FP+TN+FN} \notag \\ 
+    \mathrm{Precision} & = \frac{TP}{TP+FP} \\
+    \mathrm{Recall} & = \frac{TP}{TP+FN} \notag
+\end{align}
+Accuracyは正解率と呼ばれ，モデルの予測結果全体と答えがどれだけ一致しているか示す割合である．一般にモデルの精度というとAccuracyを指す事が多い．
+Precisionは適合率と呼ばれ，モデルが真と予測結果全体の中で実際に正解である割合である．つまり誤検知にどれだけ強いかを示す．
+Recallは再現率と呼ばれ，モデルの予測で出力されるもののうち実際に正解である割合である．つまり，見逃しにどれだけ強いかを示す．
 
+他クラス分類では各クラスのPrecisionやRecallをクラス数で平均してAverage Precision(AP)やAverage Recall(AR)とする．
+
+一方，物体検出やセグメンテーションにおける評価指数としてはIoU(Intersection over Union)を使う．\fig{IoU}に示すように，IoUは予測結果と教師ラベルがどれだけ重なっているかを表す．数式では混同行列の要素を使って
+\begin{align}\label{eq:IoU}
+    \mathrm{IoU} = \frac{TP}{TP+FP+FN}
+\end{align}
+と表す．
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figure/chapter2/IoU}
+    \caption{Example image of IoU.}
+    \label{fig:IoU}
+\end{figure}
+
+また，物体検出やセグメンテーションではpixel-wiseで予測結果が出力されるため，APやARをさらに画素全体で平均を取ってmean Avereage Precision(mAP)やmean Average Recall(mAR)とする．
+
+なお，MSCOCOと呼ばれるデータセット\cite{COCO}ではCOCO AP，COCO ARと呼ばれる独自の評価指標を用いている．\fig{COCOAP}にCOCOの評価指標のまとめを示す．
+mAPやAPの決め方はひとつでなく，IoUの閾値によってそれを物体と認めるか背景とするかによって変わってくる．COCOのmAPは101pointの補間APであり，COCOでは複数のIoUを基準とするmAPを導出し，それを平均したものをAPとしたものも採用している．$\mathrm{IoU} = 0.50:0.95$は0.05刻みに0.50--0.95まで基準IoUを変えたmAPの平均である．
+COCO ARは画像ごとの検出数(maxDets)を1,10,100のいずれかに固定した時のRecallを測定する．
+また，AP，ARともにsmall \/ medium \/ largeに分けたオブジェクトの大きさ(Area)ごとの値も測定している．
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figure/chapter2/cocoAP}
+    \caption[Other metrics collected for the COCO dataset.]{Other metrics collected for the COCO dataset\cite{COCO}}
+    \label{fig:COCOAP}
+\end{figure}
+
+他にもいくつか細かい指標があるが，本研究では\fig{COCOAP}に示す$AP$と$AR^{max=100}$を使用した．
 
 \section{強化学習}\label{sec:強化学習}
 % 上の話は教師あり学習で，ここからは強化学習という分野である．
