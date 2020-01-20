@@ -193,7 +193,7 @@ MSCOCOデータセットの中で，机の上にあるものを把持できる�
         \includegraphics[clip, width=\linewidth]{figure/chapter4/apple}
         \subcaption{apple}
     \end{minipage}
-    
+
     \caption{Objects.}
     \label{fig:対象物}
     
@@ -215,31 +215,68 @@ MSCOCOデータセットの中で，机の上にあるものを把持できる�
 
 
 まず，学習済みモデルを使用して識別精度の対象物との距離依存性検証した．各対象物において，ロボットハンドとの距離を変えながらMask R-CNNの検出精度およびそのクラス分類の精度を測定した（\fig{mrcnn距離}）．
+appleは全ての場所・向きにおいて認識できなかったため，\fig{mrcnn距離}には載せていない．
+まず，入力にカメラ画像をそのまま入れた結果が\fig{mrcnn距離そのまま}であった．
+
+次に，入力画像をzero paddingして対象物を小さくなるようにして入力した結果が\fig{mrcnn距離パディング}であった．
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\linewidth]{figure/chapter4/mrcnn_depth}
+    \begin{minipage}{0.4\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/chapter4/mrcnn_depth}
+        \subcaption{Input raw image.}
+        \label{fig:mrcnn距離そのまま}
+    \end{minipage}
+    \begin{minipage}{0.4\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/chapter4/mrcnn_depth_padding}
+        \subcaption{Input zero padding image.}
+        \label{fig:mrcnn距離パディング}
+    \end{minipage}
     \caption{Dependency of distance between camera and object.}
     \label{fig:mrcnn距離}
 \end{figure}
-appleは全ての場所・向きにおいて認識できなかったため，\fig{mrcnn距離}には載せていない．
-
 
 
 次に，各物体に対して把持成功率を検証した．
+5秒間持ち上げ続けたら成功，そうでなければ失敗とし，10回試行した．
+
+把持タスク1
+接近して対象物の向かい17 cmに着いたところからルールベースで把持を行う．
+
+把持タスク2
+接近タスクと把持タスク1を通して行う．
 
 \begin{table}[H]
     \centering
-    \caption{Success rate of grasping objects by Prototype No.2}
+    \caption{Success rate on grasping objects task 1.}
     \begin{tabular}{cc}\toprule
         Objects & Success rate \\ \midrule
-        bottle(350 ml) & 90\% \\ 
+        bottle (350 ml) & 90\% \\
+        bottle (650 ml) & 80\% \\
         cell phone & 50\% \\ 
         cup & 50\% \\ \bottomrule
     \end{tabular} 
-    \label{tab:把持成功率}
+    \label{tab:把持成功率1}
 \end{table}
 
 失敗例は，掴み方が悪く掴んでも落とした，掴んで持ち上げたがロボットハンド自体が横転した，持ち上げたがズレ落ちた，などがあった．
+
+\begin{table}[H]
+    \centering
+    \caption{Success rate on grasping objects task 2.}
+    \begin{tabular}{cc}\toprule
+        Objects & Success rate \\ \midrule
+        bottle (350 ml) & 50\% \\ 
+        bottle (650 ml) & 50\% \\ 
+        cup & 30\% \\ 
+        cell phone & 40\% \\ \bottomrule
+    \end{tabular} 
+    \label{tab:把持成功率2}
+\end{table}
+
+
 
 \section{まとめ}
 物体の種類を識別し，把持し，元の位置に持ち帰ることができた．
