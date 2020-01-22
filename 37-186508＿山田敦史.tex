@@ -1,16 +1,12 @@
-%%% https://github.com/akira-okumura/MasterThesisTemplate %%%
+%%% このテンプレートは https://github.com/akira-okumura/MasterThesisTemplate をforkしたものです %%%
 \documentclass[12pt, twoside,openright,a4paper,papersize,uplatex,dvipdfmx, report]{jsbook}
 % uplatex オプションを指定し、ユニコード対応に。ただだし、uplatex でコンパイルすること。
 
 % 修論本体と表紙で共通で必要となる設定
 \input{preamble}
 
-% 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
-\usepackage{lineno}
-\linenumbers
-
 % 氏名などの情報が入っているファイル。各自で編集。
-%\include{AuthorInfo}
+\include{AuthorInfo}
 
 \begin{document}
 % 式番号，図番号，表番号を章ごとの連番にする
@@ -18,13 +14,11 @@
 \numberwithin{figure}{chapter}
 \numberwithin{table}{chapter}
 
-
-\frontmatter
-
+%  表紙を表示
 %\maketitle
-% 機械学習を用いたパーソナルロボットハンドの開発～上肢機能障害者の支援を目指して〜
-% Personal Robot Hands Supported by Machine Learning and Deep Learning ~ Help the disabled in the future ~
 
+%% 序文の開始 %%
+\frontmatter  % ローマ数字ページ番号
 % これを入れることでページ番号が表示されない。
 \thispagestyle{empty}
 
@@ -35,29 +29,38 @@
 \end{center}
 \input{Abstract}
 
-\tableofcontents
-\listoffigures
-\listoftables
+% 目次を表示
+\tableofcontents  % 目次
+\listoffigures  % 図目次
+\listoftables  % 表目次
 
-\mainmatter
+
+%% 本文の開始 %%
+\mainmatter  % アラビア数字ページ番号
+
+% 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
+\linenumbers
 
 % include を使うことで、別ファイルに分割することができます。
-\include{chapter1} % 背景
-\include{chapter2} % 原理
-\include{chapter3} % 実験手法
-\include{chapter4} % 結果と考察
-\include{chapter5} % まとめ
-%\include{Appendix} % 付録
+\include{chapter1}  % 背景
+\include{chapter2}  % 原理
+\include{chapter3}  % 実験手法
+\include{chapter4}  % 結果と考察
+\include{chapter5}  % まとめ
+%\include{Appendix}  % 付録
+
+
+%% 後書きの開始 %%
+\backmatter  % 章番号が振られなくなる
 
 \renewcommand{\bibname}{引用文献}
-%\bibliographystyle{jecon}
 \bibliographystyle{bibliography_thesis}
+%\bibliographystyle{jecon}
 %\bibliographystyle{junsrt}
 %\bibliographystyle{junsrt2}
 \bibliography{thesis}
-\label{page:bib}
 
-\include{Achievements} % 研究業績
-\include{Acknowledgments} % 謝辞
+\include{Achievements}  % 研究業績
+\include{Acknowledgments}  % 謝辞
 
 \end{document}
