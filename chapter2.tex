@@ -267,6 +267,8 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \subsection{Segmentation（セグメンテーション）}
 セグメンテーションにはSemantic Segmentation（セマンティックセグメンテーション）とInstance Segmentation（インスタンスセグメンテーション）の2つがある．
 
+
+\subsubsection{セマンティックセグメンテーション}
 セマンティックセグメンテーションとは画像をピクセルレベルで認識することである．画像内の各画素をオブジェクトクラスに割り当てる手法である．
 
 セマンティックセグメンテーションにおいて最初にCNNを使った手法はFully Convolutional Network(FCN)である\cite{FCN}．これはクラス分類に使われるネットワークの全結合層を畳み込み層に置き換えて，最終出力を2次元マップにするネットワークである（\fig{FCN概要}）．\fig{FCN最終層}のように，これによりピクセル単位でクラス分類の結果がヒートマップとして出力される．
@@ -295,6 +297,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \end{figure}
 
 
+\subsubsection{インスタンスセグメンテーション}
 インスタンスセグメンテーションとは同じクラスの物体も別として認識することである．まず入力画像に対して物体検出を行い，検出したBBox内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{MaskRCNN}．
 
 Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNとほぼ同様であるため説明は割愛する．Segmentation branchではFPN\cite{FPN}と同じ構造であり，畳み込みを複数回行い最後に逆畳み込みを処理することで提案候補領域におけるマスクを生成する．
