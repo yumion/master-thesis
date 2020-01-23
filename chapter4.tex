@@ -12,20 +12,25 @@
 
 
 \section{機構設計・機体デザイン}
-
-対象物との距離を測るためにデプスカメラを用いる．
-
-
+環境把握と対象物との距離を測るためにRGBカメラとデプスカメラを両方搭載したIntel社のRealSenseを用いた．
 対象物を持ち上げるために腕に関節を1つ加え，地面から垂直に対象物を挙上できるようにした．
+把持中心点を正確に掴むため，2指対立タイプの一般的な形状のグリッパとした．
+把持中心位置の制御では，高精度化のためにラック\&ピニオンを用いてサーボモータの回転を水平運動に変換にし，腕を進行方向と垂直な方向にスライドできるようにした．
 
-把持点制御では移動方向が回転方向になるため制御が難しい．
-対象物の把持点を調整するために，腕を進行方向と垂直な方向にスライドできるよう，ラック\&ピニオンを用いてサーボモータの回転を水平移動にした．
+以上を考慮して\fig{2号機CAD}に示すようなフレームを3DCAD（123D Design Autodesk社を使用）で設計した．また，ロボットハンドの向きは\fig{2号機向き}に示す，ソフトウェアでの画像（配列）の向きと同様の定義とする．
 
-把持点を正確に掴むために，手は把持点に対して対称に掴むよう設計した．
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figure/chapter4/2号機CAD前}
+    \caption{3DCAD image of prototype No.2}
+    \label{fig:2号機CAD}
+\end{figure}
 
+% 向きはここで定義する．CADの写真を使って向きを定義する．
 
 \section{実機作製}
-3Dプリンタ（Adventure3）で印刷した．
+
+\tab{2号機部品}に2号機作製に当たって使用した部品をまとめた．
 
 \begin{table}[H]
     \centering
@@ -44,36 +49,26 @@
     \label{tab:2号機部品}
 \end{table}
 
-デプスカメラおよびArduinoの制御はDeepLearning BoxII（Ubuntu16.04）を使用し，計算リソースはNVIDIA社のGPU（TITAN RTX）を使用した．
+1号機と同様にロボットハンドのフレームは簡便さと軽さを考慮して3Dプリンタ（Adventure3）で造形した．
+\fig{2号機外観}に作製したロボットハンドの外観を示す．
 
+2号機の総重量は572.27gであった．
 
-\begin{figure}[H]
+\begin{figure}
     \centering
-    \begin{minipage}{\linewidth}
-        \centering
-        \includegraphics[width=0.7\linewidth]{figure/chapter4/2号機CAD前}
-        \subcaption{3DCAD image of prototype No.2}
-    \end{minipage}
     \begin{minipage}{\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figure/chapter4/2号機外観}
-        \subcaption{Appearance of Prototype No.2. Weight is 572.27 g.}
+        \caption{Appearance of Prototype No.2. Weight is 572.27 g.}
+        \label{fig:2号機外観}
     \end{minipage}
-    \caption{Overview of prototype No.2}
-    \label{fig:2号機外観}
+    \begin{minipage}{\linewidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{figure/chapter4/2号機向き}
+        \caption{Definition of orientation at prototype No.2}
+        \label{fig:2号機向き}
+    \end{minipage}
 \end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figure/chapter4/2号機向き}
-    \caption{Definition of orientation at prototype No.2}
-    \label{fig:2号機向き}
-\end{figure}
-
-
-% 重さ
-572.27g
-
 
 
 \section{制御アルゴリズム}
@@ -94,7 +89,31 @@
 
 把持が成功したらホームポジションまでコード\ref{code:motor}と同様の制御で戻る．ホームポジションの認識にはARマーカーを使用した．
 
-なお，Arduinoとのシリアル通信では1回に2byteまでしか送信できず，String型でモーター5つの情報を送信すると遅延や読み飛ばしが発生した．そこで2号機ではモーターの取る値をデジタル化し情報を圧縮してByte型で送信するようにした．
+なお，Arduinoとのシリアル通信では1回に2byteまでしか送信できず，String型でモーター5つの情報を送信すると遅延や読み飛ばしが発生した．そこで2号機ではモーターの取る値をデジタル化し情報を圧縮してByte型で送信するようにした．実際に取る値と送信bit信号の対応表を\tab{2号機信号表}に示す．
+
+\begin{table}
+    \centering
+    \caption{}
+    \begin{tabular}{cccc}\toprule
+        Actuator & Bit serial & Value @ Arduino & Value @ Python \\ \midrule
+        Forward right DC motor & 000 & 0--100(step 5) & 0--20  \\ 
+        Forward left DC motor & 001 & 0--100(step 5) & 0--20 \\ 
+        Grip servo & 010 & 0 / 100 & 0 / 1\\ 
+        Vertical swing servo & 011 & 0 / 100 & 0 / 1 & 011 \\ 
+        Horizontal slide servo & 100 & 0--180 (step 10) & 0--18 \\ 
+        Terminate & 101 & 0 / 1 & 0/1 \\ 
+        Backward right DC motor & 110 & 0--100(step 5) & 0--20 \\ 
+        Backward left DC motor & 111 & 0--100(step 5) & 0--20 \\ \bottomrule
+    \end{tabular} 
+    \label{tab:2号機信号表}
+\end{table}
+
+Bit serialが駆動させるアクチュエータを2進数で示しており，動かす値をValue @ Pythonに示す10進数を5桁の2進数に変換してそれぞれをドッキングして8桁の2進数としてシリアル送信する．
+
+
+デプスカメラおよびArduinoの制御はG-DEP社のDeepLearning BoxII（Ubuntu16.04）を使用し，計算リソースはNVIDIA社のGPU（TITAN RTX）を使用した．
+プログラムは以下のURLの筆者のGitHubで公開している．
+\url{https://github.com/yumion/onodera-lab/tree/master/robotHandV2}
 
 
 \subsection{デプスカメラを使用したカメラ画像内における実距離推定}
