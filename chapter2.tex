@@ -300,7 +300,7 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \subsubsection{インスタンスセグメンテーション}
 インスタンスセグメンテーションとは同じクラスの物体も別として認識することである．まず入力画像に対して物体検出を行い，検出したBBox内でセグメンテーションを行う．すなわち，インスタンスセグメンテーションは物体検出とセマンティックセグメンテーションのハイブリッドと言える．インスタンスセグメンテーションでよく使われる手法はMask R-CNNである\cite{MaskRCNN}．
 
-Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNとほぼ同様であるため説明は割愛する．Segmentation branchではFPN\cite{FPN}と同じ構造であり，畳み込みを複数回行い最後に逆畳み込みを処理することで提案候補領域におけるマスクを生成する．
+Mask R-CNNはFaster R-CNNをベースとしたアーキテクチャで，RPマップでDetection \& Classification branchとSegmentation branchに分岐する．Detection \& Classification branchはFaster R-CNNとほぼ同様であるため説明は割愛する．Segmentation branchではFCN\cite{FCN}と同じ構造であり，畳み込みを複数回行い最後に逆畳み込みを処理することで提案候補領域におけるマスクを生成する．
 
 \begin{figure}[H]
     \centering
@@ -350,7 +350,7 @@ Recallは再現率と呼ばれ，モデルの予測で出力されるものの�
 
 また，物体検出やセグメンテーションではpixel-wiseで予測結果が出力されるため，APやARをさらに画素全体で平均を取ってmean Avereage Precision(mAP)やmean Average Recall(mAR)とする．
 
-なお，MSCOCOと呼ばれるデータセット\cite{COCO}ではCOCO AP，COCO ARと呼ばれる独自の評価指標を用いている．\fig{COCOAP}にCOCOの評価指標のまとめを示す．
+なお，MSCOCOと呼ばれるデータセット\cite{COCO論文}ではCOCO AP，COCO ARと呼ばれる独自の評価指標を用いている．\fig{COCOAP}にCOCOの評価指標のまとめを示す．
 mAPやAPの決め方はひとつでなく，IoUの閾値によってそれを物体と認めるか背景とするかによって変わってくる．COCOのmAPは101pointの補間APであり，COCOでは複数のIoUを基準とするmAPを導出し，それを平均したものをAPとしたものも採用している．$\mathrm{IoU} = 0.50:0.95$は0.05刻みに0.50--0.95まで基準IoUを変えたmAPの平均である．
 COCO ARは画像ごとの検出数(maxDets)を1,10,100のいずれかに固定した時のRecallを測定する．
 また，AP，ARともにsmall \/ medium \/ largeに分けたオブジェクトの大きさ(Area)ごとの値も測定している．
@@ -358,7 +358,7 @@ COCO ARは画像ごとの検出数(maxDets)を1,10,100のいずれかに固定�
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figure/chapter2/cocoAP}
-    \caption[Other metrics collected for the COCO dataset.]{Other metrics collected for the COCO dataset\cite{COCO}}
+    \caption[Other metrics collected for the COCO dataset.]{Other metrics collected for the COCO dataset\cite{COCOサイト}}
     \label{fig:COCOAP}
 \end{figure}
 
