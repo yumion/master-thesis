@@ -18,21 +18,14 @@
 
 上記の画像取得，認識，処理，アクチュエータ制御をすべてスマートフォンで実現を試みた．ロボットハンドにはスマートフォンを搭載し，スマートフォンのフロントカメラから環境を認識させた．アクチュエータの制御にはワンチップコンピュータを使用し，スマートフォンとシリアル通信を行うことで各アクチュエータをそれぞれ制御した．
 
-これらを考慮して\fig{1号機CAD}に示すようなフレームを3DCAD（123D Design Autodesk社を使用）で設計した．また，ロボットハンドの向きは\fig{1号機向き}に示す，ソフトウェアでの画像（配列）の向きと同様の定義とした．
+これらを考慮して\fig{1号機CAD}に示すようなフレームを3DCAD（123D Design Autodesk社を使用）で設計した．また，ロボットハンドの向きは\fig{1号機CAD}に示す，ソフトウェアでの画像（配列）の向きと同様の定義とした．
 % 向きはここで定義する．CADの写真を使って向きを定義する．
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figure/chapter3/robothand-v1_cad}
+    \includegraphics[width=\linewidth]{figure/chapter3/1号機CAD}
     \caption{3DCAD image of prototype No.1}
     \label{fig:1号機CAD}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.9\linewidth]{figure/chapter3/1号機向き}
-    \caption{Definition of orientation at protoptype No.1}
-    \label{fig:1号機向き}
 \end{figure}
 
 
@@ -163,6 +156,8 @@ AndroidのスマートフォンではPythonから制御すると内蔵カメラ�
 
 今後は，物体を把持した後に次の行為を実行させるため，より自由度を上げ複雑な動作を可能にするロボットハンドを開発する事の必要性を実感した．ロボットの制御精度と動作速度向上には，環境を認識するセンサとして，環境を俯瞰する位置に定点カメラを設置したり，作動環境内に測距センサを配置する必要がある．加えて，把持対象物が複数ある場合に，使用者が意図する物体を正しく認識し把持できる物体識別性能が重要になってくる．
 
+
+\section{ヒアリングの実施}
 茨城県立大学付属病院リハビリテーション科にて義手使用患者へヒアリングを行い，ロボットハンド1号機の感想をいただいた．
 \begin{itemize}
     \item "軽いと感じた"
@@ -171,4 +166,3 @@ AndroidのスマートフォンではPythonから制御すると内蔵カメラ�
     \item "クラウドを使わないから停電になったときでも使えて良い"
 \end{itemize}
 このように義手使用患者からも好評であり，本システムの実用性は高いと考える．
-
