@@ -185,23 +185,24 @@ vertical_deg =\
     \caption{Components of prototype No.2}
     \begin{tabular}{cc}\toprule
         本体フレーム & PLA（赤） \\
-        デプスカメラ & RealSense D435i \\ 
+        カメラ & RealSense D435i \\ 
         マイコン & Arduino Nano \\ 
         DCモータ & \href{http://akizukidenshi.com/catalog/g/gM-12379/}{STLギヤモータ 栄42D長軸型} \\ 
         サーボモータ & \href{https://hitecrcd.co.jp/products/servo32225/}{HS-225MG} x1，\href{https://hitecrcd.com/products/servos/discontinued-servos-servo-accessories/hsr-5990tg-hmi-ultra-premium-robot-servo/product}{HSR-5990TG} x1，\href{https://hitecrcd.co.jp/products/servo31422s/}{HS-422} x1 \\ 
-        バッテリー & モバイルバッテリー \\ 
+        バッテリー & \href{https://cheero.net/powerplus3mini/}{cheero Power Plus 3 mini 6700mAh} \\ 
         タイヤ & \href{https://tamiya.com/japan/products/70194/index.html}{TAMIYA製スパイクタイヤ} \\
-        リニアガイド &  \\
-        ラック\&ピニオン &  \\ \bottomrule
+        リニアガイド & \href{https://jp.misumi-ec.com/vona2/detail/110302586530/}{ミニチュアリニアガイド　標準ブロック} \\
+        \multirow{2}{*}{ラック\&ピニオン} & \href{https://jp.misumi-ec.com/vona2/detail/110300429830/?HissuCode=RGEAM0.8-300-N}{ラックギアＬ寸固定タイプ (RGEAM0.8-300-N)}，\\
+        & \href{https://jp.misumi-ec.com/vona2/detail/221006385074/?HissuCode=S80BP32B-0503}{平歯車 m0.8 POM青（ポリアセタール）タイプ (S80BP32B-0503)}  \\ \bottomrule
     \end{tabular} 
     \label{tab:2号機部品}
 \end{table}
 
-1号機と同様にロボットハンドのフレームは簡便さと軽さを考慮して3Dプリンタ（Adventure3）で造形した．
+1号機と同様にロボットハンドのフレームは簡便さと軽さを考慮して3Dプリンタ（FLASHFORGE社 Adventure3）で造形した．
 \fig{2号機外観}に作製したロボットハンドの外観を示す．サーボモータを3つ使い，それぞれグリッパの開閉，腕のy軸方向への振り上げの関節，腕のx軸方向へのスライドに使用した．グリッパの先端にはゴムをつけてグリップ力を上げた．腕のスライドにはリニアガイドを用いてスムーズに腕が動くようにした．
 アクチュエータのバッテリーにはモバイルバッテリーを使用し，フレーム内部に組み込んだ．RealSenseはロボットハンドの土台の先端にネジ止めをした．
 RealSenseおよび各アクチュエータの制御は外部のデスクトップPCとArduino Nanoを使用し，有線で接続した．
-2号機の総重量は572.27gであった．
+2号機の総重量は572.27 gであった．
 
 \begin{figure}[H]
     \centering
