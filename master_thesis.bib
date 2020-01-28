@@ -1,15 +1,24 @@
 @article{FCN,
-abstract = {Convolutional networks are powerful visual models that yield hierarchies of features. We show that convolutional networks by themselves, trained end-to-end, pixels-to-pixels, exceed the state-of-the-art in semantic segmentation. Our key insight is to build "fully convolutional" networks that take input of arbitrary size and produce correspondingly-sized output with efficient inference and learning. We define and detail the space of fully convolutional networks, explain their application to spatially dense prediction tasks, and draw connections to prior models. We adapt contemporary classification networks (AlexNet, the VGG net, and GoogLeNet) into fully convolutional networks and transfer their learned representations by fine-tuning to the segmentation task. We then define a novel architecture that combines semantic information from a deep, coarse layer with appearance information from a shallow, fine layer to produce accurate and detailed segmentations. Our fully convolutional network achieves state-of-the-art segmentation of PASCAL VOC (20{\%} relative improvement to 62.2{\%} mean IU on 2012), NYUDv2, and SIFT Flow, while inference takes one third of a second for a typical image.},
+abstract = {Convolutional networks are powerful visual models that yield hierarchies of features. We show that convolutional networks by themselves, trained end-to-end, pixels-to-pixels, improve on the previous best result in semantic segmentation. Our key insight is to build 'fully convolutional' networks that take input of arbitrary size and produce correspondingly-sized output with efficient inference and learning. We define and detail the space of fully convolutional networks, explain their application to spatially dense prediction tasks, and draw connections to prior models. We adapt contemporary classification networks (AlexNet, the VGG net, and GoogLeNet) into fully convolutional networks and transfer their learned representations by fine-tuning to the segmentation task. We then define a skip architecture that combines semantic information from a deep, coarse layer with appearance information from a shallow, fine layer to produce accurate and detailed segmentations. Our fully convolutional networks achieve improved segmentation of PASCAL VOC (30{\%} relative improvement to 67.2{\%} mean IU on 2012), NYUDv2, SIFT Flow, and PASCAL-Context, while inference takes one tenth of a second for a typical image.},
 archivePrefix = {arXiv},
 arxivId = {1411.4038},
-author = {Long, Jonathan and Shelhamer, Evan and Darrell, Trevor},
+author = {Shelhamer, Evan and Long, Jonathan and Darrell, Trevor},
+doi = {10.1109/TPAMI.2016.2572683},
 eprint = {1411.4038},
 file = {:Users/atsushi/Library/Application Support/Mendeley Desktop/Downloaded/Long, Shelhamer, Darrell - 2014 - Fully Convolutional Networks for Semantic Segmentation.pdf:pdf},
+issn = {01628828},
+journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+keywords = {Convolutional Networks,Deep Learning,Semantic Segmentation,Transfer Learning},
+mendeley-groups = {ComputerVision},
 month = {nov},
+number = {4},
+pages = {640--651},
 title = {{Fully Convolutional Networks for Semantic Segmentation}},
 url = {http://arxiv.org/abs/1411.4038},
-year = {2014}
+volume = {39},
+year = {2017}
 }
+
 @inproceedings{MaskRCNN,
 abstract = {We present a conceptually simple, flexible, and general framework for object instance segmentation. Our approach efficiently detects objects in an image while simultaneously generating a high-quality segmentation mask for each instance. The method, called Mask R-CNN, extends Faster R-CNN by adding a branch for predicting an object mask in parallel with the existing branch for bounding box recognition. Mask R-CNN is simple to train and adds only a small overhead to Faster R-CNN, running at 5 fps. Moreover, Mask R-CNN is easy to generalize to other tasks, e.g., allowing us to estimate human poses in the same framework. We show top results in all three tracks of the COCO suite of challenges, including instance segmentation, bounding-box object detection, and person keypoint detection. Without tricks, Mask R-CNN outperforms all existing, single-model entries on every task, including the COCO 2016 challenge winners. We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition. Code will be made available.},
 archivePrefix = {arXiv},
@@ -3229,17 +3238,6 @@ year = {2016}
     year = {2012}
 }
 
-
-@Misc{お片づけロボット,
-    title = {Autonomous Tidying-up Robot System - Preferred Networks},
-    howpublished = {https://projects.preferred.jp/tidying-up-robot/}
-}
-
-@Misc{HSRサイト,
-    title = {トヨタ自動車、生活支援ロボットの実用化に向けて研究機関等と技術開発を推進するコミュニティを発足 | トヨタ自動車株式会社 公式企業サイト},
-    howpublished = {https://global.toyota/jp/detail/8709536}
-}
-
 @inproceedings{HSR2018,
     author = {Yamamoto, Takashi and Terada, Koji and Ochiai, Akiyoshi and Saito, Fuminori and Asahara, Yoshiaki and Murase, Kazuto},
     year = {2018},
@@ -3287,7 +3285,6 @@ year = {2016}
     year={2015},
     publisher={Elsevier}
 }
-
 
 @article{fmri,
     added-at = {2018-08-13T00:00:00.000+0200},
@@ -3864,19 +3861,24 @@ year = {2016}
     timestamp     = {Mon, 13 Aug 2018 16:46:11 +0200},
     url           = {http://arxiv.org/abs/1509.02971},
 }
-
-@Article{NAF,
-    author        = {Shixiang Gu and Timothy P. Lillicrap and Ilya Sutskever and Sergey Levine},
-    title         = {Continuous Deep Q-Learning with Model-based Acceleration},
-    journal       = {CoRR},
-    year          = {2016},
-    volume        = {abs/1603.00748},
-    archiveprefix = {arXiv},
-    bibsource     = {dblp computer science bibliography, https://dblp.org},
-    biburl        = {https://dblp.org/rec/bib/journals/corr/GuLSL16},
-    eprint        = {1603.00748},
-    timestamp     = {Mon, 13 Aug 2018 16:46:07 +0200},
-    url           = {http://arxiv.org/abs/1603.00748},
+@article{NAF,
+abstract = {In robotics, the ultimate goal of reinforcement learning is to endow robots with the ability to learn, improve, adapt and reproduce tasks with dynamically changing constraints based on exploration and autonomous learning. We give a summary of the state-of-the-art of reinforcement learning in the context of robotics, in terms of both algorithms and policy representations. Numerous challenges faced by the policy representation in robotics are identified. Three recent examples for the application of reinforcement learning to real-world robots are described: a pancake flipping task, a bipedal walking energy minimization task and an archery-based aiming task. In all examples, a state-of-the-art expectation-maximization-based reinforcement learning is used, and different policy representations are proposed and evaluated for each task. The proposed policy representations offer viable solutions to six rarely-addressed challenges in policy representations: correlations, adaptability, multi-resolution, globality, multi-dimensionality and convergence. Both the successes and the practical difficulties encountered in these examples are discussed. Based on insights from these particular cases, conclusions are drawn about the state-of-the-art and the future perspective directions for reinforcement learning in robotics.},
+archivePrefix = {arXiv},
+arxivId = {1603.00748},
+author = {Kormushev, Petar and Calinon, Sylvain and Caldwell, Darwin G.},
+doi = {10.3390/robotics2030122},
+eprint = {1603.00748},
+file = {:Users/atsushi/Library/Application Support/Mendeley Desktop/Downloaded/Gu et al. - 2016 - Continuous deep q-learning with model-based acceleration(2).pdf:pdf;:Users/atsushi/Google{\_}Drive{\_}a{\_}yamada0703/東大/paper/2016{\_}Continuous deep q-learning with model-based acceleration{\_}Gu et al.pdf:pdf},
+isbn = {3405062780},
+issn = {22186581},
+journal = {Robotics},
+keywords = {Learning and adaptive systems,Reinforcement learning,Robotics},
+number = {3},
+pages = {122--148},
+pmid = {21487784},
+title = {{Continuous Deep Q-Learning with Model-based Acceleration}},
+volume = {2},
+year = {2013}
 }
 
 @Article{QLearning,
@@ -3888,18 +3890,17 @@ year = {2016}
     number  = {3},
 }
 
-@Article{VGGNet,
-    author        = {Karen Simonyan and Andrew Zisserman},
-    title         = {Very Deep Convolutional Networks for Large-Scale Image Recognition},
-    journal       = {CoRR},
-    year          = {2014},
-    volume        = {abs/1409.1556},
-    archiveprefix = {arXiv},
-    bibsource     = {dblp computer science bibliography, https://dblp.org},
-    biburl        = {https://dblp.org/rec/bib/journals/corr/SimonyanZ14a},
-    eprint        = {1409.1556},
-    timestamp     = {Mon, 13 Aug 2018 16:46:51 +0200},
-    url           = {http://arxiv.org/abs/1409.1556},
+@inproceedings{VGGNet,
+abstract = {In this work we investigate the effect of the convolutional network depth on its accuracy in the large-scale image recognition setting. Our main contribution is a thorough evaluation of networks of increasing depth using an architecture with very small (3 × 3) convolution filters, which shows that a significant improvement on the prior-art configurations can be achieved by pushing the depth to 16–19 weight layers. These findings were the basis of our ImageNet Challenge 2014 submission, where our team secured the first and the second places in the localisation and classification tracks respectively. We also show that our representations generalise well to other datasets, where they achieve state-of-the-art results. We have made our two best-performing ConvNet models publicly available to facilitate further research on the use of deep visual representations in computer vision.},
+archivePrefix = {arXiv},
+arxivId = {1409.1556},
+author = {Simonyan, Karen and Zisserman, Andrew},
+booktitle = {3rd International Conference on Learning Representations, ICLR 2015 - Conference Track Proceedings},
+eprint = {1409.1556},
+file = {:Users/atsushi/Library/Application Support/Mendeley Desktop/Downloaded/Simonyan, Zisserman - 2015 - Very deep convolutional networks for large-scale image recognition.pdf:pdf},
+publisher = {International Conference on Learning Representations, ICLR},
+title = {{Very deep convolutional networks for large-scale image recognition}},
+year = {2015}
 }
 
 @Article{DuelingNetwork,
@@ -3928,6 +3929,20 @@ year = {2016}
     eprint        = {1511.05952},
     timestamp     = {Mon, 13 Aug 2018 16:46:28 +0200},
     url           = {http://arxiv.org/abs/1511.05952},
+}
+@article{Dmitry2018,
+abstract = {In this paper, we study the problem of learning vision-based dynamic manipulation skills using a scalable reinforcement learning approach. We study this problem in the context of grasping, a longstanding challenge in robotic manipulation. In contrast to static learning behaviors that choose a grasp point and then execute the desired grasp, our method enables closed-loop vision-based control, whereby the robot continuously updates its grasp strategy based on the most recent observations to optimize long-horizon grasp success. To that end, we introduce QT-Opt, a scalable self-supervised vision-based reinforcement learning framework that can leverage over 580k real-world grasp attempts to train a deep neural network Q-function with over 1.2M parameters to perform closed-loop, real-world grasping that generalizes to 96{\%} grasp success on unseen objects. Aside from attaining a very high success rate, our method exhibits behaviors that are quite distinct from more standard grasping systems: using only RGB vision-based perception from an over-the-shoulder camera, our method automatically learns regrasping strategies, probes objects to find the most effective grasps, learns to reposition objects and perform other non-prehensile pre-grasp manipulations, and responds dynamically to disturbances and perturbations.},
+archivePrefix = {arXiv},
+arxivId = {1806.10293},
+author = {Kalashnikov, Dmitry and Irpan, Alex and Pastor, Peter and Ibarz, Julian and Herzog, Alexander and Jang, Eric and Quillen, Deirdre and Holly, Ethan and Kalakrishnan, Mrinal and Vanhoucke, Vincent and Levine, Sergey},
+eprint = {1806.10293},
+file = {:Users/atsushi/Google{\_}Drive{\_}a{\_}yamada0703/東大/paper/2018{\_}QT-Opt Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation{\_}Kalashnikov et al.pdf:pdf},
+keywords = {deep learning,grasping,reinforcement learning},
+number = {CoRL},
+pages = {1--23},
+title = {{QT-Opt: Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation}},
+url = {http://arxiv.org/abs/1806.10293},
+year = {2018}
 }
 
 @Article{Dmitry2018,
@@ -3981,11 +3996,6 @@ year = {2016}
     isbn      = {978-3-540-31692-3},
 }
 
-@Misc{pathology,
-    title        = {一般社団法人 日本病理学会，認定病理専門医一覧},
-    howpublished = {http://pathology.or.jp/senmoni/board-certified.html}
-}
-
 @article{simpleRNN,
     author    = {Yann LeCun and
     Yoshua Bengio and
@@ -4027,20 +4037,16 @@ year = {2016}
     publisher = {JMLR.org},
 }
 
-@article{Adam,
-    added-at = {2018-08-13T00:00:00.000+0200},
-    author = {Kingma, Diederik P. and Ba, Jimmy},
-    biburl = {https://www.bibsonomy.org/bibtex/23b0328784dbfce338ba0dd2618a7a059/dblp},
-    ee = {http://arxiv.org/abs/1412.6980},
-    interhash = {57d2ac873f398f21bb94790081e80394},
-    intrahash = {3b0328784dbfce338ba0dd2618a7a059},
-    journal = {CoRR},
-    keywords = {dblp},
-    timestamp = {2018-08-14T14:24:27.000+0200},
-    title = {Adam: A Method for Stochastic Optimization.},
-    url = {http://dblp.uni-trier.de/db/journals/corr/corr1412.html#KingmaB14},
-    volume = {abs/1412.6980},
-    year = 2014
+@inproceedings{Adam,
+abstract = {We introduce Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions, based on adaptive estimates of lower-order moments. The method is straightforward to implement, is computationally efficient, has little memory requirements, is invariant to diagonal rescaling of the gradients, and is well suited for problems that are large in terms of data and/or parameters. The method is also appropriate for non-stationary objectives and problems with very noisy and/or sparse gradients. The hyper-parameters have intuitive interpretations and typically require little tuning. Some connections to related algorithms, on which Adam was inspired, are discussed. We also analyze the theoretical convergence properties of the algorithm and provide a regret bound on the convergence rate that is comparable to the best known results under the online convex optimization framework. Empirical results demonstrate that Adam works well in practice and compares favorably to other stochastic optimization methods. Finally, we discuss AdaMax, a variant of Adam based on the infinity norm.},
+archivePrefix = {arXiv},
+arxivId = {1412.6980},
+author = {Kingma, Diederik P. and Ba, Jimmy Lei},
+booktitle = {3rd International Conference on Learning Representations, ICLR 2015 - Conference Track Proceedings},
+eprint = {1412.6980},
+publisher = {International Conference on Learning Representations, ICLR},
+title = {{Adam: A method for stochastic optimization}},
+year = {2015}
 }
 
 @article{SIFT,
@@ -4095,34 +4101,25 @@ year = {2016}
     timestamp = {2009-08-24T22:23:57.000+0200},
     title = {Histograms of Oriented Gradients for Human Detection},
     url = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1467360},
-    volume = 1,
-    year = 2005
+    volume = {1},
+    year = {2005}
 }
 
 @article{SURF,
-    abstract = {This article presents a novel scale- and rotation-invariant detector and descriptor, coined SURF (Speeded-Up Robust Features). SURF approximates or even outperforms previously proposed schemes with respect to repeatability, distinctiveness, and robustness, yet can be computed and compared much faster.
-    
-    This is achieved by relying on integral images for image convolutions; by building on the strengths of the leading existing detectors and descriptors (specifically, using a Hessian matrix-based measure for the detector, and a distribution-based descriptor); and by simplifying these methods to the essential. This leads to a combination of novel detection, description, and matching steps.
-    
-    The paper encompasses a detailed description of the detector and descriptor and then explores the effects of the most important parameters. We conclude the article with SURF’s application to two challenging, yet converse goals: camera calibration as a special case of image registration, and object recognition. Our experiments underline SURF’s usefulness in a broad range of topics in computer vision.},
-    added-at = {2012-09-30T19:58:26.000+0200},
-    author = {Bay, Herbert and Ess, Andreas and Tuytelaars, Tinne and Gool, Luc Van},
-    biburl = {https://www.bibsonomy.org/bibtex/2dfea172dfaca0272dcdc66acf92ec58d/daill},
-    description = {ScienceDirect.com - Computer Vision and Image Understanding - Speeded-Up Robust Features (SURF)},
-    doi = {10.1016/j.cviu.2007.09.014},
-    interhash = {befc128dd8bce45a9d0308f72dc9a95a},
-    intrahash = {dfea172dfaca0272dcdc66acf92ec58d},
-    issn = {1077-3142},
-    journal = {Computer Vision and Image Understanding},
-    keywords = {detector feature surf},
-    note = {Similarity Matching in Computer Vision and Multimedia},
-    number = 3,
-    pages = {346 - 359},
-    timestamp = {2012-09-30T19:58:26.000+0200},
-    title = {Speeded-Up Robust Features (SURF)},
-    url = {http://www.sciencedirect.com/science/article/pii/S1077314207001555},
-    volume = 110,
-    year = 2008
+abstract = {This article presents a novel scale- and rotation-invariant detector and descriptor, coined SURF (Speeded-Up Robust Features). SURF approximates or even outperforms previously proposed schemes with respect to repeatability, distinctiveness, and robustness, yet can be computed and compared much faster. This is achieved by relying on integral images for image convolutions; by building on the strengths of the leading existing detectors and descriptors (specifically, using a Hessian matrix-based measure for the detector, and a distribution-based descriptor); and by simplifying these methods to the essential. This leads to a combination of novel detection, description, and matching steps. The paper encompasses a detailed description of the detector and descriptor and then explores the effects of the most important parameters. We conclude the article with SURF's application to two challenging, yet converse goals: camera calibration as a special case of image registration, and object recognition. Our experiments underline SURF's usefulness in a broad range of topics in computer vision. {\textcopyright} 2007 Elsevier Inc. All rights reserved.},
+author = {Bay, Herbert and Ess, Andreas and Tuytelaars, Tinne and {Van Gool}, Luc},
+doi = {10.1016/j.cviu.2007.09.014},
+file = {:Users/atsushi/Library/Application Support/Mendeley Desktop/Downloaded/Bay et al. - 2008 - Speeded-Up Robust Features (SURF).pdf:pdf},
+issn = {10773142},
+journal = {Computer Vision and Image Understanding},
+keywords = {Camera calibration,Feature description,Interest points,Local features,Object recognition},
+mendeley-groups = {ComputerVision},
+month = {jun},
+number = {3},
+pages = {346--359},
+title = {{Speeded-Up Robust Features (SURF)}},
+volume = {110},
+year = {2008}
 }
 
 @article{SVM,
@@ -4136,8 +4133,8 @@ year = {2016}
     pages = {273-297},
     timestamp = {2016-09-06T08:23:07.000+0200},
     title = {Support Vector Networks},
-    volume = 20,
-    year = 1995
+    volume = {20},
+    year = {1995}
 }
 
 @article{M2model,
@@ -4158,22 +4155,16 @@ year = {2016}
 }
 
 @article{Backprop,
-    added-at = {2018-06-03T13:17:55.000+0200},
-    author = {Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.},
-    biburl = {https://www.bibsonomy.org/bibtex/25d95851c0f627ab11747a2e481ecbad6/achakraborty},
-    description = {Learning representations by back-propagating errors | Nature},
-    interhash = {c354bc293fa9aa7caffc66d40a014903},
-    intrahash = {5d95851c0f627ab11747a2e481ecbad6},
-    journal = {Nature},
-    keywords = {deep-learning nature neural-networks paper},
-    month = oct,
-    pages = {533--},
-    publisher = {Nature Publishing Group},
-    timestamp = {2018-06-03T13:17:55.000+0200},
-    title = {Learning representations by back-propagating errors},
-    url = {http://dx.doi.org/10.1038/323533a0},
-    volume = 323,
-    year = 1986
+abstract = {We describe a new learning procedure, back-propagation, for networks of neurone-like units. The procedure repeatedly adjusts the weights of the connections in the network so as to minimize a measure of the difference between the actual output vector of the net and the desired output vector. As a result of the weight adjustments, internal 'hidden' units which are not part of the input or output come to represent important features of the task domain, and the regularities in the task are captured by the interactions of these units. The ability to create useful new features distinguishes back-propagation from earlier, simpler methods such as the perceptron-convergence procedure 1. {\textcopyright} 1986 Nature Publishing Group.},
+author = {Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.},
+doi = {10.1038/323533a0},
+issn = {00280836},
+journal = {Nature},
+number = {6088},
+pages = {533--536},
+title = {{Learning representations by back-propagating errors}},
+volume = {323},
+year = {1986}
 }
 
 @article{SSD,
@@ -4399,22 +4390,7 @@ year = {2016}
     title = {Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks.},
     url = {http://dblp.uni-trier.de/db/journals/corr/corr1511.html#RadfordMC15},
     volume = {abs/1511.06434},
-    year = 2015
-}
-
-@Misc{お片づけロボット,
-    title = {Autonomous Tidying-up Robot System - Preferred Networks},
-    howpublished = {\url{https://projects.preferred.jp/tidying-up-robot/}}
-}
-
-@Misc{HSRサイト,
-    title = {トヨタ自動車、生活支援ロボットの実用化に向けて研究機関等と技術開発を推進するコミュニティを発足 | トヨタ自動車株式会社 公式企業サイト},
-    howpublished = {\url{https://global.toyota/jp/detail/8709536}}
-}
-
-@Misc{COCOサイト,
-    title = {COCO - Common Objects in Context},
-    howpublished = {\url{http://cocodataset.org}}
+    year = {2015}
 }
 
 @inproceedings{COCO論文,
@@ -4436,13 +4412,6 @@ year = {2016}
     year = {2014}
 }
 
-@Misc{pybullet,
-    author =   {Erwin Coumans and Yunfei Bai},
-    title =    {PyBullet, a Python module for physics simulation for games, robotics and machine learning},
-    howpublished = {\url{http://pybullet.org}},
-    year = {2016--2019}
-}
-
 @inproceedings{HSR2018,
     author = {Yamamoto, Takashi and Terada, Koji and Ochiai, Akiyoshi and Saito, Fuminori and Asahara, Yoshiaki and Murase, Kazuto},
     year = {2018},
@@ -4452,15 +4421,22 @@ year = {2016}
     doi = {10.1109/IROS.2018.8593798}
 }
 
-@article{jamminggripper,
-    abstract = {Gripping and holding of objects are key tasks for robotic manipu-lators. The development of universal grippers able to pick up unfamiliar objects of widely varying shape and surface properties remains, however, challenging. Most current designs are based on the multifingered hand, but this approach introduces hardware and software complexities. These include large numbers of control-lable joints, the need for force sensing if objects are to be handled securely without crushing them, and the computational overhead to decide how much stress each finger should apply and where. Here we demonstrate a completely different approach to a universal gripper. Individual fingers are replaced by a single mass of granular material that, when pressed onto a target object, flows around it and conforms to its shape. Upon application of a vacuum the granular material contracts and hardens quickly to pinch and hold the object without requiring sensory feedback. We find that volume changes of less than 0.5{\%} suffice to grip objects reliably and hold them with forces exceeding many times their weight. We show that the operating principle is the ability of granular materials to transition between an unjammed, deformable state and a jammed state with solid-like rigidity. We delineate three separate mechanisms, friction, suction, and interlocking, that contribute to the gripping force. Using a simple model we relate each of them to the mechanical strength of the jammed state. This advance opens up new possibilities for the design of simple, yet highly adaptive systems that excel at fast gripping of complex objects. stress-strain | packing density | friction | suction | interlocking},
-    author = {Brown, Eric and Rodenberg, Nicholas and Amend, John and Mozeika, Annan and Steltz, Erik and Zakin, Mitchell R and Lipson, Hod and Jaeger, Heinrich M},
-    doi = {10.1073/pnas.1003250107/-/DCSupplemental},
-    file = {::},
-    mendeley-groups = {ComputerVision},
-    title = {{Universal robotic gripper based on the jamming of granular material}},
-    url = {www.pnas.org/lookup/suppl/}
+@article {jamminggripper,
+	author = {Brown, Eric and Rodenberg, Nicholas and Amend, John and Mozeika, Annan and Steltz, Erik and Zakin, Mitchell R. and Lipson, Hod and Jaeger, Heinrich M.},
+	title = {Universal robotic gripper based on the jamming of granular material},
+	volume = {107},
+	number = {44},
+	pages = {18809--18814},
+	year = {2010},
+	doi = {10.1073/pnas.1003250107},
+	publisher = {National Academy of Sciences},
+	abstract = {Gripping and holding of objects are key tasks for robotic manipulators. The development of universal grippers able to pick up unfamiliar objects of widely varying shape and surface properties remains, however, challenging. Most current designs are based on the multifingered hand, but this approach introduces hardware and software complexities. These include large numbers of controllable joints, the need for force sensing if objects are to be handled securely without crushing them, and the computational overhead to decide how much stress each finger should apply and where. Here we demonstrate a completely different approach to a universal gripper. Individual fingers are replaced by a single mass of granular material that, when pressed onto a target object, flows around it and conforms to its shape. Upon application of a vacuum the granular material contracts and hardens quickly to pinch and hold the object without requiring sensory feedback. We find that volume changes of less than 0.5\% suffice to grip objects reliably and hold them with forces exceeding many times their weight. We show that the operating principle is the ability of granular materials to transition between an unjammed, deformable state and a jammed state with solid-like rigidity. We delineate three separate mechanisms, friction, suction, and interlocking, that contribute to the gripping force. Using a simple model we relate each of them to the mechanical strength of the jammed state. This advance opens up new possibilities for the design of simple, yet highly adaptive systems that excel at fast gripping of complex objects.},
+	issn = {0027-8424},
+	URL = {https://www.pnas.org/content/107/44/18809},
+	eprint = {https://www.pnas.org/content/107/44/18809.full.pdf},
+	journal = {Proceedings of the National Academy of Sciences}
 }
+
 
 @book{われはロボット,
     title={I, Robot},
@@ -4488,17 +4464,46 @@ year = {2016}
     year = {2018}
 }
 
+@Misc{pybullet,
+    author =   {Erwin Coumans and Yunfei Bai},
+    title =    {PyBullet, a Python module for physics simulation for games, robotics and machine learning},
+    howpublished = {\url{http://pybullet.org}},
+    year = {2016--2019},
+    note = {visited on 2020/01/28}
+}
+
+@Misc{お片づけロボット,
+    title = {Autonomous Tidying-up Robot System - Preferred Networks},
+    howpublished = {\url{https://projects.preferred.jp/tidying-up-robot/}},
+    note = {visited on 2020/01/28}
+}
+
+@Misc{HSRサイト,
+    title = {トヨタ自動車、生活支援ロボットの実用化に向けて研究機関等と技術開発を推進するコミュニティを発足 | トヨタ自動車株式会社 公式企業サイト},
+    howpublished = {\url{https://global.toyota/jp/detail/8709536}},
+    note = {visited on 2020/01/28}
+}
+
+@Misc{COCOサイト,
+    title = {COCO - Common Objects in Context},
+    howpublished = {\url{http://cocodataset.org}},
+    note = {visited on 2020/01/28}
+}
+
 @Misc{roomba,
     title = {ロボット掃除機 ルンバ | アイロボット公式サイト},
-    howpublished = {\url{https://www.irobot-jp.com/roomba/}}
+    howpublished = {\url{https://www.irobot-jp.com/roomba/}},
+    note = {visited on 2020/01/28}
 }
 
 @Misc{davinci,
     title = {da Vinciiの紹介：da Vinciについて | 日本ロボット外科学会 J-robo -Japan Robotic Surgery Society-},
-    howpublished = {\url{https://j-robo.or.jp/da-vinci/}}
+    howpublished = {\url{https://j-robo.or.jp/da-vinci/}},
+    note = {visited on 2020/01/28}
 }
 
 @Misc{myspoon,
     title = {マイスプーン（食事支援ロボット）｜医療・介護｜防犯対策・セキュリティのセコム},
-    howpublished = {\url{https://www.secom.co.jp/personal/medical/myspoon.html}}
+    howpublished = {\url{https://www.secom.co.jp/personal/medical/myspoon.html}},
+    note = {visited on 2020/01/28}
 }

@@ -25,7 +25,7 @@
 	\caption{Architecture of Muti-layer perceptron}
 \end{figure}
 
-\fig {mlp}における丸や矢印はそれぞれノード(またはニューロン)と重み(または結合)と呼び，ともに数値である．例えば画像を分類しようと思えば，各ピクセルの画素数を各ノードに入力する．例えば$28 \times 28$pxのグレースケール画像であれば，784個のノードが必要となる．入力データ$\bm {x}$が入力層に入ってくると，その値に重み$\bm {w}$をかけ，活性化関数$H$と呼ばれる関数に通し，結果$\bm{y}$を出力する．ここで，入力$\bm{x}$，重み$\bm{w}$，出力$\bm{y}$を太字で表したが，これらは全てテンソルであり，1つの層にあるノード$x_1, x_2, \cdots x_n$を一括して$\bm {x}$として表記している．
+\fig {mlp}における丸や矢印はそれぞれノード(またはニューロン)と重み(または結合)と呼び，ともに数値である．例えば画像を分類しようと思えば，各ピクセルの画素数を各ノードに入力する．例えば$28 \times 28$pixelのグレースケール画像であれば，784個のノードが必要となる．入力データ$\bm {x}$が入力層に入ってくると，その値に重み$\bm {w}$をかけ，活性化関数$H$と呼ばれる関数に通し，結果$\bm{y}$を出力する．ここで，入力$\bm{x}$，重み$\bm{w}$，出力$\bm{y}$を太字で表したが，これらは全てテンソルであり，1つの層にあるノード$x_1, x_2, \cdots x_n$を一括して$\bm {x}$として表記している．
 
 ここで，中間層の1つのノードについて考える．\fig {perceptron}にMLPを構成する1ユニットである単純パーセプトロンを示した．この模式図を数式で表すと次のようになる．
 \begin{align}
@@ -239,14 +239,14 @@ Deep LearningとはDeep Neural Network(DNN)を指すことが多い．この"Dee
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figure/chapter2/resnet34}
-    \caption{Architecture of ResNet34.}
+    \caption[Architecture of ResNet34. ]{Architecture of ResNet34\cite{ResNet}. }
     \label{fig:ResNet}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{figure/chapter2/skipconnection}
-    \caption{Residual block: Skip Connection}
+    \caption[Residual block: Skip Connection. ]{Residual block: Skip Connection\cite{ResNet}. }
     \label{fig:skipconnection}
 \end{figure}
 
