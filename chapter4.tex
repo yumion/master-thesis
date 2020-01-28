@@ -15,13 +15,13 @@
 環境把握と対象物との距離を測るためにRGBカメラとデプスカメラを両方搭載したIntel社のRealSenseを用いた．
 対象物を持ち上げるために腕に関節を1つ加え，地面から垂直に対象物を挙上できるようにした．
 把持中心点を正確に掴むため，2指対立タイプの一般的な形状のグリッパとした．
-把持中心位置の制御では，高精度化のためにラック\&ピニオンを用いてサーボモータの回転を水平運動に変換にし，腕を進行方向と垂直な方向にスライドできるようにした．
+把持中心位置の制御では，高精度化のためにラック\&ピニオンを用いてサーボモータの回転を水平運動に変換にし，腕を進行方向と垂直な方向にスライドできる機構を搭載した．
 
 以上を考慮して\fig{2号機CAD}に示すようなフレームを3DCAD（123D Design Autodesk社を使用）で設計した．また，ロボットハンドの向きは\fig{2号機CAD}に示す，ソフトウェアでの画像（配列）の向きと同様の定義とする．
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figure/chapter4/2号機CAD-2}
+    \includegraphics[width=0.7\linewidth]{figure/chapter4/2号機CAD-2}
     \caption{3DCAD image of prototype No.2}
     \label{fig:2号機CAD}
 \end{figure}
@@ -30,15 +30,15 @@
 \section{制御アルゴリズム}
 2号機では強化学習ではなく比例制御の考え方を利用した手法及びルールベースによって対象物のピックアップを行った．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figure/chapter4/2号機制御図_接近-2}
-    \caption{Block diagram of tracking objects task.}
+    \includegraphics[width=\linewidth]{figure/chapter4/2号機制御図_接近-2}
+    \caption{Block diagram ① of tracking objects task.}
     \label{fig:2号機接近}
 \end{figure}
 
 
-接近動作では2段階に分けて行った．まず対象物までのラフな接近について述べる（\fig{2号機接近}）．
+接近動作では2段階に分けて行った．まず対象物までの接近について述べる（\fig{2号機接近}）．
 インスタンスセグメンテーションにより物体を検出し，対象物のマスクを取得し重心を計算した．その重心がロボットハンドの中心軸に来るように，左右輪のスピードをそれぞれ独立に以下の更新式によって制御しながら接近させた．
 \begin{lstlisting}[caption=接近アルゴリズム, label=code:motor]
 r_motor = (1 - error_distance) / 2 * MAX_SPEED
@@ -46,10 +46,10 @@ l_motor = (1 + error_distance) / 2 * MAX_SPEED
 \end{lstlisting}
 ここで\texttt{MAX\_SPEED}はモーターの最大スピードで今回は100とした．\texttt{error\_distance}はロボットハンドと対象物との画像内におけるx軸方向のズレを画像の横の長さの半分で規格した値であり，-1から1の値をとる．そして対象物からRealSenseのデプス測定限界である20 cm程度まで近づいたら停止させた．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figure/chapter4/2号機制御図_把持-2}
-    \caption{Block diagram of grasping objects task.}
+    \includegraphics[width=\linewidth]{figure/chapter4/2号機制御図_把持-3}
+    \caption{Block diagram ② of grasping objects task.}
     \label{fig:2号機把持}
 \end{figure}
 
@@ -57,10 +57,10 @@ l_motor = (1 + error_distance) / 2 * MAX_SPEED
 対象物の重心にハンドの把持中心が来るように横方向にラックピニオンで修正を加えた．この時，画像におけるピクセル間距離を実距離に変換し，重心とハンド中心の変位をなるべく小さくするようにサーボを動かした．そしてデプスカメラが対象物に覆われて見えなくなるまで（デプス画像の現フレームとのピクセル数比を取り，10\%以下になるまで）直進させた．
 そこからさらにグリッパのより内側に対象物を収めるため4 cm直進させ，グリッパを閉じさせた．その後腕を上げ物体を持ち上げ，この際のデプス画像を保持しておいた．そこから1秒ごとにデプス画像の現フレームとのピクセル数比を取り，50\%以下であったら失敗とし，5秒落とさず維持したら把持成功とした．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figure/chapter4/2号機制御図_AR-2}
-    \caption{Block diagram of get back home position task.}
+    \includegraphics[width=\linewidth]{figure/chapter4/2号機制御図_AR-3}
+    \caption{Block diagram ③ of get back home position task.}
     \label{fig:2号機AR}
 \end{figure}
 
@@ -69,7 +69,7 @@ l_motor = (1 + error_distance) / 2 * MAX_SPEED
 
 なお，Arduinoとのシリアル通信では1回に2byteまでしか送信できず，String型でモーター5台の情報を送信すると遅延や読み飛ばしが発生した．そこで2号機ではモーターの取る値をデジタル化し情報を圧縮してByte型で送信するようにした．実際に取る値と送信bit信号の対応表を\tab{2号機信号表}に示す．
 
-\begin{table}
+\begin{table}[H]
     \centering
     \caption{Convert value of motor speed or servo degree to bit signal.}
     \begin{tabular}{cccc}\toprule
@@ -86,10 +86,10 @@ l_motor = (1 + error_distance) / 2 * MAX_SPEED
     \label{tab:2号機信号表}
 \end{table}
 
-Bit signalが駆動させるアクチュエータを2進数で示しており，動かす値をValue @ Pythonに示す10進数を5桁の2進数に変換してそれぞれをドッキングして8桁の2進数として1byteのデータをシリアル送信した．
+Bit signalが駆動させるアクチュエータを2進数で示しており，動かす値をValue @ Pythonに示す10進数を5桁の2進数に変換してそれぞれを連結して8桁の2進数として1byteのデータをシリアル送信した．
 
 RealSenseおよびArduinoの制御はG-DEP社のDeepLearning BoxII（Ubuntu16.04）を使用し，計算リソースはNVIDIA社のGPU（TITAN RTX）を使用した．
-プログラムは筆者のGitHub\footnote{\url{https://github.com/yumion/onodera-lab/tree/master/robotHandV2}}で公開している．
+2号機のプログラムは筆者のGitHub\footnote{\url{https://github.com/yumion/onodera-lab/tree/master/robotHandV2}}で公開している．
 
 
 \subsection{RealSenseを使用したカメラ画像内における実距離推定}
@@ -97,7 +97,7 @@ RealSenseおよびArduinoの制御はG-DEP社のDeepLearning BoxII（Ubuntu16.04
 
 具体的には，壁に30cm定規を置きカメラは壁と平行になるよう設置した．壁からカメラの距離$z$(cm)を変えながら定規の目盛りのピクセル座標を取得し，横軸にピクセル差分$\Delta \rm{pixel}$，縦軸にそのピクセルに対応する定規の目盛り幅$\Delta x$(cm)をプロットした（\fig{pix2dist}）．また，各$z$で線形回帰を行ったあと横軸に壁からカメラの距離$z$，縦軸に傾き$a$をプロットし線形回帰を行い，全ての距離$z$におけるピクセル間距離を求めた（\fig{depth2grad}）．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.49\hsize}
         \centering
@@ -115,7 +115,7 @@ RealSenseおよびArduinoの制御はG-DEP社のDeepLearning BoxII（Ubuntu16.04
     \label{fig:pix2distance}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{figure/chapter4/servo2distance}
     \caption{Convert servo input to distance.}
@@ -159,7 +159,7 @@ vertical_deg =\
         & 2014 & 2017 & 2014 & 2017 \\ \midrule
         $\rm{AP}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.352 & 0.227 & 0.334 & 0.243 \\ 
         $\rm{AR}^{\rm{IoU}=0.50:0.95} \u{maxDets=100} @Area=all$ & 0.438 & 0.299 & 0.405 & 0.301 \\ 
-        FPS & 4.078 & 3.880 & 4.013 & 4.002 \\ \bottomrule
+        Inference speed (image / sec) & 4.078 & 3.880 & 4.013 & 4.002 \\ \bottomrule
     \end{tabular} 
     \label{tab:MSCOCO評価}
 \end{table}
@@ -173,7 +173,7 @@ vertical_deg =\
     \label{fig:maskrcnn例}
 \end{figure}
 
-このように，物体のセグメンテーションが完璧ではなくても対象物の重心はおおよそ把握できるため，IoUよりもPrecisionを重視し物体検出におけるfpsが高いCOCO2014の学習モデルを使用した．
+このように，物体のセグメンテーションが完璧ではなくても対象物の重心はおおよそ把握できるため，IoUよりもPrecisionを重視し，物体検出における推論速度が速いCOCO2014の学習モデルを使用した．
 
 
 \section{実機作製}
@@ -184,22 +184,21 @@ vertical_deg =\
     \centering
     \caption{Components of prototype No.2}
     \begin{tabular}{cc}\toprule
-        本体フレーム & PLA（赤） \\
-        カメラ & RealSense D435i \\ 
+        本体フレーム & \href{http://flashforge.shop-pro.jp/?pid=76863013}{Flashforge Filament PLA 500g レッド} \\
+        カメラ & Intel RealSense D435i \\ 
         マイコン & Arduino Nano \\ 
         DCモータ & \href{http://akizukidenshi.com/catalog/g/gM-12379/}{STLギヤモータ 栄42D長軸型} \\ 
         サーボモータ & \href{https://hitecrcd.co.jp/products/servo32225/}{HS-225MG} x1，\href{https://hitecrcd.com/products/servos/discontinued-servos-servo-accessories/hsr-5990tg-hmi-ultra-premium-robot-servo/product}{HSR-5990TG} x1，\href{https://hitecrcd.co.jp/products/servo31422s/}{HS-422} x1 \\ 
         バッテリー & \href{https://cheero.net/powerplus3mini/}{cheero Power Plus 3 mini 6700mAh} \\ 
         タイヤ & \href{https://tamiya.com/japan/products/70194/index.html}{TAMIYA製スパイクタイヤ} \\
-        リニアガイド & \href{https://jp.misumi-ec.com/vona2/detail/110302586530/}{ミニチュアリニアガイド　標準ブロック} \\
-        \multirow{2}{*}{ラック\&ピニオン} & \href{https://jp.misumi-ec.com/vona2/detail/110300429830/?HissuCode=RGEAM0.8-300-N}{ラックギアＬ寸固定タイプ (RGEAM0.8-300-N)}，\\
-        & \href{https://jp.misumi-ec.com/vona2/detail/221006385074/?HissuCode=S80BP32B-0503}{平歯車 m0.8 POM青（ポリアセタール）タイプ (S80BP32B-0503)}  \\ \bottomrule
+        リニアガイド & \href{https://jp.misumi-ec.com/vona2/detail/110302586530/}{MiSUMi ミニチュアリニアガイド　標準ブロック} \\
+        \multirow{2}{*}{ラック\&ピニオン} & \href{https://jp.misumi-ec.com/vona2/detail/110300429830/?HissuCode=RGEAM0.8-300-N}{MiSUMi ラックギアＬ寸固定タイプ (RGEAM0.8-300-N)}，\\
+        & \href{https://jp.misumi-ec.com/vona2/detail/221006385074/?HissuCode=S80BP32B-0503}{MiSUMi 平歯車 m0.8 POM青（ポリアセタール）タイプ (S80BP32B-0503)}  \\ \bottomrule
     \end{tabular} 
     \label{tab:2号機部品}
 \end{table}
 
-1号機と同様にロボットハンドのフレームは簡便さと軽さを考慮して3Dプリンタ（FLASHFORGE社 Adventure3）で造形した．
-\fig{2号機外観}に作製したロボットハンドの外観を示す．サーボモータを3つ使い，それぞれグリッパの開閉，腕のy軸方向への振り上げの関節，腕のx軸方向へのスライドに使用した．グリッパの先端にはゴムをつけてグリップ力を上げた．腕のスライドにはリニアガイドを用いてスムーズに腕が動くようにした．
+\fig{2号機外観}に作製したロボットハンドの外観を示す．1号機と同様にロボットハンドのフレームは簡便さと軽さを考慮して3Dプリンタ（FLASHFORGE社 Adventure3）で造形した．サーボモータを3つ使い，それぞれグリッパの開閉（0〜50度），腕の$y$軸方向への振り上げの関節(0〜80度)，腕の$x$軸方向へのスライド（0〜180度）に使用した．グリッパの先端にはゴムをつけてグリップ力を上げた．腕のスライドにはリニアガイドを用いてスムーズに腕が動くようにした．
 アクチュエータのバッテリーにはモバイルバッテリーを使用し，フレーム内部に組み込んだ．RealSenseはロボットハンドの土台の先端にネジ止めをした．
 RealSenseおよび各アクチュエータの制御は外部のデスクトップPCとArduino Nanoを使用し，有線で接続した．
 2号機の総重量は572.27 gであった．
@@ -207,7 +206,7 @@ RealSenseおよび各アクチュエータの制御は外部のデスクトッ�
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figure/chapter4/2号機外観}
-    \caption{Appearance of Prototype No.2. Weight is 572.27 g.}
+    \caption[Appearance of Prototype No.2]{Appearance of Prototype No.2. Blue lines are expression of parts and yellow lines are motion of motors. Weight is 572.27 g.}
     \label{fig:2号機外観}
 \end{figure}
 
@@ -215,7 +214,7 @@ RealSenseおよび各アクチュエータの制御は外部のデスクトッ�
 \section{評価方法}
 2号機の改良点は対象物の識別性能とより正確な把持動作である．したがってこの2点に関して評価を行った．
 
-COCOデータセットの中で，机の上にあるものを識別・把持できるかを検証した．
+COCOデータセットの中で，机の上にあるものをRealSenseカメラ（D435i）で識別・把持できるかを検証した．
 今回，対象とした物体は\fig{対象物}に示す5つの物体（4種類）である．また，\tab{対象物}に各対象物の詳細を示す．ロボットハンドの機構上，地面から高さが低い物体は把持ができないため，各対象物は正立させた状態で配置した．"cell phone"は背面にクリップを付けて直立させた．
 \begin{figure}[H]
     \centering
@@ -281,7 +280,7 @@ COCOデータセットの中で，机の上にあるものを識別・把持で�
 
 \section{結果}
 \subsection{識別性能評価}\label{sec:識別性能評価}
-正立させた"bottle"はどの向きにおいても検出できた．"cell phone"はエッジ部分だけでは検出できず，画面側と背面のみ検出できた．"cup"は取っ手が写っている角度では検出できたが，取っ手が写らない向きでは"bottle"と誤認識することがあった．"apple"はどの向きにおいても検出できなかった．
+正立させた"bottle"は向きに関わらず検出できた．"cell phone"はエッジ部分だけでは検出できず，画面側と背面のみ検出できた．"cup"は取っ手が写っている角度では検出できたが，取っ手が写らない向きでは"bottle"と誤認識することがあった．"apple"はどの向きにおいても検出できなかった．
 
 各対象物において，識別精度の対象物依存性を\fig{mrcnn距離}に示す．なお，"apple"は全ての場所・向きにおいて認識できなかったため載せていない．
 \begin{figure}[H]
@@ -301,10 +300,10 @@ COCOデータセットの中で，机の上にあるものを識別・把持で�
     \caption{Dependency of distance between camera and object.}
     \label{fig:mrcnn距離}
 \end{figure}
-カメラ画像をそのままMask R-CNNの入力とした結果が\fig{mrcnn距離そのまま}である．対象物とカメラとの距離が23 cmを境に識別精度が上昇し，30 cm以上では精度がほぼ100\%であることが分かった．しかし，"cell phone"は50 cmよりも遠いと検出できなくなった．
+カメラ画像をそのままMask R-CNNの入力とした結果が\fig{mrcnn距離そのまま}である．対象物とカメラとの距離が23 cmを境により遠い位置での識別精度が向上し，30 cm以上では精度がほぼ100\%であった．しかし，"cell phone"は50 cmよりも遠いと検出できなくなった．
 
-背の高い"bottle(650 ml)"は，距離が近いと画像内に物体全体が収まらず検出精度が下がると予想できるが，背の低い"cup"も同じように精度が下がった．これは学習データに大きく写っている画像が無いことが原因と考えられる．
-そこで，入力画像をzero paddingして対象物を小さく写るようにして入力した結果が\fig{mrcnn距離パディング}である．paddingをすることで大幅に距離依存性が改善され，16 cmまで近づいても検出されるようになった．したがって，接近タスクでは16 cmを閾値としてそこまで近くタスクとした．
+背の高い"bottle(650 ml)"は，距離が近いと画像内に物体全体が収まらず検出精度が下がると予想できるが，背の低い"cup"も同じように精度が下がった．これはCOCO2014の学習データには対象物が大きく写っている画像が少ないことが原因と考えられる．
+そこで，入力画像をzero paddingして対象物を小さく写るようにして入力した結果が\fig{mrcnn距離パディング}である．paddingをすることで大幅に距離依存性が改善され，16 cmまで近づいても検出されるようになった．したがって接近タスクでは16 cmを閾値とし，そこまで対象物に接近するタスクとした．
 
 \subsection{把持タスク評価}
 各タスクにおける成功率を\tab{把持成功率}に示す．
@@ -322,9 +321,9 @@ COCOデータセットの中で，机の上にあるものを識別・把持で�
 \end{table}
 "apple"は認識ができなかったため，全てのタスクにおいて成功率は0であった．
 
-失敗例は，掴み方が悪く掴んでも落とした，掴んで持ち上げたがロボットハンド自体が横転した，持ち上げたがズレ落ちた，などであった．
+失敗例では，掴み方が悪いため掴んでも落とした，掴んで持ち上げたがロボットハンド自体が横転した，持ち上げたがズレ落ちた，などが原因であった．
 
-またホームポジションに戻る動作も実装した．ARマーカーを原点の壁に設置しておき，把持が成功したら旋回してARマーカーを探索し，マーカーを捉えたらそこへ直進した．
+またホームポジションに戻る動作も実装した．ARマーカーを原点の壁に設置しておき，把持が成功したら旋回してARマーカーを探索し，マーカーを捉えたらそこへ直進し，対象物を下ろすことができた．
 
 
 \section{考察}
@@ -333,9 +332,9 @@ Mask R-CNNの検出精度における対象物との距離依存性では，対�
 そこで，入力画像をzero paddingして対象物を小さく写るようにして入力した結果が\fig{mrcnn距離パディング}である．paddingをすることで大幅に距離依存性が改善され，16 cmまで近づいても検出されるようになった．
 
 次に，把持性能について述べる．
-把持成功率より接近成功率が低い原因は，2号機のRGBカメラの位置だと考えられる．2号機に搭載したカメラRealSenseは左端にRGBカメラ，真ん中右寄りにデプスカメラが付いているため，RGB画像は右側を見ることが難しい．そのため，ロボットハンドから距離が離れていれば問題ないが，対象物がロボットハンド近接時において右側に位置すると死角となり，認識不能となり接近できないという事になる．また，"cell phone"と"cup"は把持成功率が低く，"bottle"の把持成功率が高い理由としては，把持対象物の対称性が考えられる．bottleは円筒対称であるため，どの角度からアプローチしても同じ把持が可能だが，"cell phone"や"cup"は"bottle"より対称性が悪いため，ルールベースでは正しい位置で把持できなかった．これは各物体に対して把持位置を学習するなど，より高度なアルゴリズムが必要となる．また，非対称性の複雑な形状をもつ物体の把持が可能なJamming転移型グリッパ\cite{jamminggripper}や多指グリッパ，吸盤グリッパなどへの変更も選択肢である．
+把持成功率より接近成功率が低い原因は，2号機のRGBカメラの位置によると考えられる．2号機に搭載したカメラRealSenseは左端にRGBカメラ，真ん中右寄りにデプスカメラが付いている．そのため，対象物がロボットハンドから距離が離れていれば問題ないが，ロボットハンド近接時において対象物が右側に位置すると死角となり，認識不能となり接近できない．また，"cell phone"と"cup"は把持成功率が低く，"bottle"の把持成功率が高い理由としては，把持対象物の対称性が考えられる．bottleは円筒対称であるため，どの角度からアプローチしても同じ把持が可能だが，"cell phone"や"cup"は"bottle"より対称性が低いため，ルールベースだけでは正しい位置で把持できなかった．これは各物体に対して把持位置を学習するなど，より高度なアルゴリズムが必要となる．また，非対称性の複雑な形状をもつ物体の把持が可能なJamming転移型グリッパ\cite{jamminggripper}や多指グリッパ，吸盤グリッパなどへの変更も選択肢となる．
 
-"apple"が認識できなかった原因は，学習データ数の偏りにあると考えられる．\tab{対象物}に示したように，"apple"だけ他の対象物よりも訓練データが3分の1以下と少ない．したがって今回使用したモデルは"apple"の認識が弱いモデルだったと考えられる．
+"apple"が認識できなかった原因は，学習データ数の偏りにあると考えられる．\tab{対象物}に示したように，"apple"だけ他の対象物よりも訓練データ数が3分の1以下と少ない．したがって今回使用したモデルは"apple"の認識が弱いモデルだったと考えられる．
 
 
 \section{まとめ}
