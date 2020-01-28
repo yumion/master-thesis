@@ -19,9 +19,9 @@
 
 以上を考慮して\fig{2号機CAD}に示すようなフレームを3DCAD（123D Design Autodesk社を使用）で設計した．また，ロボットハンドの向きは\fig{2号機CAD}に示す，ソフトウェアでの画像（配列）の向きと同様の定義とする．
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figure/chapter4/2号機CAD-2}
+    \includegraphics[width=0.85\linewidth]{figure/chapter4/2号機CAD-2}
     \caption{3DCAD image of prototype No.2}
     \label{fig:2号機CAD}
 \end{figure}
@@ -79,7 +79,7 @@ l_motor = (1 + error_distance) / 2 * MAX_SPEED
         Grip servo & 010 & 0 / 100 & 0 / 1\\ 
         Vertical swing servo & 011 & 0 / 100 & 0 / 1\\ 
         Horizontal slide servo & 100 & 0--180 (step 10) & 0--18 \\ 
-        Terminate & 101 & 0 / 1 & 0/1 \\ 
+        Terminate & 101 & 0 / 1 & 0 / 1 \\ 
         Backward right DC motor & 110 & 0--100(step 5) & 0--20 \\ 
         Backward left DC motor & 111 & 0--100(step 5) & 0--20 \\ \bottomrule
     \end{tabular} 
@@ -115,13 +115,6 @@ RealSenseおよびArduinoの制御はG-DEP社のDeepLearning BoxII（Ubuntu16.04
     \label{fig:pix2distance}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{figure/chapter4/servo2distance}
-    \caption{Convert servo input to distance.}
-    \label{fig:servo2dist}
-\end{figure}
-
 以上から，実距離$\Delta x$はピクセル間距離$\Delta \rm{pixel}$とカメラと対象物の距離$z$を用いて
 \begin{align}\label{eq:ピクセル間距離}
 \Delta x \simeq (0.0016z + 0.0006) \cdot \Delta \rm{pixel}
@@ -129,6 +122,14 @@ RealSenseおよびArduinoの制御はG-DEP社のDeepLearning BoxII（Ubuntu16.04
 と推定できる．
 
 また，ラック\&ピニオンの回転から水平移動に変換するためには，サーボが0\deg -- 180\deg まで可動するため，その移動最大距離を測定しておき（4cm），各角度における0\deg からの移動量をプロットし線形回帰する（\fig{servo2dist}）ことで以下のように求められる．
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figure/chapter4/servo2distance}
+    \caption{Convert servo input to distance.}
+    \label{fig:servo2dist}
+\end{figure}
+
 
 \begin{align}\label{eq:スライド角度}
 \Delta x \simeq 0.0216 \theta
@@ -183,17 +184,16 @@ vertical_deg =\
 \begin{table}[H]
     \centering
     \caption{Components of prototype No.2}
-    \begin{tabular}{cc}\toprule
+    \begin{tabular}{cp{0.7\hsize}}\toprule
         本体フレーム & \href{http://flashforge.shop-pro.jp/?pid=76863013}{Flashforge Filament PLA 500g レッド} \\
         カメラ & Intel RealSense D435i \\ 
         マイコン & Arduino Nano \\ 
-        DCモータ & \href{http://akizukidenshi.com/catalog/g/gM-12379/}{STLギヤモータ 栄42D長軸型} \\ 
+        DCモーター & \href{http://akizukidenshi.com/catalog/g/gM-12379/}{STLギヤモータ 栄42D長軸型} \\ 
         サーボモータ & \href{https://hitecrcd.co.jp/products/servo32225/}{HS-225MG} x1，\href{https://hitecrcd.com/products/servos/discontinued-servos-servo-accessories/hsr-5990tg-hmi-ultra-premium-robot-servo/product}{HSR-5990TG} x1，\href{https://hitecrcd.co.jp/products/servo31422s/}{HS-422} x1 \\ 
         バッテリー & \href{https://cheero.net/powerplus3mini/}{cheero Power Plus 3 mini 6700mAh} \\ 
         タイヤ & \href{https://tamiya.com/japan/products/70194/index.html}{TAMIYA製スパイクタイヤ} \\
         リニアガイド & \href{https://jp.misumi-ec.com/vona2/detail/110302586530/}{MiSUMi ミニチュアリニアガイド　標準ブロック} \\
-        \multirow{2}{*}{ラック\&ピニオン} & \href{https://jp.misumi-ec.com/vona2/detail/110300429830/?HissuCode=RGEAM0.8-300-N}{MiSUMi ラックギアＬ寸固定タイプ (RGEAM0.8-300-N)}，\\
-        & \href{https://jp.misumi-ec.com/vona2/detail/221006385074/?HissuCode=S80BP32B-0503}{MiSUMi 平歯車 m0.8 POM青（ポリアセタール）タイプ (S80BP32B-0503)}  \\ \bottomrule
+        ラック\&ピニオン & \href{https://jp.misumi-ec.com/vona2/detail/110300429830/?HissuCode=RGEAM0.8-300-N}{MiSUMi ラックギアＬ寸固定タイプ (RGEAM0.8-300-N)}，\href{https://jp.misumi-ec.com/vona2/detail/221006385074/?HissuCode=S80BP32B-0503}{MiSUMi 平歯車 m0.8 POM青（ポリアセタール）タイプ (S80BP32B-0503)}  \\ \bottomrule
     \end{tabular} 
     \label{tab:2号機部品}
 \end{table}
@@ -285,15 +285,16 @@ COCOデータセットの中で，机の上にあるものをRealSenseカメラ�
 各対象物において，識別精度の対象物依存性を\fig{mrcnn距離}に示す．なお，"apple"は全ての場所・向きにおいて認識できなかったため載せていない．
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.45\columnwidth}
+    \begin{minipage}{0.49\columnwidth}
         \centering
-        \includegraphics[width=0.95\linewidth]{figure/chapter4/mrcnn_depth}
+        \includegraphics[width=\linewidth]{figure/chapter4/mrcnn_depth}
         \subcaption{Input raw image.}
         \label{fig:mrcnn距離そのまま}
     \end{minipage}
-    \begin{minipage}{0.45\columnwidth}
+    \hspace*{\fill}
+    \begin{minipage}{0.49\columnwidth}
         \centering
-        \includegraphics[width=0.95\linewidth]{figure/chapter4/mrcnn_depth_padding}
+        \includegraphics[width=\linewidth]{figure/chapter4/mrcnn_depth_padding}
         \subcaption{Input zero padding image.}
         \label{fig:mrcnn距離パディング}
     \end{minipage}
