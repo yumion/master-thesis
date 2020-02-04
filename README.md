@@ -13,6 +13,15 @@ Personal Robot Hands Supported by Machine Learning and Deep Learning ~ Help the 
 `37-186508＿山田敦史.tex`をコンパイルして生成する．
 
 ## 提出先
+期限1/30 11:00まで
+
 https://itc-lms.ecc.u-tokyo.ac.jp/lms/course/report/submission?idnumber=201937919060302&reportId=19461
 
 1/29 1st submitted
+
+
+## 差し替え提出先
+期限2/21 12:00まで
+
+https://itc-lms.ecc.u-tokyo.ac.jp/lms/course/report/submission?idnumber=201937919060302&reportId=19462
+
