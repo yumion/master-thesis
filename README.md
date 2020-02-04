@@ -17,7 +17,7 @@ Personal Robot Hands Supported by Machine Learning and Deep Learning ~ Help the 
 
 https://itc-lms.ecc.u-tokyo.ac.jp/lms/course/report/submission?idnumber=201937919060302&reportId=19461
 
-1/29 1st submitted
+1/29 1st submit
 
 
 ## 差し替え提出先
@@ -25,3 +25,4 @@ https://itc-lms.ecc.u-tokyo.ac.jp/lms/course/report/submission?idnumber=20193791
 
 https://itc-lms.ecc.u-tokyo.ac.jp/lms/course/report/submission?idnumber=201937919060302&reportId=19462
 
+2/4 2nd submit
